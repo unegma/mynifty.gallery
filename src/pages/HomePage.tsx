@@ -30,25 +30,39 @@ export default function HomePage(): JSX.Element {
     assets = assets.assets;
 
     if (assets.length > 0) {
+      let tempIndex = 0;
       let newAssets = assets.map((asset: any, index: number) => {
         let assetImage, assetImageName, assetImageDescription;
         // if (asset.collection && asset.collection.banner_image_url) {
         assetImage = asset.image_thumbnail_url;
         // assetImage = asset.collection.banner_image_url;
         if (assetImage == null) return null;
+        tempIndex = tempIndex + 1;
         // assetImageName = asset.collection.name;
         assetImageName = asset.name;
         // assetImageDescription = asset.collection.description;
         assetImageDescription = asset.description;
         // }
 
+        let pos1 = 0; let pos2 = 0; let pos3 = 0;
+
+        if (tempIndex === 1) {
+          pos1 = 0; pos2 = 1; pos3 = 4;
+        } else if (tempIndex === 2) {
+          pos1 = 0; pos2 = 0.5; pos3 = 1;
+        } else if (tempIndex === 3) {
+          pos1 = 0; pos2 = -2; pos3 = -2;
+        } else if (tempIndex === 4) {
+          pos1 = -1.5; pos2 = -4; pos3 = -7;
+        }
+
         return {
           url: assetImage,
           name: assetImageName,
           description: assetImageDescription,
           pos1: 0,
-          pos2: index - 0.5,
-          pos3: index - 2,
+          pos2: pos2,
+          pos3: pos3,
           asset: asset
         }
       }).filter((e:any) => e);
