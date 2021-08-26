@@ -1,0 +1,79 @@
+// palette
+$main-background-color: rgb(232, 236, 236);
+$secondary-background-color: #ecd8bf;
+$main-color: #023c40;
+$secondary-color: #683d00;
+
+* {
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+  // background-color: $main-background-color;
+}
+
+// position
+@mixin column-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin column-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+@mixin column-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+@mixin row-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin row-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+// todo moveme
+.timeline-container {
+  //position: absolute;
+  //margin: 100px;
+  border: 1px solid #000;
+
+  > .container {
+    //position: relative;
+  }
+
+  //width: 80vw;
+  //height: 10px;
+}
+
+.timeline-canvas {
+
+  //padding: 10px;
+
+  > canvas {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+.timeline-modal {
+  z-index: 99;
+}
+
+.App {
+  min-height: 100vh;
+}

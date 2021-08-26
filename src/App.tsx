@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './global.scss';
 import HomePage from "./pages/HomePage";
 
-function App() {
+function App(): JSX.Element {
 
   useEffect(() => {
     getAssets();
