@@ -17,8 +17,8 @@ export default function Image3D(props: any): JSX.Element {
       ref={mesh}
       onClick={(event) => handleOpen(props.image) }
       position={[props.image.pos1, props.image.pos2, props.image.pos3]}
-      rotation={[Math.PI / 2, 0, 0]}
-      scale={[1, 1, 1]}>
+      rotation={[Math.PI / props.image.pos1, Math.PI / props.image.pos2, Math.PI / props.image.pos3]}
+      scale={[1.5, 1.5, 1.5]}>
       <planeBufferGeometry />
 
       { /* @ts-ignore */ }

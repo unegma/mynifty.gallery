@@ -1,17 +1,24 @@
 import React, {useRef} from 'react';
 import * as THREE from 'three';
 
-export default function Line(): JSX.Element {
+type LineType = {
+  color: any|undefined,
+  position: any|undefined,
+  rotation: any|undefined,
+  geometry: any|undefined
+}
+
+export default function Line({color, position, rotation, geometry}: LineType): JSX.Element {
   const mesh = useRef<THREE.Mesh>(null!)
 
   return (
     <mesh
       ref={mesh}
-      position={[0, 0, 1]}
-      rotation={[1, 7.9, 30]}
+      position={position}
+      rotation={rotation}
     >
-      <boxGeometry args={[9999, 0.1, 0.1]} />
-      <meshStandardMaterial color={'white'} />
+      <boxGeometry args={geometry} />
+      <meshStandardMaterial color={color} />
     </mesh>
   )
 }

@@ -7,6 +7,7 @@ import Grass from "../components/Grass";
 import Line from "../components/Line";
 import Image3D from "../components/Image3D";
 import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
+import {randFloat, randInt} from "three/src/math/MathUtils";
 
 
 export default function HomePage(): JSX.Element {
@@ -23,70 +24,108 @@ export default function HomePage(): JSX.Element {
     let assets;
 
     // desc seems to show the most recent
-    assets = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=20&owner=0x0000000000000000000000000000000000000000`);
+    assets = await fetch(`https://api.thegraph.com/subgraphs/name/knownorigin/known-origin`, {
+      method: 'POST',
+      headers: {
+        // 'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+          query { tokens(where: {currentOwner_in: ["0x000000000000000000000000000000000000dead"]}) {
+            id
+            lastSalePriceInEth
+            lastTransferTimestamp
+            metadata {
+              name
+              description
+              image
+            }
+          }}`
+        }
+      )
+    });
+    // assets = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=20&owner=0x0000000000000000000000000000000000000000`);
     assets = await assets.json();
 
     console.log('pulled assets:');
     console.log(assets);
-    assets = assets.assets;
+    assets = assets.data.tokens;
 
     if (assets.length > 0) {
       let newAssets = assets.map((asset: any, index: number) => {
+
+        //ko
         let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
-        // if (asset.collection && asset.collection.banner_image_url) {
-        assetImageThumbnail = asset.image_thumbnail_url;
-        assetImage = asset.image_url;
-        // assetImage = asset.collection.banner_image_url;
+        assetImageThumbnail = asset.metadata.image;
+        assetImage = asset.metadata.image;
         if (assetImage == null || assetImage == "") return null;
         tempIndex = tempIndex + 1;
-        // assetImageName = asset.collection.name;
-        assetImageName = asset.name;
-        // assetImageDescription = asset.collection.description;
-        assetImageDescription = asset.description;
+        assetImageName = asset.metadata.name;
+        assetImageDescription = asset.metadata.description;
+
+        // opensea
+        // let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
+        // assetImageThumbnail = asset.image_thumbnail_url;
+        // assetImage = asset.image_url;
+        // if (assetImage == null || assetImage == "") return null;
+        // tempIndex = tempIndex + 1;
+        // assetImageName = asset.name;
+        // assetImageDescription = asset.description;
         // }
 
         let pos1 = 0; let pos2 = 0; let pos3 = 0;
 
-        if (tempIndex === 1) {
-          pos1 = 0; pos2 = 1; pos3 = 4;
-        } else if (tempIndex === 2) {
-          pos1 = 0; pos2 = 0.5; pos3 = 1;
-        } else if (tempIndex === 3) {
-          pos1 = 0; pos2 = -2; pos3 = -2;
-        } else if (tempIndex === 4) {
-          pos1 = -1.5; pos2 = -4; pos3 = -4;
-        } else if (tempIndex === 5) {
-          pos1 = -1.5; pos2 = -4; pos3 = -5;
-        } else if (tempIndex === 6) {
-          pos1 = -1.5; pos2 = -4; pos3 = -8;
-        } else if (tempIndex === 7) {
-          pos1 = -4.5; pos2 = -7; pos3 = -10;
-        } else if (tempIndex === 8) {
-          pos1 = -4.5; pos2 = -8; pos3 = -12;
-        } else if (tempIndex === 9) {
-          pos1 = -4.5; pos2 = -8; pos3 = -14;
-        } else if (tempIndex === 10) {
-          pos1 = -7.5; pos2 = -10; pos3 = -16;
-        } else if (tempIndex === 11) {
-          pos1 = -7.5; pos2 = -10; pos3 = -18;
-        } else if (tempIndex === 12) {
-          pos1 = -7.5; pos2 = -10; pos3 = -20;
-        } else if (tempIndex === 13) {
-          pos1 = -10.5; pos2 = -12; pos3 = -22;
-        } else if (tempIndex === 14) {
-          pos1 = -10.5; pos2 = -12; pos3 = -24;
-        } else if (tempIndex === 15) {
-          pos1 = -10.5; pos2 = -13; pos3 = -26;
-        } else if (tempIndex === 16) {
-          pos1 = -10.5; pos2 = -13; pos3 = -25;
-        }
+        let randNeg1 = Math.round(Math.random()) * 2 - 1;
+        let randNeg2 = Math.round(Math.random()) * 2 - 1;
+        let randNeg3 = Math.round(Math.random()) * 2 - 1;
+
+        pos1 = randFloat(0, index) * randNeg1;
+        pos2 = randFloat(0, index) * randNeg2;
+        pos3 = randFloat(0, index) * randNeg3;
+
+        //
+        // if (tempIndex === 1) {
+        //   pos1 = 0; pos2 = 1; pos3 = 4;
+        // } else if (tempIndex === 2) {
+        //   pos1 = 0; pos2 = 0.5; pos3 = 1;
+        // } else if (tempIndex === 3) {
+        //   pos1 = 0; pos2 = -2; pos3 = -2;
+        // } else if (tempIndex === 4) {
+        //   pos1 = -1.5; pos2 = -4; pos3 = -4;
+        // } else if (tempIndex === 5) {
+        //   pos1 = -1.5; pos2 = -4; pos3 = -5;
+        // } else if (tempIndex === 6) {
+        //   pos1 = -1.5; pos2 = -4; pos3 = -8;
+        // } else if (tempIndex === 7) {
+        //   pos1 = -4.5; pos2 = -7; pos3 = -10;
+        // } else if (tempIndex === 8) {
+        //   pos1 = -4.5; pos2 = -8; pos3 = -12;
+        // } else if (tempIndex === 9) {
+        //   pos1 = -4.5; pos2 = -8; pos3 = -14;
+        // } else if (tempIndex === 10) {
+        //   pos1 = -7.5; pos2 = -10; pos3 = -16;
+        // } else if (tempIndex === 11) {
+        //   pos1 = -7.5; pos2 = -10; pos3 = -18;
+        // } else if (tempIndex === 12) {
+        //   pos1 = -7.5; pos2 = -10; pos3 = -20;
+        // } else if (tempIndex === 13) {
+        //   pos1 = -10.5; pos2 = -12; pos3 = -22;
+        // } else if (tempIndex === 14) {
+        //   pos1 = -10.5; pos2 = -12; pos3 = -24;
+        // } else if (tempIndex === 15) {
+        //   pos1 = -10.5; pos2 = -13; pos3 = -26;
+        // } else if (tempIndex === 16) {
+        //   pos1 = -10.5; pos2 = -13; pos3 = -25;
+        // }
 
         return {
+          order: tempIndex,
           imageUrl: assetImage,
           thumbnail: assetImageThumbnail,
           name: assetImageName,
           description: assetImageDescription,
-          pos1: 0,
+          pos1: pos1,
           pos2: pos2,
           pos3: pos3,
           asset: asset
@@ -96,7 +135,7 @@ export default function HomePage(): JSX.Element {
       console.log('new array:');
       console.log(newAssets);
 
-      let joinedAssets = newAssets.concat(assetsArray)
+      let joinedAssets = newAssets.concat(assetsArray);
 
       console.log('here')
       if (joinedAssets.length <= 10) {
@@ -193,15 +232,16 @@ export default function HomePage(): JSX.Element {
 
         <color attach="background" args={['#000']} />
 
-        <Suspense fallback={null}>
-          <Grass />
-        </Suspense>
+        {/*<Suspense fallback={null}>*/}
+        {/*  <Grass />*/}
+        {/*</Suspense>*/}
 
         <group>
           <group>
             {/*<Date date={1967} position={[-1,2,5]} rotation={[0,60,0]}></Date>*/}
             {/*<Date date={1977} position={[-2.5,-3,-5]} rotation={[0,0,0]}></Date>*/}
-            <Line/>
+            {/*<Line color='white'position={[0, 0, 0]} geometry={[20, 0.1, 0.1]} rotation={[0, 0, 0]}/>*/}
+            {/*<Line color='blue' position={[0, 0, 1]} geometry={[20, 0.1, 0.1]} rotation={[1, 7.9, 30]}/>*/}
           </group>
 
           {gallery && gallery.length
@@ -225,10 +265,10 @@ export default function HomePage(): JSX.Element {
         />
 
 
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} enablePan={false} />
 
         <Suspense fallback={null}>
-          <Moon />
+          {/*<Moon />*/}
         </Suspense>
 
       </Canvas>

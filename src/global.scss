@@ -72,6 +72,11 @@ $secondary-color: #683d00;
 
 .timeline-modal {
   z-index: 99;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .App {
