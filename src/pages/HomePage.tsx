@@ -16,13 +16,14 @@ export default function HomePage(): JSX.Element {
 
 
   useEffect(() => {
-    getAssets();
+    getAssets([]);
   }, []);
 
-  async function getAssets() {
+  async function getAssets(assetsArray: [], tempIndex = 0, offset = 0) {
     let assets;
 
-    assets = await fetch('https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&owner=0x0000000000000000000000000000000000000000');
+    // desc seems to show the most recent
+    assets = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=20&owner=0x0000000000000000000000000000000000000000`);
     assets = await assets.json();
 
     console.log('pulled assets:');
@@ -30,7 +31,6 @@ export default function HomePage(): JSX.Element {
     assets = assets.assets;
 
     if (assets.length > 0) {
-      let tempIndex = 0;
       let newAssets = assets.map((asset: any, index: number) => {
         let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
         // if (asset.collection && asset.collection.banner_image_url) {
@@ -54,7 +54,31 @@ export default function HomePage(): JSX.Element {
         } else if (tempIndex === 3) {
           pos1 = 0; pos2 = -2; pos3 = -2;
         } else if (tempIndex === 4) {
-          pos1 = -1.5; pos2 = -4; pos3 = -7;
+          pos1 = -1.5; pos2 = -4; pos3 = -4;
+        } else if (tempIndex === 5) {
+          pos1 = -1.5; pos2 = -4; pos3 = -5;
+        } else if (tempIndex === 6) {
+          pos1 = -1.5; pos2 = -4; pos3 = -8;
+        } else if (tempIndex === 7) {
+          pos1 = -4.5; pos2 = -7; pos3 = -10;
+        } else if (tempIndex === 8) {
+          pos1 = -4.5; pos2 = -8; pos3 = -12;
+        } else if (tempIndex === 9) {
+          pos1 = -4.5; pos2 = -8; pos3 = -14;
+        } else if (tempIndex === 10) {
+          pos1 = -7.5; pos2 = -10; pos3 = -16;
+        } else if (tempIndex === 11) {
+          pos1 = -7.5; pos2 = -10; pos3 = -18;
+        } else if (tempIndex === 12) {
+          pos1 = -7.5; pos2 = -10; pos3 = -20;
+        } else if (tempIndex === 13) {
+          pos1 = -10.5; pos2 = -12; pos3 = -22;
+        } else if (tempIndex === 14) {
+          pos1 = -10.5; pos2 = -12; pos3 = -24;
+        } else if (tempIndex === 15) {
+          pos1 = -10.5; pos2 = -13; pos3 = -26;
+        } else if (tempIndex === 16) {
+          pos1 = -10.5; pos2 = -13; pos3 = -25;
         }
 
         return {
@@ -71,7 +95,17 @@ export default function HomePage(): JSX.Element {
 
       console.log('new array:');
       console.log(newAssets);
-      setGallery(newAssets);
+
+      let joinedAssets = newAssets.concat(assetsArray)
+
+      console.log('here')
+      if (joinedAssets.length <= 10) {
+        getAssets(joinedAssets, tempIndex, offset+20);
+      } else {
+        console.log('final array');
+        console.log(joinedAssets);
+        setGallery(joinedAssets);
+      }
     }
   }
 

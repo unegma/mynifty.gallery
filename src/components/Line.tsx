@@ -8,7 +8,7 @@ export default function Line(): JSX.Element {
     <mesh
       ref={mesh}
       position={[0, 0, 1]}
-      rotation={[1, 9, 30]}
+      rotation={[1, 7.9, 30]}
     >
       <boxGeometry args={[9999, 0.1, 0.1]} />
       <meshStandardMaterial color={'white'} />
