@@ -13,7 +13,9 @@ import {randFloat, randInt} from "three/src/math/MathUtils";
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
-  const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: ""});
+  const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: "",
+    dateLost: "", lastPrice: ""
+  });
 
 
   useEffect(() => {
@@ -119,6 +121,10 @@ export default function HomePage(): JSX.Element {
         //   pos1 = -10.5; pos2 = -13; pos3 = -25;
         // }
 
+        let newDate = new Date();
+        newDate.setTime(asset.lastTransferTimestamp*1000);
+        let dateString = newDate.toUTCString();
+
         return {
           order: tempIndex,
           imageUrl: assetImage,
@@ -128,7 +134,9 @@ export default function HomePage(): JSX.Element {
           pos1: pos1,
           pos2: pos2,
           pos3: pos3,
-          asset: asset
+          asset: asset,
+          dateLost: dateString,
+          lastPrice: asset.lastSalePriceInEth
         }
       }).filter((e:any) => e);
 
@@ -192,6 +200,7 @@ export default function HomePage(): JSX.Element {
   const [modalStyle] = React.useState(getModalStyle);
 
 
+
   return (
     <div>
       <div className="text1-container">
@@ -219,6 +228,8 @@ export default function HomePage(): JSX.Element {
           <p id="simple-modal-description">
             {selectedImage.description}<br/>
           </p>
+          <p>Last Price: {selectedImage.lastPrice}<br/></p>
+          <p>Date Lost: {selectedImage.dateLost}<br/></p>
           <img src={selectedImage.imageUrl} /><br/>
           {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
         </div>
