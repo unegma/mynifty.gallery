@@ -212,7 +212,7 @@ export default function HomePage(): JSX.Element {
       <div className="text2-container">
 
         <Typography variant="subtitle2" className="text2" gutterBottom>
-          <a href="https://unegma.com">unegma.com</a>
+          <a target="_blank" href="https://unegma.com">unegma.com</a>
         </Typography>
       </div>
 
@@ -285,7 +285,7 @@ export default function HomePage(): JSX.Element {
         />
 
 
-        <OrbitControls enableZoom={false} enablePan={false} />
+        <OrbitControls enableZoom={false} />
 
         <Suspense fallback={null}>
           {/*<Moon />*/}
