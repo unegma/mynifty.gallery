@@ -6,13 +6,13 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import Grass from "../components/Grass";
 import Line from "../components/Line";
 import Image3D from "../components/Image3D";
-import {Typography} from "@material-ui/core";
+import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
 
 
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
-  const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", url: ""});
+  const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: ""});
 
 
   useEffect(() => {
@@ -32,11 +32,12 @@ export default function HomePage(): JSX.Element {
     if (assets.length > 0) {
       let tempIndex = 0;
       let newAssets = assets.map((asset: any, index: number) => {
-        let assetImage, assetImageName, assetImageDescription;
+        let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
         // if (asset.collection && asset.collection.banner_image_url) {
-        assetImage = asset.image_thumbnail_url;
+        assetImageThumbnail = asset.image_thumbnail_url;
+        assetImage = asset.image_url;
         // assetImage = asset.collection.banner_image_url;
-        if (assetImage == null) return null;
+        if (assetImage == null || assetImage == "") return null;
         tempIndex = tempIndex + 1;
         // assetImageName = asset.collection.name;
         assetImageName = asset.name;
@@ -57,7 +58,8 @@ export default function HomePage(): JSX.Element {
         }
 
         return {
-          url: assetImage,
+          imageUrl: assetImage,
+          thumbnail: assetImageThumbnail,
           name: assetImageName,
           description: assetImageDescription,
           pos1: 0,
@@ -91,11 +93,56 @@ export default function HomePage(): JSX.Element {
   //   { url: "https://upload.wikimedia.org/wikipedia/en/1/13/PinkFloydWallCoverOriginalNoText.jpg", pos1: -1.5, pos2: -4, pos3:-7, name: "The Wall", description: "The Wall is the eleventh studio album by the English rock band Pink Floyd, released on 30 November 1979 by Harvest and Columbia Records." }
   // ]
 
+
+  function getModalStyle() {
+    return {
+      top: `50%`,
+      left: `50%`,
+      transform: `translate(-50%, -50%)`,
+    };
+  }
+
+
+  const useStyles2 = makeStyles((theme: Theme) =>
+    createStyles({
+      paper: {
+        position: 'absolute',
+        width: 'auto',
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      },
+    }),
+  );
+  const classes2 = useStyles2();
+  const [modalStyle] = React.useState(getModalStyle);
+
+
   return (
     <div>
       {/*<Typography variant="subtitle1" gutterBottom>*/}
       {/*  Timeline Example*/}
       {/*</Typography>*/}
+
+      <Modal
+        className="timeline-modal"
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={classes2.paper}>
+          <h2 id="simple-modal-title">{selectedImage.name}</h2>
+          <p id="simple-modal-description">
+            {selectedImage.description}<br/>
+          </p>
+          <img src={selectedImage.imageUrl} /><br/>
+          {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
+        </div>
+      </Modal>
+
+
       <Canvas className="timeline-canvas">
         {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
         <PerspectiveCamera position={[4, 7, 7]} makeDefault />

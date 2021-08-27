@@ -4,7 +4,7 @@ import {useFrame, useLoader} from "@react-three/fiber";
 
 export default function Image3D(props: any): JSX.Element {
   const mesh = useRef<THREE.Mesh>(null!);
-  const texture = useLoader(THREE.TextureLoader, props.image.url);
+  const texture = useLoader(THREE.TextureLoader, props.image.thumbnail);
 
   useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
 
