@@ -194,9 +194,18 @@ export default function HomePage(): JSX.Element {
 
   return (
     <div>
-      {/*<Typography variant="subtitle1" gutterBottom>*/}
-      {/*  Timeline Example*/}
-      {/*</Typography>*/}
+      <div className="text1-container">
+        <Typography variant="subtitle1" className="text1" gutterBottom>
+          The Void
+        </Typography>
+      </div>
+
+      <div className="text2-container">
+
+        <Typography variant="subtitle2" className="text2" gutterBottom>
+          <a href="https://unegma.com">unegma.com</a>
+        </Typography>
+      </div>
 
       <Modal
         className="timeline-modal"
