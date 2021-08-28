@@ -252,7 +252,7 @@ export default function HomePage(): JSX.Element {
         <div style={modalStyle} className={classes2.paper}>
           <h2 id="simple-modal-title">{selectedImage.name}</h2>
           <p id="simple-modal-description">
-            <b>Description:</b>{selectedImage.description}<br/>
+            <b>Description:</b> {selectedImage.description}<br/>
           </p>
           <p><b>Last Price:</b> {selectedImage.lastPrice}<br/></p>
           <p><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
