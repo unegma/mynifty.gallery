@@ -1,5 +1,5 @@
-@use '../../global.scss' as position;
-@use '../../global.scss' as color;
+@use '../global.scss' as position;
+@use '../global.scss' as color;
 
 body {
   margin: 0;
@@ -99,4 +99,4 @@ a, button, input, select {
     cursor: pointer;
   }
 }
-
+//todo fixme because not being imported

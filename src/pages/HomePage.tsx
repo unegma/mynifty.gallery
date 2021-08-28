@@ -1,4 +1,5 @@
 import React, {useRef, useState, Suspense, useEffect} from 'react';
+import './homePage.module.scss';
 import classes from './homePage.module.scss';
 import Moon from "../components/Moon";
 import {Html, OrbitControls, PerspectiveCamera, Sphere, Stars, Text} from "@react-three/drei";
@@ -67,7 +68,7 @@ export default function HomePage(): JSX.Element {
 
         let imageURL = asset.metadata.image;
 
-        console.log(imageURL);
+        // console.log(imageURL);
         //ipfs://Qmb4zQH54vKrMrJZoku2zdCnELeQ5HArXmPEtQPf2qWPKk/asset.gif
         //https://ipfs.infura.io/ipfs/QmVdyHRUvKiQukpmHgFbrbkPey7F2fLrQPiM8xvNfELWCg
 
@@ -79,7 +80,7 @@ export default function HomePage(): JSX.Element {
           imageURL = imageURL.replace('ipfs://', 'https://ipfs.infura.io/ipfs/');
         }
 
-        console.log(`new imageurl ${imageURL}`);
+        // console.log(`new imageurl ${imageURL}`);
 
         //ko
         let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
@@ -251,7 +252,7 @@ export default function HomePage(): JSX.Element {
       >
         <div style={modalStyle} className={classes2.paper}>
           <h2 id="simple-modal-title">{selectedImage.name}</h2>
-          <p id="simple-modal-description">
+          <p id="simple-modal-description" className="simple-modal-description">
             <b>Description:</b> {selectedImage.description}<br/>
           </p>
           <p><b>Last Price:</b> {selectedImage.lastPrice}<br/></p>

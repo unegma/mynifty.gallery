@@ -114,3 +114,9 @@ $secondary-color: #683d00;
     text-decoration: none;
   }
 }
+
+.simple-modal-description {
+  display: block !important;
+  overflow: scroll !important;
+  max-height: 20vh !important;
+}
