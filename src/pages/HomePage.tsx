@@ -12,6 +12,7 @@ import {randFloat, randInt} from "three/src/math/MathUtils";
 import InfoIcon from '@material-ui/icons/Info';
 import {InfoOutlined, MusicNoteOutlined, MusicOffOutlined, SettingsOutlined} from "@material-ui/icons";
 import AudioPlayer from "../components/AudioPlayer";
+import NFTModal from "../components/NFTModal";
 
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
@@ -173,9 +174,6 @@ export default function HomePage(): JSX.Element {
     setSelectedImage(image);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
 
 
@@ -185,31 +183,6 @@ export default function HomePage(): JSX.Element {
   //   { url: "https://upload.wikimedia.org/wikipedia/en/7/74/Pink_Floyd-Animals-Frontal.jpg", pos1: 0, pos2: -2, pos3:-2, name: "Animals", description: "Animals is the tenth studio album by the English rock band Pink Floyd, released on 21 January 1977 through Harvest and Columbia Records."},
   //   { url: "https://upload.wikimedia.org/wikipedia/en/1/13/PinkFloydWallCoverOriginalNoText.jpg", pos1: -1.5, pos2: -4, pos3:-7, name: "The Wall", description: "The Wall is the eleventh studio album by the English rock band Pink Floyd, released on 30 November 1979 by Harvest and Columbia Records." }
   // ]
-
-
-  function getModalStyle() {
-    return {
-      top: `50%`,
-      left: `50%`,
-      transform: `translate(-50%, -50%)`,
-    };
-  }
-
-
-  const useStyles2 = makeStyles((theme: Theme) =>
-    createStyles({
-      paper: {
-        position: 'absolute',
-        width: 'auto',
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-      },
-    }),
-  );
-  const classes2 = useStyles2();
-  const [modalStyle] = React.useState(getModalStyle);
 
 
 
@@ -241,25 +214,7 @@ export default function HomePage(): JSX.Element {
         </Typography>
       </div>
 
-      <Modal
-        className="timeline-modal"
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        <div style={modalStyle} className={classes2.paper}>
-          <h2 id="simple-modal-title">{selectedImage.name}</h2>
-          <p id="simple-modal-description" className="simple-modal-description">
-            <b>Description:</b> {selectedImage.description}<br/>
-          </p>
-          <p><b>Last Price:</b> {selectedImage.lastPrice}<br/></p>
-          <p><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
-          <img src={selectedImage.imageUrl} /><br/>
-          {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
-        </div>
-      </Modal>
-
+      <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} />
 
       <Canvas className="timeline-canvas">
         {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
@@ -293,7 +248,7 @@ export default function HomePage(): JSX.Element {
             ? gallery.map((image: any, index: number) => (
 
               <Suspense key={index} fallback={null}>
-                <Image3D image={image} handleOpen={handleOpen}/>
+                <Image3D className="pointer" image={image} handleOpen={handleOpen}/>
               </Suspense>
             ))
             : <></> }
