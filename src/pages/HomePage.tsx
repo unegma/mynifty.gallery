@@ -101,15 +101,11 @@ export default function HomePage(): JSX.Element {
         // assetImageDescription = asset.description;
         // }
 
-        let pos1 = 0; let pos2 = 0; let pos3 = 0;
-
-        let randNeg1 = Math.round(Math.random()) * 2 - 1;
-        let randNeg2 = Math.round(Math.random()) * 2 - 1;
-        let randNeg3 = Math.round(Math.random()) * 2 - 1;
-
-        pos1 = randFloat(0, index) * randNeg1;
-        pos2 = randFloat(0, index) * randNeg2;
-        pos3 = randFloat(0, index) * randNeg3;
+        // create co-ordinates based on the a number between 0 and the index of the item (higher index = older item)
+        // the second part randomly creates 1 or negative 1 to add depth along each axis
+        let pos1 = randFloat(0, index) * (Math.round(Math.random()) * 2 - 1);
+        let pos2 = randFloat(0, index) * (Math.round(Math.random()) * 2 - 1);
+        let pos3 = randFloat(0, index) * (Math.round(Math.random()) * 2 - 1);
 
         let scale, baseScale = 1.5;
         let lastSalePriceInEth = asset.lastSalePriceInEth;
@@ -119,41 +115,6 @@ export default function HomePage(): JSX.Element {
         }
         scale = [baseScale, baseScale, baseScale];
 
-
-        //
-        // if (tempIndex === 1) {
-        //   pos1 = 0; pos2 = 1; pos3 = 4;
-        // } else if (tempIndex === 2) {
-        //   pos1 = 0; pos2 = 0.5; pos3 = 1;
-        // } else if (tempIndex === 3) {
-        //   pos1 = 0; pos2 = -2; pos3 = -2;
-        // } else if (tempIndex === 4) {
-        //   pos1 = -1.5; pos2 = -4; pos3 = -4;
-        // } else if (tempIndex === 5) {
-        //   pos1 = -1.5; pos2 = -4; pos3 = -5;
-        // } else if (tempIndex === 6) {
-        //   pos1 = -1.5; pos2 = -4; pos3 = -8;
-        // } else if (tempIndex === 7) {
-        //   pos1 = -4.5; pos2 = -7; pos3 = -10;
-        // } else if (tempIndex === 8) {
-        //   pos1 = -4.5; pos2 = -8; pos3 = -12;
-        // } else if (tempIndex === 9) {
-        //   pos1 = -4.5; pos2 = -8; pos3 = -14;
-        // } else if (tempIndex === 10) {
-        //   pos1 = -7.5; pos2 = -10; pos3 = -16;
-        // } else if (tempIndex === 11) {
-        //   pos1 = -7.5; pos2 = -10; pos3 = -18;
-        // } else if (tempIndex === 12) {
-        //   pos1 = -7.5; pos2 = -10; pos3 = -20;
-        // } else if (tempIndex === 13) {
-        //   pos1 = -10.5; pos2 = -12; pos3 = -22;
-        // } else if (tempIndex === 14) {
-        //   pos1 = -10.5; pos2 = -12; pos3 = -24;
-        // } else if (tempIndex === 15) {
-        //   pos1 = -10.5; pos2 = -13; pos3 = -26;
-        // } else if (tempIndex === 16) {
-        //   pos1 = -10.5; pos2 = -13; pos3 = -25;
-        // }
 
         let newDate = new Date();
         newDate.setTime(asset.lastTransferTimestamp*1000);
