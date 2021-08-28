@@ -34,7 +34,10 @@ export default function HomePage(): JSX.Element {
       },
       body: JSON.stringify({
         query: `
-          query { tokens(where: {currentOwner_in: ["0x000000000000000000000000000000000000dead"]}) {
+          query { tokens(orderBy: lastTransferTimestamp, orderDirection: desc, where: {currentOwner_in: [
+            "0x000000000000000000000000000000000000dead", 
+            "0x0000000000000000000000000000000000000000"
+          ]}) {
             id
             lastSalePriceInEth
             lastTransferTimestamp
@@ -42,6 +45,11 @@ export default function HomePage(): JSX.Element {
               name
               description
               image
+              artist
+              scarcity
+              cover_image_size_in_bytes
+              image_size_in_bytes
+              cover_image
             }
           }}`
         }
