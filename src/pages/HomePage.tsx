@@ -11,18 +11,14 @@ import {createStyles, Icon, makeStyles, Modal, Theme, Typography} from "@materia
 import {randFloat, randInt} from "three/src/math/MathUtils";
 import InfoIcon from '@material-ui/icons/Info';
 import {InfoOutlined, MusicNoteOutlined, MusicOffOutlined, SettingsOutlined} from "@material-ui/icons";
+import AudioPlayer from "../components/AudioPlayer";
 
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const [music, setMusic] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: "",
     dateLost: "", lastPrice: ""
   });
-
-  const toggleMusic = () => {
-    setMusic(!music);
-  }
 
   useEffect(() => {
     getAssets([]);
@@ -241,10 +237,7 @@ export default function HomePage(): JSX.Element {
 
       <div className="text4-container">
         <Typography variant="subtitle2" className="text3" gutterBottom>
-          {!music ?
-            <MusicOffOutlined className="pointer" style={{color: "white"}} onClick={toggleMusic}/> :
-            <MusicNoteOutlined className="pointer" style={{color: "white"}} onClick={toggleMusic}/>
-          }
+          <AudioPlayer url="https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3" />
         </Typography>
       </div>
 
