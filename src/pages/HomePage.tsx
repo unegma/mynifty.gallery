@@ -111,6 +111,15 @@ export default function HomePage(): JSX.Element {
         pos2 = randFloat(0, index) * randNeg2;
         pos3 = randFloat(0, index) * randNeg3;
 
+        let scale, baseScale = 1.5;
+        let lastSalePriceInEth = asset.lastSalePriceInEth;
+
+        if (lastSalePriceInEth && Number.parseFloat(lastSalePriceInEth) > 0) {
+          baseScale = baseScale + (lastSalePriceInEth*3); // increase size of item by last sale price*2
+        }
+        scale = [baseScale, baseScale, baseScale];
+
+
         //
         // if (tempIndex === 1) {
         //   pos1 = 0; pos2 = 1; pos3 = 4;
@@ -156,12 +165,13 @@ export default function HomePage(): JSX.Element {
           thumbnail: assetImageThumbnail,
           name: assetImageName,
           description: assetImageDescription,
+          scale: scale,
           pos1: pos1,
           pos2: pos2,
           pos3: pos3,
           asset: asset,
           dateLost: dateString,
-          lastPrice: asset.lastSalePriceInEth
+          lastPrice: lastSalePriceInEth
         }
       }).filter((e:any) => e); // trim any nulls
 
