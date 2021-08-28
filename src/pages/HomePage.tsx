@@ -230,8 +230,8 @@ export default function HomePage(): JSX.Element {
 
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" gutterBottom>
-          <InfoOutlined className="pointer" style={{ color: "white" }}/>
-          <SettingsOutlined className="pointer" style={{ color: "white" }}/>
+          <InfoOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Burned and irrecoverable NFTs.')}}/>
+          <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Coming Soon!')}}/>
         </Typography>
       </div>
 
