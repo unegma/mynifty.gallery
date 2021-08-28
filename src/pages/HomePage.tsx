@@ -216,27 +216,27 @@ export default function HomePage(): JSX.Element {
   return (
     <div>
       <div className="text1-container">
-        <Typography variant="subtitle1" className="text1" gutterBottom>
+        <Typography variant="subtitle1" className="text1" >
           The Void
         </Typography>
       </div>
 
       <div className="text2-container">
 
-        <Typography variant="subtitle2" className="text2" gutterBottom>
+        <Typography variant="subtitle2" className="text2" >
           <a target="_blank" href="https://unegma.com">unegma.com</a>
         </Typography>
       </div>
 
       <div className="text3-container">
-        <Typography variant="subtitle2" className="text3" gutterBottom>
+        <Typography variant="subtitle2" className="text3" >
           <InfoOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Burned and irrecoverable NFTs.')}}/>
           <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Coming Soon!')}}/>
         </Typography>
       </div>
 
       <div className="text4-container">
-        <Typography variant="subtitle2" className="text3" gutterBottom>
+        <Typography variant="subtitle2" className="text3" >
           <AudioPlayer url="https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3" />
         </Typography>
       </div>
