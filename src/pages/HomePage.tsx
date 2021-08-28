@@ -65,10 +65,26 @@ export default function HomePage(): JSX.Element {
     if (assets.length > 0) {
       let newAssets = assets.map((asset: any, index: number) => {
 
+        let imageURL = asset.metadata.image;
+
+        console.log(imageURL);
+        //ipfs://Qmb4zQH54vKrMrJZoku2zdCnELeQ5HArXmPEtQPf2qWPKk/asset.gif
+        //https://ipfs.infura.io/ipfs/QmVdyHRUvKiQukpmHgFbrbkPey7F2fLrQPiM8xvNfELWCg
+
+        if (imageURL == null || imageURL == "") {
+          return null;
+        }
+
+        if (imageURL.includes('ipfs://')) {
+          imageURL = imageURL.replace('ipfs://', 'https://ipfs.infura.io/ipfs/');
+        }
+
+        console.log(`new imageurl ${imageURL}`);
+
         //ko
         let assetImage, assetImageThumbnail, assetImageName, assetImageDescription;
-        assetImageThumbnail = asset.metadata.image;
-        assetImage = asset.metadata.image;
+        assetImageThumbnail = imageURL;
+        assetImage = imageURL;
         if (assetImage == null || assetImage == "") return null;
         tempIndex = tempIndex + 1;
         assetImageName = asset.metadata.name;
@@ -146,21 +162,23 @@ export default function HomePage(): JSX.Element {
           dateLost: dateString,
           lastPrice: asset.lastSalePriceInEth
         }
-      }).filter((e:any) => e);
+      }).filter((e:any) => e); // trim any nulls
 
       console.log('new array:');
       console.log(newAssets);
 
-      let joinedAssets = newAssets.concat(assetsArray);
-
-      console.log('here')
-      if (joinedAssets.length <= 10) {
-        getAssets(joinedAssets, tempIndex, offset+20);
-      } else {
-        console.log('final array');
-        console.log(joinedAssets);
-        setGallery(joinedAssets);
-      }
+      // this section is for opensea which returns 20 at a time
+      // let joinedAssets = newAssets.concat(assetsArray);
+      //
+      // console.log('here')
+      // if (joinedAssets.length <= 10) {
+      //   getAssets(joinedAssets, tempIndex, offset+20);
+      // } else {
+      //   console.log('final array');
+      //   console.log(joinedAssets);
+      //   setGallery(joinedAssets);
+      // }
+      setGallery(newAssets);
     }
   }
 
@@ -234,10 +252,10 @@ export default function HomePage(): JSX.Element {
         <div style={modalStyle} className={classes2.paper}>
           <h2 id="simple-modal-title">{selectedImage.name}</h2>
           <p id="simple-modal-description">
-            {selectedImage.description}<br/>
+            <b>Description:</b>{selectedImage.description}<br/>
           </p>
-          <p>Last Price: {selectedImage.lastPrice}<br/></p>
-          <p>Date Lost: {selectedImage.dateLost}<br/></p>
+          <p><b>Last Price:</b> {selectedImage.lastPrice}<br/></p>
+          <p><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
           <img src={selectedImage.imageUrl} /><br/>
           {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
         </div>
