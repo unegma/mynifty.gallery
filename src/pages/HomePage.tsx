@@ -7,17 +7,22 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import Grass from "../components/Grass";
 import Line from "../components/Line";
 import Image3D from "../components/Image3D";
-import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
+import {createStyles, Icon, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
 import {randFloat, randInt} from "three/src/math/MathUtils";
-
+import InfoIcon from '@material-ui/icons/Info';
+import {InfoOutlined, MusicNoteOutlined, MusicOffOutlined, SettingsOutlined} from "@material-ui/icons";
 
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
+  const [music, setMusic] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: "",
     dateLost: "", lastPrice: ""
   });
 
+  const toggleMusic = () => {
+    setMusic(!music);
+  }
 
   useEffect(() => {
     getAssets([]);
@@ -224,6 +229,22 @@ export default function HomePage(): JSX.Element {
 
         <Typography variant="subtitle2" className="text2" gutterBottom>
           <a target="_blank" href="https://unegma.com">unegma.com</a>
+        </Typography>
+      </div>
+
+      <div className="text3-container">
+        <Typography variant="subtitle2" className="text3" gutterBottom>
+          <InfoOutlined className="pointer" style={{ color: "white" }}/>
+          <SettingsOutlined className="pointer" style={{ color: "white" }}/>
+        </Typography>
+      </div>
+
+      <div className="text4-container">
+        <Typography variant="subtitle2" className="text3" gutterBottom>
+          {!music ?
+            <MusicOffOutlined className="pointer" style={{color: "white"}} onClick={toggleMusic}/> :
+            <MusicNoteOutlined className="pointer" style={{color: "white"}} onClick={toggleMusic}/>
+          }
         </Typography>
       </div>
 

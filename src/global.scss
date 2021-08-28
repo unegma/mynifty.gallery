@@ -115,8 +115,38 @@ $secondary-color: #683d00;
   }
 }
 
+.text3-container {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  padding: 5px;
+
+}
+.text4-container {
+  position: absolute;
+  z-index: 999;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+
+}
+.text3 {
+  //color: white;
+  //a {
+  //  color: white;
+  //  text-decoration: none;
+  //}
+}
+
 .simple-modal-description {
   display: block !important;
   overflow: scroll !important;
   max-height: 20vh !important;
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
 }
