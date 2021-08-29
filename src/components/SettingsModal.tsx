@@ -1,10 +1,16 @@
-import {Button, createStyles, makeStyles, Modal, Theme} from "@material-ui/core";
+import {Button, createStyles, makeStyles, Modal, TextField, Theme} from "@material-ui/core";
 import React from "react";
 
-export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled }: any) {
+export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl }: any) {
 
   const toggleZoomEnabled = () => {
     setZoomEnabled(!zoomEnabled);
+  }
+
+  const updateMusicUrl = (url: string) => {
+    setMusicUrl(url);
+    localStorage.setItem('musicUrl', url);
+    // localStorage.setItem('musicUrl', JSON.stringify(url));
   }
 
   function getModalStyle() {
@@ -47,6 +53,13 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <h2 id="simple-modal-title">Settings</h2>
         <p>{ zoomEnabled ? 'Zoom Enabled' : 'Zoom Disabled' }</p>
         <Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>
+        <br/>
+        <TextField
+          type="url"
+          value={musicUrl}
+          onChange={(e) => updateMusicUrl(e.target.value)}
+          label="AudioURL"
+        />
       </div>
     </Modal>
   )

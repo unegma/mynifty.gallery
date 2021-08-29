@@ -17,6 +17,7 @@ import SettingsModal from "../components/SettingsModal";
 import InfoModal from "../components/InfoModal";
 
 export default function HomePage(): JSX.Element {
+  const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [open, setOpen] = React.useState(false);
   const [infoOpen, setInfoOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -27,6 +28,12 @@ export default function HomePage(): JSX.Element {
   });
 
   useEffect(() => {
+    let localStorageMusicUrl = localStorage.getItem('musicUrl');
+    if (typeof localStorageMusicUrl !== "undefined" && localStorageMusicUrl !== null && localStorageMusicUrl !== "") {
+      const initialValue = localStorageMusicUrl;
+      setMusicUrl(localStorageMusicUrl);
+    }
+
     getAssets([]);
   }, []);
 
@@ -226,20 +233,25 @@ export default function HomePage(): JSX.Element {
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
           <InfoOutlined className="pointer" style={{ color: "white" }} onClick={toggleInfoModal}/>
-          {/*<InfoOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Burned and irrecoverable NFTs.')}}/>*/}
           <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={toggleSettingsModal}/>
-          {/*<SettingsOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Coming Soon!')}}/>*/}
         </Typography>
       </div>
 
       <div className="text4-container">
         <Typography variant="subtitle2" className="text3" >
-          <AudioPlayer url="https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3" />
+          <AudioPlayer url={musicUrl} />
         </Typography>
       </div>
 
       <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} />
-      <SettingsModal open={settingsOpen} setOpen={setSettingsOpen} zoomEnabled={zoomEnabled} setZoomEnabled={setZoomEnabled} />
+      <SettingsModal
+        open={settingsOpen}
+        setOpen={setSettingsOpen}
+        zoomEnabled={zoomEnabled}
+        setZoomEnabled={setZoomEnabled}
+        setMusicUrl={setMusicUrl}
+        musicUrl={musicUrl}
+      />
       <InfoModal open={infoOpen} setOpen={setInfoOpen} />
 
       <Canvas className="timeline-canvas">
