@@ -9,9 +9,9 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
     <Canvas className="timeline-canvas">
       {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
       <PerspectiveCamera position={[4, 7, 7]} makeDefault />
-      <pointLight intensity={3} position={[5, 0, 5]} />
+      {/*<pointLight intensity={3} position={[5, 0, 5]} />*/}
 
-      {/* Lights */}
+      {/* Lights*/}
       {/*<rectAreaLight*/}
       {/*  intensity={3}*/}
       {/*  position={[5, 0, 5]}*/}
