@@ -139,9 +139,10 @@ $secondary-color: #683d00;
   //}
 }
 
+// todo check that probably don't need important
 .simple-modal-description {
   display: block !important;
-  overflow: scroll !important;
+  overflow-y: scroll !important;
   max-height: 20vh !important;
 }
 
