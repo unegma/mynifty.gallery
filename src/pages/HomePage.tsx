@@ -13,9 +13,14 @@ import InfoIcon from '@material-ui/icons/Info';
 import {InfoOutlined, MusicNoteOutlined, MusicOffOutlined, SettingsOutlined} from "@material-ui/icons";
 import AudioPlayer from "../components/AudioPlayer";
 import NFTModal from "../components/NFTModal";
+import SettingsModal from "../components/SettingsModal";
+import InfoModal from "../components/InfoModal";
 
 export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
+  const [infoOpen, setInfoOpen] = React.useState(false);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [zoomEnabled, setZoomEnabled] = React.useState(true);
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: "",
     dateLost: "", lastPrice: ""
@@ -189,7 +194,8 @@ export default function HomePage(): JSX.Element {
     setSelectedImage(image);
   };
 
-
+  const toggleInfoModal = () => setInfoOpen(!infoOpen);
+  const toggleSettingsModal = () => setSettingsOpen(!settingsOpen);
 
 
   // const gallery = [
@@ -198,7 +204,6 @@ export default function HomePage(): JSX.Element {
   //   { url: "https://upload.wikimedia.org/wikipedia/en/7/74/Pink_Floyd-Animals-Frontal.jpg", pos1: 0, pos2: -2, pos3:-2, name: "Animals", description: "Animals is the tenth studio album by the English rock band Pink Floyd, released on 21 January 1977 through Harvest and Columbia Records."},
   //   { url: "https://upload.wikimedia.org/wikipedia/en/1/13/PinkFloydWallCoverOriginalNoText.jpg", pos1: -1.5, pos2: -4, pos3:-7, name: "The Wall", description: "The Wall is the eleventh studio album by the English rock band Pink Floyd, released on 30 November 1979 by Harvest and Columbia Records." }
   // ]
-
 
 
   return (
@@ -218,8 +223,10 @@ export default function HomePage(): JSX.Element {
 
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
-          <InfoOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Burned and irrecoverable NFTs.')}}/>
-          <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Coming Soon!')}}/>
+          <InfoOutlined className="pointer" style={{ color: "white" }} onClick={toggleInfoModal}/>
+          {/*<InfoOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Burned and irrecoverable NFTs.')}}/>*/}
+          <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={toggleSettingsModal}/>
+          {/*<SettingsOutlined className="pointer" style={{ color: "white" }} onClick={() => {alert('Coming Soon!')}}/>*/}
         </Typography>
       </div>
 
@@ -230,6 +237,8 @@ export default function HomePage(): JSX.Element {
       </div>
 
       <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} />
+      <SettingsModal open={settingsOpen} setOpen={setSettingsOpen} zoomEnabled={zoomEnabled} setZoomEnabled={setZoomEnabled} />
+      <InfoModal open={infoOpen} setOpen={setInfoOpen} />
 
       <Canvas className="timeline-canvas">
         {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
@@ -280,7 +289,7 @@ export default function HomePage(): JSX.Element {
         />
 
 
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={zoomEnabled} />
 
         <Suspense fallback={null}>
           {/*<Moon />*/}
