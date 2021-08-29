@@ -142,7 +142,7 @@ export default function HomePage(): JSX.Element {
         // let pos3 = Math.tan(slope) * (Math.sqrt(1+exponent) * Math.exp(exponent) * t) / exponent;
 
 
-        let scale, baseScale = 1.5, priceIncreaseScale = 7;
+        let scale, baseScale = 1.5, priceIncreaseScale = 10;
         let lastSalePriceInEth = asset.lastSalePriceInEth;
 
         if (lastSalePriceInEth && Number.parseFloat(lastSalePriceInEth) > 0) {
