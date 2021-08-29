@@ -7,6 +7,9 @@ import {MusicNoteOutlined, MusicOffOutlined} from "@material-ui/icons";
  * @constructor
  */
 const AudioPlayer = ({ url }: any) => {
+
+  // todo may need to add an 'await' from get storage with the url of the audio
+
   console.log(url)
   const [audio] = useState(new Audio(url));
   const [playing, setPlaying] = useState(false);

@@ -1,7 +1,13 @@
 import {randFloat} from "three/src/math/MathUtils";
 
-export default async function getAssets(assetsArray: [], tempIndex = 0, offset = 0) {
+export default async function getAssets(assetsArray: [], maxImages: number) {
   let assets;
+
+  // added this here with await instead of using only maxImages pulled in, because of possible race conditions
+  let localStorageMaxImages = await localStorage.getItem('maxImages');
+  if (typeof localStorageMaxImages !== "undefined" && localStorageMaxImages !== null && localStorageMaxImages !== "") {
+    maxImages = parseInt(localStorageMaxImages);
+  }
 
   // TODO ADD TRY CATCH
 
@@ -66,7 +72,7 @@ export default async function getAssets(assetsArray: [], tempIndex = 0, offset =
       assetImageThumbnail = imageURL;
       assetImage = imageURL;
       if (assetImage == null || assetImage == "") return null;
-      tempIndex = tempIndex + 1;
+      // tempIndex = tempIndex + 1; // todo did I use this to stop the -0 issue? is this causing some not to be shown?
       assetImageName = asset.metadata.name;
       assetImageDescription = asset.metadata.description;
 
@@ -127,7 +133,8 @@ export default async function getAssets(assetsArray: [], tempIndex = 0, offset =
       let dateString = newDate.toUTCString();
 
       return {
-        order: tempIndex,
+        // order: tempIndex,
+        order: index, // todo why was this tempIndex+1 before?
         imageUrl: assetImage,
         thumbnail: assetImageThumbnail,
         name: assetImageName,
@@ -166,6 +173,12 @@ export default async function getAssets(assetsArray: [], tempIndex = 0, offset =
     //   console.log(joinedAssets);
     //   setGallery(joinedAssets);
     // }
+
+    // set be no higher than max images (this is done last because array might have lost some items
+    // in the algorithm above)
+    newAssets = newAssets.slice(0, maxImages+1); // todo adding +1 temporarily because isn't showing all the assets (maybe because 0 index is sometimes -0?)
+    console.log('here2')
+    console.log(`Final Assets, max ${maxImages}:`, newAssets);
 
     return newAssets;
   } else {

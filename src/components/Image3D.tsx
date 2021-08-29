@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import * as THREE from "three";
 import {useFrame, useLoader} from "@react-three/fiber";
 
@@ -9,6 +9,15 @@ export default function Image3D(props: any): JSX.Element {
   useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
 
   let handleOpen = props.handleOpen;
+  let pos1 = 0, pos2 = 0, pos3 = 0;
+  const displayMode = Number.parseInt(props.displayMode); // may not be needed
+
+  // todo this works without use effect, and I'm not sure why (ie switching from cluser to spiral)
+  // useEffect(() => {
+    pos1 = props.image.displayMode[displayMode].pos1;
+    pos2 = props.image.displayMode[displayMode].pos2;
+    pos3 = props.image.displayMode[displayMode].pos3;
+  // }, [props.displayMode])
 
   return (
     <mesh
@@ -16,8 +25,8 @@ export default function Image3D(props: any): JSX.Element {
       {...props}
       ref={mesh}
       onClick={(event) => handleOpen(props.image) }
-      position={[props.image.pos1, props.image.pos2, props.image.pos3]}
-      rotation={[Math.PI / props.image.pos1, Math.PI / props.image.pos2, Math.PI / props.image.pos3]}
+      position={[pos1, pos2, pos3]}
+      rotation={[Math.PI / pos1, Math.PI / pos2, Math.PI / pos3]}
       scale={props.image.scale}>
       <planeBufferGeometry />
 
@@ -25,7 +34,5 @@ export default function Image3D(props: any): JSX.Element {
       <meshStandardMaterial map={texture} attach="material" side={THREE.DoubleSide} />
 
     </mesh>
-
-
   )
 }
