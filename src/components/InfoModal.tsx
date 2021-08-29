@@ -32,6 +32,7 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings }: a
   };
 
   return (
+    // todo add close button on modal
     <Modal
       className="timeline-modal"
       open={open}

@@ -66,6 +66,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   };
 
   return (
+    // todo add close button on modal
     <Modal
       className="timeline-modal"
       open={open}
