@@ -19,6 +19,7 @@ const AudioPlayer = ({ url }: any) => {
   );
 
   useEffect(() => {
+    // todo add loop
     audio.addEventListener('ended', () => setPlaying(false));
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
