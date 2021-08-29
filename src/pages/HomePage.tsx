@@ -238,7 +238,7 @@ export default function HomePage(): JSX.Element {
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
           <InfoOutlined className="pointer" style={{ color: "white" }} onClick={toggleInfoModal}/>
-          <SettingsOutlined className="pointer" style={{ color: "white" }} onClick={toggleSettingsModal}/>
+          <SettingsOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleSettingsModal}/>
         </Typography>
       </div>
 

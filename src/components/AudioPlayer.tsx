@@ -7,6 +7,7 @@ import {MusicNoteOutlined, MusicOffOutlined} from "@material-ui/icons";
  * @constructor
  */
 const AudioPlayer = ({ url }: any) => {
+  console.log(url)
   const [audio] = useState(new Audio(url));
   const [playing, setPlaying] = useState(false);
   const toggle = () => setPlaying(!playing);
