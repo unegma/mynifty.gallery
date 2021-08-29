@@ -108,11 +108,15 @@ export default function HomePage(): JSX.Element {
         // assetImageDescription = asset.description;
         // }
 
+        const getRandomOneOrNegativeOne = () => {
+          return (Math.round(Math.random()) * 2 - 1);
+        }
+
         // create co-ordinates based on the a number between 0 and the index of the item (higher index = older item)
         // the second part randomly creates 1 or negative 1 to add depth along each axis
-        // let pos1 = randFloat(0, index) * getRandomOneOrNegativeOne();
-        // let pos2 = randFloat(0, index) * getRandomOneOrNegativeOne();
-        // let pos3 = randFloat(0, index) * getRandomOneOrNegativeOne();
+        let pos1 = randFloat(0, index) * getRandomOneOrNegativeOne();
+        let pos2 = randFloat(0, index) * getRandomOneOrNegativeOne();
+        let pos3 = randFloat(0, index) * getRandomOneOrNegativeOne();
 
 
         // x = sin(i)
@@ -120,14 +124,12 @@ export default function HomePage(): JSX.Element {
         // z = i
 
 
-        const getRandomOneOrNegativeOne = () => {
-          return (Math.round(Math.random()) * 2 - 1);
-        }
 
 
-        let pos1 = 7*Math.sin(index) *-1;
-        let pos2 = 7*Math.cos(index) *-1;
-        let pos3 = 7*index *-1;
+
+        // let pos1 = 7*Math.sin(index) *-1;
+        // let pos2 = 7*Math.cos(index) *-1;
+        // let pos3 = 7*index *-1;
 
         //
         // // https://www.reddit.com/r/theydidthemath/comments/286tqb/3d_golden_spiral_equation/
