@@ -45,6 +45,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
     >
       <div style={modalStyle} className={classes2.paper}>
         <h2 id="simple-modal-title">Settings</h2>
+        <p>{ zoomEnabled ? 'Zoom Enabled' : 'Zoom Disabled' }</p>
         <Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>
       </div>
     </Modal>

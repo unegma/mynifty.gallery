@@ -20,7 +20,7 @@ export default function HomePage(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [infoOpen, setInfoOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
-  const [zoomEnabled, setZoomEnabled] = React.useState(true);
+  const [zoomEnabled, setZoomEnabled] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({name: "", description: "", imageUrl: "", thumbnail: "",
     dateLost: "", lastPrice: ""
