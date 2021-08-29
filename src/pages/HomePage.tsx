@@ -109,6 +109,16 @@ export default function HomePage(): JSX.Element {
         let pos2 = randFloat(0, index) * (Math.round(Math.random()) * 2 - 1);
         let pos3 = randFloat(0, index) * (Math.round(Math.random()) * 2 - 1);
 
+
+        // x = sin(i)
+        // y = cos(i)
+        // z = i
+
+
+        // let pos1 = Math.sin(index);
+        // let pos2 = Math.cos(index);
+        // let pos3 = index;
+
         //
         // // https://www.reddit.com/r/theydidthemath/comments/286tqb/3d_golden_spiral_equation/
         // const exponent = 0.306349; // growth factor in Radians: `ln(phi)/(pi/2)` OR in Degrees: `ln(phi)/90`
@@ -122,11 +132,11 @@ export default function HomePage(): JSX.Element {
         // let pos3 = Math.tan(slope) * (Math.sqrt(1+exponent) * Math.exp(exponent) * t) / exponent;
 
 
-        let scale, baseScale = 1.5;
+        let scale, baseScale = 1.5, priceIncreaseScale = 7;
         let lastSalePriceInEth = asset.lastSalePriceInEth;
 
         if (lastSalePriceInEth && Number.parseFloat(lastSalePriceInEth) > 0) {
-          baseScale = baseScale + (lastSalePriceInEth*3); // increase size of item by last sale price*2
+          baseScale = baseScale + (lastSalePriceInEth*priceIncreaseScale); // increase size of item by last sale price*2
         }
         scale = [baseScale, baseScale, baseScale];
 
