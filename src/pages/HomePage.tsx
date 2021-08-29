@@ -8,6 +8,7 @@ import SettingsModal from "../components/SettingsModal";
 import InfoModal from "../components/InfoModal";
 import fetchAssets from '../helpers/fetchAssets';
 import MainCanvas from "../components/MainCanvas";
+import {Spinner} from "../components/Spinner";
 
 export default function HomePage(): JSX.Element {
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
@@ -20,6 +21,7 @@ export default function HomePage(): JSX.Element {
   const [zoomEnabled, setZoomEnabled] = React.useState(false);
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
@@ -37,9 +39,24 @@ export default function HomePage(): JSX.Element {
       setMaxImages(parseInt(localStorageMaxImages));
     }
 
+    getLoading();
+
     // this might be being called before the local storage retreival above
     getAssets();
   }, []);
+
+  /**
+   * this is here as a test, maybe move all localstorage loadings to an async function?
+   */
+  async function getLoading() {
+    console.log(`Loading for: ${maxImages}`);
+    // currently we show the loading spinner giving 1 second per image
+    setTimeout(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, maxImages * 1000);
+    }, 3000); // todo temporary fix: wait 1 second because localStorage value isn't retreived immediately
+  }
 
   async function getAssets () {
     let newAssets = await fetchAssets([], maxImages);
@@ -58,8 +75,13 @@ export default function HomePage(): JSX.Element {
     <div>
       <div className="text1-container">
         <Typography variant="subtitle1" className="text1" >
-          The Void: <a className="pointer underlined" onClick={() => {setSettingsOpen(true)}}>last {maxImages}</a>
-          {/*todo add loading circle*/}
+          The Void:&nbsp;
+          {loading ?
+            <Spinner className="spinner" color="white" showFor={maxImages}/> :
+            <a className="pointer underlined" onClick={() => {
+              setSettingsOpen(true)
+            }}>last {maxImages}</a>
+        }
         </Typography>
       </div>
 
