@@ -10,7 +10,8 @@ import fetchAssets from '../helpers/fetchAssets';
 import MainCanvas from "../components/MainCanvas";
 
 export default function HomePage(): JSX.Element {
-  const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
+  // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
+  const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
   const [open, setOpen] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
   const [maxImages, setMaxImages] = React.useState(5);
