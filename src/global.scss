@@ -152,4 +152,12 @@ $secondary-color: #683d00;
   }
 }
 
+.underlined {
+  text-decoration: underline;
+}
+
 // todo still seems to be a height issue on mobile (click logo at bottom and scroll
+
+.audioURLInput {
+  width: 100%;
+}
