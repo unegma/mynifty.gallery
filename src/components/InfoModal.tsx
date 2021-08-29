@@ -1,7 +1,7 @@
-import {createStyles, makeStyles, Modal, Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
 import React from "react";
 
-export default function InfoModal ({ open, setOpen }: any) {
+export default function InfoModal ({ open, setOpen, maxImages, openSettings }: any) {
 
   function getModalStyle() {
     return {
@@ -40,8 +40,16 @@ export default function InfoModal ({ open, setOpen }: any) {
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
-        <h2 id="simple-modal-title">Info</h2>
-        <p>Burned and irrecoverable NFTs.</p>
+        <Typography variant="h3" style={{color: 'black'}}>Info</Typography>
+        <br/>
+        <Typography style={{color: '#333'}}>Burned and irrecoverable NFTs sent to the addresses:<br/><br/>
+          0x0000000000000000000000000000000000000000<br/><br/>
+          0x000000000000000000000000000000000000dead<br/><br/>
+          This site currently pulls data of the last (max) {maxImages} burned NFTs on&nbsp;
+          <a target="_blank" href="https://knownorigin.io">Known Origin</a>.<br/><br/>
+          Visit <a className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</a> to change options.<br/><br/>
+          Made by <a target="_blank" href="https://unegma.com">unegma</a>.
+        </Typography>
       </div>
     </Modal>
   )
