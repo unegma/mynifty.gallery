@@ -112,10 +112,13 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           label="Max Images"
           InputProps={{
             inputProps: {
-              min: 0 , max: 100
+              min: 1 , max: 100
             }
           }}
         />
+        <br/><br/>
+
+        <Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>
       </div>
     </Modal>
   )
