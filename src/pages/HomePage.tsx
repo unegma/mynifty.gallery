@@ -40,6 +40,8 @@ export default function HomePage(): JSX.Element {
   async function getAssets(assetsArray: [], tempIndex = 0, offset = 0) {
     let assets;
 
+    // TODO ADD TRY CATCH
+
     // desc seems to show the most recent
     assets = await fetch(`https://api.thegraph.com/subgraphs/name/knownorigin/known-origin`, {
       method: 'POST',
@@ -76,6 +78,9 @@ export default function HomePage(): JSX.Element {
     console.log('pulled assets:');
     console.log(assets);
     assets = assets.data.tokens;
+
+    // TODO ADD TRY CATCH (there is a scenario where if the image can't be resolved, it crashes the whole app)
+
 
     if (assets.length > 0) {
       let newAssets = assets.map((asset: any, index: number) => {
