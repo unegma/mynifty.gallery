@@ -16,7 +16,9 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
                                          setDisplayMode, displayMode, maxImages, setMaxImages }: any) {
 
   const toggleZoomEnabled = () => {
-    setZoomEnabled(!zoomEnabled);
+    let zoomEnabledOption = !zoomEnabled;
+    setZoomEnabled(zoomEnabledOption);
+    localStorage.setItem('zoomEnabled', zoomEnabledOption.toString());
   }
 
   const updateMusicUrl = (url: string) => {
