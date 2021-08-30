@@ -30,6 +30,11 @@ export default function HomePage(): JSX.Element {
       setMusicUrl(localStorageMusicUrl);
     }
 
+    let localStorageZoomEnabled = localStorage.getItem('zoomEnabled');
+    if (typeof localStorageZoomEnabled !== "undefined" && localStorageZoomEnabled !== null && localStorageZoomEnabled !== "") {
+      setZoomEnabled((localStorageZoomEnabled === 'true' ? true: false));
+    }
+
     let localStorageDisplayMode = localStorage.getItem('displayMode');
     if (typeof localStorageDisplayMode !== "undefined" && localStorageDisplayMode !== null && localStorageDisplayMode !== "") {
       setDisplayMode(parseInt(localStorageDisplayMode));
