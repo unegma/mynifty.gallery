@@ -77,7 +77,7 @@ export default function HomePage(): JSX.Element {
         <Typography variant="subtitle1" className="text1" >
           The Void:&nbsp;
           {loading ?
-            <Spinner className="spinner" color="white" showFor={maxImages}/> :
+            <Spinner className="spinner" color="white"/> :
             <a className="pointer underlined" onClick={() => {
               setSettingsOpen(true)
             }}>last {maxImages}</a>
