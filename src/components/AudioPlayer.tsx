@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, AudioHTMLAttributes} from "react";
 import {MusicNoteOutlined, MusicOffOutlined} from "@material-ui/icons";
 
 /**
@@ -11,6 +11,8 @@ const AudioPlayer = ({ url }: any) => {
   // todo may need to add an 'await' from get storage with the url of the audio
 
   console.log(url)
+  // todo add a way to stop the error continually being called if not online
+
   const [audio] = useState(new Audio(url));
   const [playing, setPlaying] = useState(false);
   const toggle = () => setPlaying(!playing);
