@@ -110,7 +110,7 @@ export default function HomePage(): JSX.Element {
         </Typography>
       </div>
 
-      <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} />
+      <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
       <SettingsModal
         open={settingsOpen}
         setOpen={setSettingsOpen}

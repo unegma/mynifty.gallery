@@ -1,7 +1,7 @@
 import {createStyles, makeStyles, Modal, Theme} from "@material-ui/core";
 import React from "react";
 
-export default function NFTModal ({ open, selectedImage, setOpen }: any) {
+export default function NFTModal ({ open, selectedImage, setOpen, setSelectedImage }: any) {
 
   function getModalStyle() {
     return {
@@ -28,6 +28,7 @@ export default function NFTModal ({ open, selectedImage, setOpen }: any) {
   const [modalStyle] = React.useState(getModalStyle);
 
   const handleClose = () => {
+    setSelectedImage({}); // clear so image from previous piece isn't shown when opening next (if image is large and takes time to load)
     setOpen(false);
   };
 
