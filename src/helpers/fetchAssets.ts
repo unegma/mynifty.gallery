@@ -90,43 +90,52 @@ export default async function getAssets(assetsArray: [], maxImages: number) {
         return (Math.round(Math.random()) * 2 - 1);
       }
 
+      /**
+       * Begin Cluster
+       */
+
       // create co-ordinates based on the a number between 0 and the index of the item (higher index = older item)
       // the second part randomly creates 1 or negative 1 to add depth along each axis
       let pos1dm1 = randFloat(0, index) * getRandomOneOrNegativeOne();
       let pos2dm1 = randFloat(0, index) * getRandomOneOrNegativeOne();
       let pos3dm1 = randFloat(0, index) * getRandomOneOrNegativeOne();
 
+      /**
+       * End Cluster
+       */
 
-      // x = sin(i)
-      // y = cos(i)
-      // z = i
-
+      /**
+       * Begin Spiral
+       */
 
       let pos1dm2 = 7*Math.sin(index) *-1;
       let pos2dm2 = 7*Math.cos(index) *-1;
       let pos3dm2 = 7*index *-1;
 
+      /**
+       * End Spiral
+       */
 
 
-
-      //
+      /**
+       * Begin Golden Spiral
+       */
       // // https://www.reddit.com/r/theydidthemath/comments/286tqb/3d_golden_spiral_equation/
       const exponent = 0.306349; // growth factor in Radians: `ln(phi)/(pi/2)` OR in Degrees: `ln(phi)/90`
+      // const angle = index ;// theta
       const angle = index ;// theta
       // const angle = (index + 0.1) * (Math.round(Math.random()) * 2 - 1) ;// theta
       const slope = 0.2;
-      // // const t = 0.3;
-      //
-      // let pos1spiral = Math.exp(exponent) * angle * Math.cos(angle);
-      // let pos2spiral = Math.exp(exponent) * angle * Math.sin(angle);
-      // let pos3spiral = slope * angle;
-      // let pos3 = Math.tan(slope) * (Math.sqrt(1+exponent) * Math.exp(exponent) * t) / exponent;
+      const t = index - index/2; // todo what is t?
 
-      let pos1dm3 = (3*(Math.exp(exponent) * angle) * Math.sin(angle));
-      let pos2dm3 = (3*(Math.exp(exponent) * angle) * Math.cos(angle));
-      let pos3dm3 = (3*(slope * angle));
+      let pos1dm3 = ((Math.exp(exponent) * angle) * Math.sin(angle));
+      let pos2dm3 = ((Math.exp(exponent) * angle) * Math.cos(angle));
+      let pos3dm3 = ((index*(slope * angle))) / (index * Math.sqrt(index));
+      // let pos3dm3 = ((Math.tan(slope) * ((Math.sqrt(1+exponent) )*Math.exp(exponent * t))/exponent ));
 
-
+      /**
+       * End Golden Spiral
+       */
 
       let scale, baseScale = 1.5, priceIncreaseScale = 10;
       let lastSalePriceInEth = asset.lastSalePriceInEth;
