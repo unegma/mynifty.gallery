@@ -103,6 +103,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         >
           <MenuItem value={0}>Cluster</MenuItem>
           <MenuItem value={1}>Spiral</MenuItem>
+          <MenuItem value={2}>Golden Spiral</MenuItem>
         </Select>
 
         <br/>

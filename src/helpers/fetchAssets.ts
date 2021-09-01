@@ -106,17 +106,26 @@ export default async function getAssets(assetsArray: [], maxImages: number) {
       let pos2dm2 = 7*Math.cos(index) *-1;
       let pos3dm2 = 7*index *-1;
 
+
+
+
       //
       // // https://www.reddit.com/r/theydidthemath/comments/286tqb/3d_golden_spiral_equation/
-      // const exponent = 0.306349; // growth factor in Radians: `ln(phi)/(pi/2)` OR in Degrees: `ln(phi)/90`
+      const exponent = 0.306349; // growth factor in Radians: `ln(phi)/(pi/2)` OR in Degrees: `ln(phi)/90`
+      const angle = index ;// theta
       // const angle = (index + 0.1) * (Math.round(Math.random()) * 2 - 1) ;// theta
-      // const slope = 0.2;
+      const slope = 0.2;
       // // const t = 0.3;
       //
       // let pos1spiral = Math.exp(exponent) * angle * Math.cos(angle);
       // let pos2spiral = Math.exp(exponent) * angle * Math.sin(angle);
       // let pos3spiral = slope * angle;
       // let pos3 = Math.tan(slope) * (Math.sqrt(1+exponent) * Math.exp(exponent) * t) / exponent;
+
+      let pos1dm3 = (3*(Math.exp(exponent) * angle) * Math.sin(angle));
+      let pos2dm3 = (3*(Math.exp(exponent) * angle) * Math.cos(angle));
+      let pos3dm3 = (3*(slope * angle));
+
 
 
       let scale, baseScale = 1.5, priceIncreaseScale = 10;
@@ -149,6 +158,10 @@ export default async function getAssets(assetsArray: [], maxImages: number) {
             pos1: pos1dm2,
             pos2: pos2dm2,
             pos3: pos3dm2
+          },{
+            pos1: pos1dm3,
+            pos2: pos2dm3,
+            pos3: pos3dm3
           },
         ],
         asset: asset,
