@@ -13,12 +13,18 @@ import React from "react";
 import {Switch} from "@material-ui/core";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
-                                         setDisplayMode, displayMode, maxImages, setMaxImages }: any) {
+                                         setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode }: any) {
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
     setZoomEnabled(zoomEnabledOption);
     localStorage.setItem('zoomEnabled', zoomEnabledOption.toString());
+  }
+
+  const toggleVrMode = () => {
+    let vrModeOption = !vrMode;
+    setVrMode(vrModeOption);
+    localStorage.setItem('vrMode', vrModeOption.toString());
   }
 
   const updateMusicUrl = (url: string) => {
@@ -82,6 +88,11 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <Typography style={{color: 'black'}}>Zoom Enabled:</Typography>
         {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
         <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
+        <br/>
+        <br/>
+        <Typography style={{color: 'black'}}>VR Mode:</Typography>
+        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
+        <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
         <br/>
         <br/>
         <TextField

@@ -5,8 +5,7 @@ import Image3D from "./Image3D";
 
 export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMode}: any) {
   return (
-
-    <Canvas className="timeline-canvas">
+    <>
       {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
       <PerspectiveCamera position={[4, 7, 7]} makeDefault />
       {/*<pointLight intensity={3} position={[5, 0, 5]} />*/}
@@ -60,7 +59,6 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       <Suspense fallback={null}>
         {/*<Moon />*/}
       </Suspense>
-
-    </Canvas>
+  </>
   )
 }

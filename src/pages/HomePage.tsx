@@ -9,11 +9,15 @@ import InfoModal from "../components/InfoModal";
 import fetchAssets from '../helpers/fetchAssets';
 import MainCanvas from "../components/MainCanvas";
 import {Spinner} from "../components/Spinner";
+import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
+import {Canvas} from "@react-three/fiber";
+
 
 export default function HomePage(): JSX.Element {
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
   const [open, setOpen] = React.useState(false);
+  const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
   const [maxImages, setMaxImages] = React.useState(15);
   const [infoOpen, setInfoOpen] = React.useState(false);
@@ -33,6 +37,11 @@ export default function HomePage(): JSX.Element {
     let localStorageZoomEnabled = localStorage.getItem('zoomEnabled');
     if (typeof localStorageZoomEnabled !== "undefined" && localStorageZoomEnabled !== null && localStorageZoomEnabled !== "") {
       setZoomEnabled((localStorageZoomEnabled === 'true' ? true: false));
+    }
+
+    let localStorageVrMode = localStorage.getItem('vrMode');
+    if (typeof localStorageVrMode !== "undefined" && localStorageVrMode !== null && localStorageVrMode !== "") {
+      setVrMode((localStorageVrMode === 'true' ? true: false));
     }
 
     let localStorageDisplayMode = localStorage.getItem('displayMode');
@@ -116,6 +125,8 @@ export default function HomePage(): JSX.Element {
         setOpen={setSettingsOpen}
         zoomEnabled={zoomEnabled}
         setZoomEnabled={setZoomEnabled}
+        vrMode={vrMode}
+        setVrMode={setVrMode}
         setMusicUrl={setMusicUrl}
         musicUrl={musicUrl}
         setDisplayMode={setDisplayMode}
@@ -125,7 +136,19 @@ export default function HomePage(): JSX.Element {
       />
       <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen}/>
 
-      <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+      { vrMode && (
+        <VRCanvas className="timeline-canvas">
+          <DefaultXRControllers />
+          <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+        </VRCanvas>
+      )}
+
+      { !vrMode && (
+        <Canvas className="timeline-canvas">
+          <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+        </Canvas>
+      )}
+
     </div>
   )
 }

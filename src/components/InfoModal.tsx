@@ -51,6 +51,7 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings }: a
           Please currently allow a few minutes to load, especially if the number of assets to pull is really high.<br/><br/>
           Visit <a className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</a> to change options.<br/><br/>
           <a target="_blank" href="https://github.com/timhc22/nifty.rip">Github</a>.<br/><br/>
+          Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a><br/><br/>
           Made by <a target="_blank" href="https://unegma.com">unegma</a>.
         </Typography>
       </div>
