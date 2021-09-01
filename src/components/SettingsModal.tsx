@@ -13,7 +13,7 @@ import React from "react";
 import {Switch} from "@material-ui/core";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
-                                         setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode }: any) {
+                                         setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode, setInfoOpen }: any) {
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -84,6 +84,8 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
     >
       <div style={modalStyle} className={classes2.paper}>
         <Typography variant="h3" style={{color: 'black'}}>Settings</Typography>
+        <br/>
+        <Typography style={{color: 'black'}}>More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
         <Typography style={{color: 'black'}}>Zoom Enabled:</Typography>
         {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}

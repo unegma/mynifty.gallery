@@ -28,6 +28,13 @@ export default function HomePage(): JSX.Element {
   const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
+    // open settings on first visit
+    let localStorageFirstVisit = localStorage.getItem('firstVisit');
+    if (typeof localStorageFirstVisit === "undefined" || localStorageFirstVisit === null || localStorageFirstVisit === "") {
+      setSettingsOpen(true);
+      localStorage.setItem('firstVisit', 'false');
+    }
+
     // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
     let localStorageMusicUrl = localStorage.getItem('musicUrl');
     if (typeof localStorageMusicUrl !== "undefined" && localStorageMusicUrl !== null && localStorageMusicUrl !== "") {
@@ -133,6 +140,7 @@ export default function HomePage(): JSX.Element {
         displayMode={displayMode}
         maxImages={maxImages}
         setMaxImages={setMaxImages}
+        setInfoOpen={setInfoOpen}
       />
       <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen}/>
 
