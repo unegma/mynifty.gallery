@@ -28,7 +28,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
   if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
     source = localStorageSource;
   }
-console.log(address)
+
   try {
     /**
      * KO
@@ -65,11 +65,8 @@ console.log(address)
         })
       });
 
-      console.log(assets);
-
       // might break if you pass in an array here, but shouldn't be an issue because that would never happen with KO
       assets = await assets.json();
-      console.log(assets);
       assets = assets.data.tokens;
 
     /**
@@ -145,7 +142,6 @@ console.log(address)
           // this is a bit hacky, but in the scenario where multiple calls are made, the array will be formed of
           // formatted data, and data which hasn't been formatted yet, so only edit the ones with no formatting yet
           if (asset.hasOwnProperty('asset') && asset.hasOwnProperty('order')) {
-            console.log(`here ${index}`);
             return asset;
           }
           assetImage = asset.image_url;
