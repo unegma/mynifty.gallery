@@ -1,8 +1,8 @@
-import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
+import {Button, createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
 import React from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
-export default function InfoModal ({ open, setOpen, maxImages, openSettings }: any) {
+export default function InfoModal ({ open, setOpen, maxImages, openSettings, source, address }: any) {
 
   function getModalStyle() {
     return {
@@ -46,15 +46,23 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings }: a
 
         <Typography variant="h3" style={{color: 'black'}}>Info</Typography>
         <br/>
-        <Typography style={{color: '#333'}}>Burned and irrecoverable NFTs sent to the addresses:<br/><br/>
-          * 0x0000000000000000000000000000000000000000<br/>
-          * 0x000000000000000000000000000000000000dead<br/><br/>
-          This site currently pulls data of the last (max) {maxImages} burned NFTs on&nbsp;
-          <a target="_blank" href="https://knownorigin.io">Known Origin</a>.<br/><br/>
-          Please currently allow a few minutes to load, especially if the number of assets to pull is really high.<br/><br/>
-          Visit <a className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</a> to change options.<br/><br/>
-          <a target="_blank" href="https://github.com/timhc22/nifty.rip">Github</a>.<br/><br/>
-          Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a> and <a target="_blank" href="https://twitter.com/mo_ezz14">@mo_ezz14</a><br/><br/>
+        <Typography style={{color: '#333'}}>Burned (and therefore irrecoverable) NFTs sent to the address:<br/>
+
+          <b>{address}<br/><br/></b>
+
+          This site currently pulls data of the last <b>{maxImages}</b> burned NFTs on&nbsp;
+
+          { source === 'knownorigin' && (
+            <b><a target="_blank" href="https://knownorigin.io">Known Origin</a>.<br/><br/></b>
+          )}
+          { source === 'opensea' && (
+            <b><a target="_blank" href="https://opensea.io">OpenSea</a>.<br/></b>
+          )}
+
+          Please allow a few minutes to load, especially if the number of assets to pull is high.<br/><br/>
+          To change options visit: <b><Button variant="contained" color="primary" className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</Button></b><br/><br/>
+          Contribute here: <a target="_blank" href="https://github.com/timhc22/nifty.rip">Github</a>.<br/>
+          Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a> and <a target="_blank" href="https://twitter.com/mo_ezz14">@mo_ezz14</a><br/>
           Made by <a target="_blank" href="https://unegma.com">unegma</a>.
         </Typography>
       </div>

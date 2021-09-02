@@ -34,7 +34,7 @@ export default function HomePage(): JSX.Element {
     // open settings on first visit
     let localStorageFirstVisit = localStorage.getItem('firstVisit');
     if (typeof localStorageFirstVisit === "undefined" || localStorageFirstVisit === null || localStorageFirstVisit === "") {
-      setSettingsOpen(true);
+      setInfoOpen(true);
       localStorage.setItem('firstVisit', 'false');
     }
 
@@ -158,7 +158,7 @@ export default function HomePage(): JSX.Element {
         address={address}
         setAddress={setAddress}
       />
-      <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen}/>
+      <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen} source={source} address={address}/>
 
 
         { vrMode && (
