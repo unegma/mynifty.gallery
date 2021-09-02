@@ -13,7 +13,8 @@ import React from "react";
 import {Switch} from "@material-ui/core";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
-                                         setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode, setInfoOpen }: any) {
+                                         setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
+                                         setInfoOpen, source, setSource }: any) {
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -36,7 +37,11 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   const updateDisplayMode = (dm: any) => {
     setDisplayMode(dm);
     localStorage.setItem('displayMode', dm);
-    // localStorage.setItem('musicUrl', JSON.stringify(url));
+  }
+
+  const updateSource = (src: any) => {
+    setSource(src);
+    localStorage.setItem('source', src);
   }
 
   const updateMaxImages = (mi: any) => {
@@ -118,6 +123,19 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <MenuItem value={1}>Spiral</MenuItem>
           <MenuItem value={2}>Spiral Galaxy</MenuItem>
           <MenuItem value={3}>Swirl</MenuItem>
+        </Select>
+
+        <br/><br/>
+
+        <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
+        <Select
+          labelId="demo-simple-select-label2"
+          id="demo-simple-select2"
+          value={source}
+          onChange={(ev) => {updateSource(ev.target.value)}}
+        >
+          <MenuItem value={'knownorigin'}>Known Origin</MenuItem>
+          <MenuItem value={'opensea'}>OpenSea</MenuItem>
         </Select>
 
         <br/>

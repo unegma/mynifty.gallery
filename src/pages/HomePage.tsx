@@ -15,6 +15,7 @@ import {Canvas} from "@react-three/fiber";
 
 export default function HomePage(): JSX.Element {
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
+  const [source, setSource] = React.useState("opensea");
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
   const [open, setOpen] = React.useState(false);
   const [vrMode, setVrMode] = React.useState(false);
@@ -33,6 +34,12 @@ export default function HomePage(): JSX.Element {
     if (typeof localStorageFirstVisit === "undefined" || localStorageFirstVisit === null || localStorageFirstVisit === "") {
       setSettingsOpen(true);
       localStorage.setItem('firstVisit', 'false');
+    }
+
+    // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
+    let localStorageSource = localStorage.getItem('source');
+    if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
+      setSource(localStorageSource);
     }
 
     // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
@@ -80,7 +87,7 @@ export default function HomePage(): JSX.Element {
   }
 
   async function getAssets () {
-    let newAssets = await fetchAssets([], maxImages);
+    let newAssets = await fetchAssets([], maxImages, source);
     setGallery(newAssets);
   }
 
@@ -141,21 +148,25 @@ export default function HomePage(): JSX.Element {
         maxImages={maxImages}
         setMaxImages={setMaxImages}
         setInfoOpen={setInfoOpen}
+        source={source}
+        setSource={setSource}
       />
       <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen}/>
 
-      { vrMode && (
-        <VRCanvas className="timeline-canvas">
-          <DefaultXRControllers />
-          <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
-        </VRCanvas>
-      )}
 
-      { !vrMode && (
-        <Canvas className="timeline-canvas">
-          <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
-        </Canvas>
-      )}
+        { vrMode && (
+          <VRCanvas className="timeline-canvas">
+            <DefaultXRControllers />
+            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+          </VRCanvas>
+        )}
+
+        { !vrMode && (
+          <Canvas className="timeline-canvas">
+            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+          </Canvas>
+        )}
+
 
     </div>
   )
