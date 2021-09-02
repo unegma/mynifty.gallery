@@ -62,6 +62,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       left: `50%`,
       transform: `translate(-50%, -50%)`,
       minWidth: '50vw',
+      maxWidth: '90vw',
     };
   }
 

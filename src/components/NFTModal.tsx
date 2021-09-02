@@ -8,6 +8,7 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
       top: `50%`,
       left: `50%`,
       transform: `translate(-50%, -50%)`,
+      maxWidth: '90vw',
     };
   }
 
