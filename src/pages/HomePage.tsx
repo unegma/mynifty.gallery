@@ -11,6 +11,7 @@ import MainCanvas from "../components/MainCanvas";
 import {Spinner} from "../components/Spinner";
 import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
 import {Canvas} from "@react-three/fiber";
+import {OrbitControls} from "@react-three/drei";
 
 
 export default function HomePage(): JSX.Element {
@@ -158,18 +159,27 @@ export default function HomePage(): JSX.Element {
         address={address}
         setAddress={setAddress}
       />
-      <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen} source={source} address={address}/>
+      <InfoModal
+        open={infoOpen}
+        setOpen={setInfoOpen}
+        maxImages={maxImages}
+        openSettings={setSettingsOpen}
+        source={source}
+        address={address}
+      />
 
 
         { vrMode && (
           <VRCanvas className="timeline-canvas">
             <DefaultXRControllers />
+            <OrbitControls enableZoom={zoomEnabled} />
             <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
           </VRCanvas>
         )}
 
         { !vrMode && (
           <Canvas className="timeline-canvas">
+            <OrbitControls enableZoom={zoomEnabled} />
             <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
           </Canvas>
         )}
@@ -178,3 +188,4 @@ export default function HomePage(): JSX.Element {
     </div>
   )
 }
+

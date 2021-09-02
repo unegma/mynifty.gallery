@@ -53,9 +53,6 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
         fade // Faded dots (default=false)
       />
 
-
-      <OrbitControls enableZoom={zoomEnabled} />
-
       <Suspense fallback={null}>
         {/*<Moon />*/}
       </Suspense>
