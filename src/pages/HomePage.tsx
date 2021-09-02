@@ -83,9 +83,9 @@ export default function HomePage(): JSX.Element {
   async function getAssets () {
     let newAssets = await fetchAssets([], maxImages, source, address);
     setLoading(false);
-    console.log('hi im here on the homepage', newAssets)
+    console.log('assets:', newAssets)
     if (newAssets.length === 0) {
-      console.log('There has probably been an error');
+      console.log('There has probably been an error (not very helpful I know sorry, but there ain\'t no Nifties!');
       setErrorMessage('Looks like an error :(');
     }
     setGallery(newAssets);

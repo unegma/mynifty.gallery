@@ -218,8 +218,6 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
         asset.displayMode = createShapes(asset.order);
         return asset;
       })
-      console.log ('finalAssets', finalAssets);
-
       return finalAssets;
     } else {
       return [];
