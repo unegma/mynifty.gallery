@@ -137,7 +137,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           value={source}
           onChange={(ev) => {updateSource(ev.target.value)}}
         >
-          <MenuItem value={'knownorigin'}>Known Origin</MenuItem>
+          <MenuItem value={'knownorigin'}>KnownOrigin</MenuItem>
           <MenuItem value={'opensea'}>OpenSea</MenuItem>
         </Select>
 

@@ -7,7 +7,7 @@ import {randFloat} from "three/src/math/MathUtils";
  * @param source
  * @param offset
  */
-export default async function getAssets(assetsArray: [], maxImages: number, source: string, offset = 0) {
+export default async function getAssets(assetsArray: [], maxImages: number, source: string, offset = 0): Promise<any> {
   let assets = <any>[];
 
   // added this here with await instead of using only maxImages pulled in, because of possible race conditions
@@ -97,6 +97,11 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
           imageURL = imageURL.replace('ipfs://', 'https://ipfs.infura.io/ipfs/');
         }
 
+        // currently remove mp4s
+        if (imageURL.includes('.mp4')) {
+          return null;
+        }
+
         assetImageThumbnail = imageURL;
         assetImage = imageURL;
         if (assetImage == null || assetImage == "") return null; // this could cause breaks in the order, so may be better to go through and number then at the end
@@ -117,8 +122,14 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
 
       // Opensea
       } else if (source === 'opensea') {
-        assetImageThumbnail = asset.image_thumbnail_url;
         assetImage = asset.image_url;
+
+        // currently remove mp4s
+        if (assetImage.includes('.mp4')) {
+          return null;
+        }
+
+        assetImageThumbnail = asset.image_thumbnail_url;
         if (assetImage == null || assetImage == "") return null; // some images have no image set by the looks of it // this could cause breaks in the order, so may be better to go through and number then at the end
         assetImageName = asset.name;
         assetImageDescription = asset.description;
@@ -156,8 +167,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
       // get more if needed
       if (joinedAssets.length < maxImages) {
         console.log(`calling getAssets with ${joinedAssets.length} assets, ${maxImages} maxImages, ${source} as source and offset of ${offset}+20`);
-        getAssets(joinedAssets, maxImages, source, offset+20); // may be a better way of getting 20 at a time and then slicing to be length of maxImages
-        return;
+        return await getAssets(joinedAssets, maxImages, source, offset+20); // may be a better way of getting 20 at a time and then slicing to be length of maxImages
       } else {
         // this should be equal to maxImages
         finalAssets = joinedAssets.splice(0, maxImages);
