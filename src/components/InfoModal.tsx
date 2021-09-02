@@ -1,5 +1,6 @@
 import {createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
 import React from "react";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 export default function InfoModal ({ open, setOpen, maxImages, openSettings }: any) {
 
@@ -41,6 +42,8 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings }: a
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
+        <HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>
+
         <Typography variant="h3" style={{color: 'black'}}>Info</Typography>
         <br/>
         <Typography style={{color: '#333'}}>Burned and irrecoverable NFTs sent to the addresses:<br/><br/>

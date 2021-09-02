@@ -166,3 +166,10 @@ $secondary-color: #683d00;
   height: 15px;
   width: 15px;
 }
+
+.closeModalButton {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top:5px;
+}

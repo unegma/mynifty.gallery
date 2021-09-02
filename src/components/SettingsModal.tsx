@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import {Switch} from "@material-ui/core";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
@@ -88,6 +89,8 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
+        <HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>
+
         <Typography variant="h3" style={{color: 'black'}}>Settings</Typography>
         <br/>
         <Typography style={{color: 'black'}}>More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
