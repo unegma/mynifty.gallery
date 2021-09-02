@@ -67,27 +67,14 @@ export default function HomePage(): JSX.Element {
       setMaxImages(parseInt(localStorageMaxImages));
     }
 
-    getLoading();
-
     // this might be being called before the local storage retreival above
     getAssets();
   }, []);
 
-  /**
-   * this is here as a test, maybe move all localstorage loadings to an async function?
-   */
-  async function getLoading() {
-    console.log(`Loading for: ${maxImages}`);
-    // currently we show the loading spinner giving 1 second per image
-    setTimeout(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, maxImages * 1000);
-    }, 3000); // todo temporary fix: wait 1 second because localStorage value isn't retreived immediately
-  }
 
   async function getAssets () {
     let newAssets = await fetchAssets([], maxImages, source);
+    setLoading(false);
     setGallery(newAssets);
   }
 
