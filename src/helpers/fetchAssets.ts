@@ -28,7 +28,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
   if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
     source = localStorageSource;
   }
-
+console.log(address)
   try {
     /**
      * KO
@@ -43,10 +43,8 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            query: `
-          query { tokens(orderBy: lastTransferTimestamp, orderDirection: desc, where: {currentOwner_in: [
-            ${address}, 
-          ]}) {
+          query: `
+          query($add: [String]) { tokens(orderBy: lastTransferTimestamp, orderDirection: desc, where: {currentOwner_in: $add}) {
             id
             lastSalePriceInEth
             lastTransferTimestamp
@@ -60,12 +58,18 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
               image_size_in_bytes
               cover_image
             }
-          }}`
+          }}`,
+          variables: {
+            add: [address]
           }
-        )
+        })
       });
+
+      console.log(assets);
+
       // might break if you pass in an array here, but shouldn't be an issue because that would never happen with KO
       assets = await assets.json();
+      console.log(assets);
       assets = assets.data.tokens;
 
     /**
