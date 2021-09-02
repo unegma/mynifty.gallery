@@ -161,6 +161,9 @@ $secondary-color: #683d00;
 .audioURLInput {
   width: 100%;
 }
+.addressInput {
+  width: 100%;
+}
 
 .spinner {
   height: 15px;
@@ -172,4 +175,8 @@ $secondary-color: #683d00;
   position: absolute;
   right: 5px;
   top:5px;
+}
+
+.error {
+  color: red;
 }

@@ -14,9 +14,10 @@ import {Canvas} from "@react-three/fiber";
 
 
 export default function HomePage(): JSX.Element {
+  const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [source, setSource] = React.useState("opensea");
-  const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
+  const [address, setAddress] = React.useState("0x0000000000000000000000000000000000000000");
   const [open, setOpen] = React.useState(false);
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
@@ -27,6 +28,7 @@ export default function HomePage(): JSX.Element {
   const [gallery, setGallery] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState({});
   const [loading, setLoading] = React.useState(true);
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   useEffect(() => {
     // open settings on first visit
@@ -46,6 +48,11 @@ export default function HomePage(): JSX.Element {
     let localStorageMusicUrl = localStorage.getItem('musicUrl');
     if (typeof localStorageMusicUrl !== "undefined" && localStorageMusicUrl !== null && localStorageMusicUrl !== "") {
       setMusicUrl(localStorageMusicUrl);
+    }
+    // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
+    let localStorageAddress = localStorage.getItem('address');
+    if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
+      setAddress(localStorageAddress);
     }
 
     let localStorageZoomEnabled = localStorage.getItem('zoomEnabled');
@@ -73,8 +80,13 @@ export default function HomePage(): JSX.Element {
 
 
   async function getAssets () {
-    let newAssets = await fetchAssets([], maxImages, source);
+    let newAssets = await fetchAssets([], maxImages, source, address);
     setLoading(false);
+    console.log('hi im here on the homepage', newAssets)
+    if (newAssets.length === 0) {
+      console.log('There has probably been an error');
+      setErrorMessage('Looks like an error :(');
+    }
     setGallery(newAssets);
   }
 
@@ -91,12 +103,18 @@ export default function HomePage(): JSX.Element {
       <div className="text1-container">
         <Typography variant="subtitle1" className="text1" >
           The Void:&nbsp;
-          {loading ?
-            <Spinner className="spinner" color="white"/> :
+          { loading &&
+            <Spinner className="spinner" color="white"/>
+          }
+          { !loading && errorMessage === "" &&
             <a className="pointer underlined" onClick={() => {
               setSettingsOpen(true)
             }}>last {maxImages}</a>
-        }
+          }
+          { errorMessage !== "" &&
+            <span className="error">{errorMessage}</span>
+            // todo reportme button
+          }
         </Typography>
       </div>
 
@@ -137,6 +155,8 @@ export default function HomePage(): JSX.Element {
         setInfoOpen={setInfoOpen}
         source={source}
         setSource={setSource}
+        address={address}
+        setAddress={setAddress}
       />
       <InfoModal open={infoOpen} setOpen={setInfoOpen} maxImages={maxImages} openSettings={setSettingsOpen}/>
 

@@ -15,7 +15,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
-                                         setInfoOpen, source, setSource }: any) {
+                                         setInfoOpen, source, setSource, address, setAddress }: any) {
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -32,6 +32,12 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   const updateMusicUrl = (url: string) => {
     setMusicUrl(url);
     localStorage.setItem('musicUrl', url);
+    // localStorage.setItem('musicUrl', JSON.stringify(url));
+  }
+
+  const updateAddress = (ad: any) => {
+    setAddress(ad);
+    localStorage.setItem('address', ad);
     // localStorage.setItem('musicUrl', JSON.stringify(url));
   }
 
@@ -112,6 +118,20 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           onChange={(e) => updateMusicUrl(e.target.value)}
           label="AudioURL"
         />
+        <br/>
+        <br/>
+        <InputLabel id="demo-simple-select-label3">Address:</InputLabel>
+        <Select
+          className="addressInput"
+          labelId="demo-simple-select-label3"
+          id="demo-simple-select3"
+          value={address}
+          onChange={(ev) => {updateAddress(ev.target.value)}}
+        >
+          <MenuItem value={"0x0000000000000000000000000000000000000000"}>0x0000000000000000000000000000000000000000</MenuItem>
+          <MenuItem value={"0x000000000000000000000000000000000000dead"}>0x000000000000000000000000000000000000dead</MenuItem>
+          {/*<MenuItem value={"0x8309d9a1B39CC5f309B5e44db315532Afb60f43e"}>0x8309d9a1B39CC5f309B5e44db315532Afb60f43e</MenuItem>*/}
+        </Select>
         <br/>
         <br/>
 
