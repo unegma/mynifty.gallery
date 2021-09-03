@@ -50,10 +50,15 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
         <Typography variant="h3" className="greyFont">Info</Typography>
         <br/>
 
+        <Typography className="greyFont">
+          Visit the twin project of this site <a target="_blank" href="https://nifty.rip">nifty.rip</a> to see NFTs lost forever in the void.
+        </Typography>
 
         <br/>
         <hr/>
         <br/>
+
+
         {/*<Typography style={{color: '#333'}}>Burned (and therefore irrecoverable) NFTs sent to the address:<br/>*/}
         {/**/}
         {/*  <b>{address}<br/><br/></b>*/}
