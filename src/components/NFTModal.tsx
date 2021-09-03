@@ -9,7 +9,8 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
       left: `50%`,
       transform: `translate(-50%, -50%)`,
       maxWidth: '90vw',
-      maxHeight: '70vh'
+      maxHeight: '70vh',
+      overflow: 'scroll'
     };
   }
 
