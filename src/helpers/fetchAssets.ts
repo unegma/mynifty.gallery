@@ -135,6 +135,8 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
           newDate.setTime(asset.lastTransferTimestamp*1000);
           dateString = newDate.toUTCString();
 
+          // console.log(`here1`,assetImage);
+
           /**
            * OpenSea
            */
@@ -170,6 +172,13 @@ export default async function getAssets(assetsArray: [], maxImages: number, sour
             baseScale = baseScale + (lastSalePriceInEth*priceIncreaseScale); // increase size of item by last sale price*2
           }
           scale = [baseScale, baseScale, baseScale];
+        }
+
+
+        // TODO WHY IS assetImage BECOMING UNDEFINED AT THIS POINT? HACKY FIX
+        // console.log(`here2`,assetImage);
+        if(typeof assetImage === 'undefined') {
+          assetImage = assetImageThumbnail;
         }
 
         return {
