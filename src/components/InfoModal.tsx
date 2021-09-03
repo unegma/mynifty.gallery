@@ -10,6 +10,7 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
       left: `50%`,
       transform: `translate(-50%, -50%)`,
       maxWidth: '90vw',
+      maxHeight: '70vh'
     };
   }
 
