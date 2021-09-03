@@ -102,6 +102,8 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
         <Typography style={{color: 'black'}}>More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
+        <hr/>
+        <br/>
         <Typography style={{color: 'black'}}>Zoom Enabled:</Typography>
         {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
         <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
