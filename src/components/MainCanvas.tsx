@@ -2,6 +2,8 @@ import {Canvas} from "@react-three/fiber";
 import {OrbitControls, PerspectiveCamera, Stars} from "@react-three/drei";
 import React, {Suspense} from "react";
 import Image3D from "./Image3D";
+import Moon from "./Moon";
+import Grass from "./Grass";
 
 export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMode}: any) {
   return (
@@ -54,7 +56,15 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       />
 
       <Suspense fallback={null}>
-        {/*<Moon />*/}
+        <Moon position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <Moon position={[0, -100, 40]} size={[4, 24, 24]} color="#E3615C"/>
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <Moon position={[-100, -400, 100]} size={[4, 24, 24]} color="#728FAC"/>
       </Suspense>
   </>
   )
