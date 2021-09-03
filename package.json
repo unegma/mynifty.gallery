@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "mynifty.gallery",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,7 +40,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "update-install": "npm update; npm install",
-    "deploy": "npm run build; aws --profile unegma s3 sync --delete ./build/ s3://nifty.rip/"
+    "deploy": "npm run build; aws --profile unegma s3 sync --delete ./build/ s3://mynifty.gallery/"
   },
   "eslintConfig": {
     "extends": [
