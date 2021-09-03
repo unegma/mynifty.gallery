@@ -50,13 +50,7 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
         <Typography variant="h3" className="greyFont">Info</Typography>
         <br/>
 
-        <Typography className="greyFont">
-          This project is designed to show an important concept about NFTs.. 'ownership' can be lost, the 'jpg' not.. Think about posting the key AND the deeds through the letterbox of a house..
-        </Typography>
-        <br/>
-        <Typography className="greyFont">
-          Blockchains add 'ownership certainty' re 'digital assets' on the Internet, therefore, these NFTs are arguably the most valuable on the planet as there will always be demand for them, but no supply.
-        </Typography>
+
         <br/>
         <hr/>
         <br/>
@@ -64,16 +58,6 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
         {/**/}
         {/*  <b>{address}<br/><br/></b>*/}
         <Typography className="greyFont">
-          This site is currently displaying the last <b>{maxImages}</b> 'burned' NFTs from&nbsp;
-
-          { source === 'knownorigin' && (
-            <b><a target="_blank" href="https://knownorigin.io">Known Origin</a></b>
-          )}
-          { source === 'opensea' && (
-            <b><a target="_blank" href="https://opensea.io">OpenSea</a>.</b>
-          )}
-            <br/>
-            sent to the address: <b className="minitext">{address}<br/><br/></b>
           Please allow some time for loading, especially if the number of assets is high.<br/>
           To change options visit: <b><Button variant="contained" color="primary" className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</Button></b><br/><br/>
         </Typography>
