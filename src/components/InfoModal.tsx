@@ -47,6 +47,17 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
 
         <Typography variant="h3" style={{color: 'black'}}>Info</Typography>
         <br/>
+
+        <Typography>
+          This project is designed to show an important concept about NFTs.. 'ownership' can be lost, the 'jpg' not.. Think about posting the key AND the deeds through the letterbox of a house..
+        </Typography>
+        <br/>
+        <Typography>
+          Blockchains add 'ownership certainty' re 'digital assets' on the Internet, therefore, these NFTs are arguably the most valuable on the planet as there will always be demand for them, but no supply.
+        </Typography>
+        <br/>
+        <hr/>
+        <br/>
         <Typography style={{color: '#333'}}>Burned (and therefore irrecoverable) NFTs sent to the address:<br/>
 
           <b>{address}<br/><br/></b>
@@ -62,6 +73,10 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
 
           Please allow a few minutes to load, especially if the number of assets to pull is high.<br/><br/>
           To change options visit: <b><Button variant="contained" color="primary" className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</Button></b><br/><br/>
+        </Typography>
+        <hr/>
+        <br/>
+        <Typography>
           Contribute here: <a target="_blank" href="https://github.com/timhc22/nifty.rip">Github</a>.<br/>
           Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a> and <a target="_blank" href="https://twitter.com/mo_ezz14">@mo_ezz14</a><br/>
           Made by <a target="_blank" href="https://unegma.com">unegma</a>.
