@@ -44,18 +44,18 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
-        <h2 className="greyFont" id="simple-modal-title">{selectedImage.name}</h2>
+        <h2 className="secondaryColor" id="simple-modal-title">{selectedImage.name}</h2>
 
         { selectedImage.dateLost && (
-          <p className="greyFont"><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
+          <p className="secondaryColor"><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
         )}
 
-        <p id="simple-modal-description" className="greyFont">
+        <p id="simple-modal-description" className="secondaryColor">
           <b>Description:</b> {selectedImage.description}<br/>
         </p>
 
         { selectedImage.lastPrice && (
-          <p className="greyFont"><b>Last Price:</b> {selectedImage.lastPrice} ETH<br/></p>
+          <p className="secondaryColor"><b>Last Price:</b> {selectedImage.lastPrice} ETH<br/></p>
         )}
         <br/>
 

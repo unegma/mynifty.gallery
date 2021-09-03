@@ -100,18 +100,18 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       <div style={modalStyle} className={classes2.paper}>
         <HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>
 
-        <Typography variant="h3" className="greyFont">Settings</Typography>
+        <Typography variant="h3" className="secondaryColor">Settings</Typography>
         <br/>
-        <Typography className="greyFont">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
+        <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
         <hr/>
         <br/>
-        <Typography className="greyFont">Zoom Enabled:</Typography>
+        <Typography className="secondaryColor">Zoom Enabled:</Typography>
         {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
         <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
         <br/>
         <br/>
-        <Typography className="greyFont">VR Mode:</Typography>
+        <Typography className="secondaryColor">VR Mode:</Typography>
         {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
         <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
         <br/>
