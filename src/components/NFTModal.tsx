@@ -44,12 +44,20 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
     >
       <div style={modalStyle} className={classes2.paper}>
         <h2 id="simple-modal-title">{selectedImage.name}</h2>
-        <p><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
+
+        { selectedImage.dateLost && (
+          <p><b>Date Lost:</b> {selectedImage.dateLost}<br/></p>
+        )}
+
         <p id="simple-modal-description" className="simple-modal-description">
           <b>Description:</b> {selectedImage.description}<br/>
         </p>
-        <p><b>Last Price:</b> {selectedImage.lastPrice} ETH<br/></p>
+
+        { selectedImage.lastPrice && (
+          <p><b>Last Price:</b> {selectedImage.lastPrice} ETH<br/></p>
+        )}
         <br/>
+
         <img src={selectedImage.imageUrl} /><br/>
         {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
       </div>
