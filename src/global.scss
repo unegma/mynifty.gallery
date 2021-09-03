@@ -140,7 +140,7 @@ $secondary-color: #683d00;
 }
 
 // todo check that probably don't need important
-.simple-modal-description {
+#simple-modal-description {
   display: block !important;
   overflow-y: scroll !important;
   max-height: 20vh !important;
@@ -179,4 +179,12 @@ $secondary-color: #683d00;
 
 .error {
   color: red;
+}
+
+.minitext {
+  font-size: 10px;
+}
+
+.greyFont {
+  color: #333;
 }
