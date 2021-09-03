@@ -58,28 +58,29 @@ export default function InfoModal ({ open, setOpen, maxImages, openSettings, sou
         <br/>
         <hr/>
         <br/>
-        <Typography style={{color: '#333'}}>Burned (and therefore irrecoverable) NFTs sent to the address:<br/>
-
-          <b>{address}<br/><br/></b>
-
-          This site currently pulls data of the last <b>{maxImages}</b> burned NFTs on&nbsp;
+        {/*<Typography style={{color: '#333'}}>Burned (and therefore irrecoverable) NFTs sent to the address:<br/>*/}
+        {/**/}
+        {/*  <b>{address}<br/><br/></b>*/}
+        <Typography style={{color: '#333'}}>
+          This site is currently displaying the last <b>{maxImages}</b> 'burned' NFTs from&nbsp;
 
           { source === 'knownorigin' && (
-            <b><a target="_blank" href="https://knownorigin.io">Known Origin</a>.<br/><br/></b>
+            <b><a target="_blank" href="https://knownorigin.io">Known Origin</a></b>
           )}
           { source === 'opensea' && (
-            <b><a target="_blank" href="https://opensea.io">OpenSea</a>.<br/></b>
+            <b><a target="_blank" href="https://opensea.io">OpenSea</a>.</b>
           )}
-
-          Please allow a few minutes to load, especially if the number of assets to pull is high.<br/><br/>
+            <br/>
+            sent to the address: <b>{address}<br/><br/></b>
+          Please allow some time for loading, especially if the number of assets is high.<br/>
           To change options visit: <b><Button variant="contained" color="primary" className="pointer underlined" onClick={()=>{setOpen(false); openSettings(true)}}>Settings</Button></b><br/><br/>
         </Typography>
         <hr/>
         <br/>
         <Typography>
           Contribute here: <a target="_blank" href="https://github.com/timhc22/nifty.rip">Github</a>.<br/>
-          Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a> and <a target="_blank" href="https://twitter.com/mo_ezz14">@mo_ezz14</a><br/>
-          Made by <a target="_blank" href="https://unegma.com">unegma</a>.
+          Special thanks to: <a target="_blank" href="https://twitter.com/0xnibbler">@0xnibbler</a> and <a target="_blank" href="https://twitter.com/mo_ezz14">@mo_ezz14</a><br/><br/>
+          <span style={{float: 'right'}}>Made by <a target="_blank" href="https://unegma.com">unegma</a>.</span>
         </Typography>
       </div>
     </Modal>
