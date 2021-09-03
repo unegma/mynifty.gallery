@@ -15,7 +15,7 @@ import {OrbitControls} from "@react-three/drei";
 
 
 export default function HomePage(): JSX.Element {
-  const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/08/09/audio_046edb7268.mp3?filename=dunes-7115.mp3");
+  const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [source, setSource] = React.useState("opensea");
   const [address, setAddress] = React.useState("0x000000000000000000000000000000000000dead");
@@ -103,14 +103,14 @@ export default function HomePage(): JSX.Element {
     <div>
       <div className="text1-container">
         <Typography variant="subtitle1" className="text1" >
-          The Void:&nbsp;
+          My NFTs:&nbsp;
           { loading &&
             <Spinner className="spinner" color="white"/>
           }
           { !loading && errorMessage === "" &&
             <a className="pointer underlined" onClick={() => {
               setSettingsOpen(true)
-            }}>last {maxImages}</a>
+            }}>{maxImages} NFTs</a>
           }
           { errorMessage !== "" &&
             <span className="error">{errorMessage}</span>
