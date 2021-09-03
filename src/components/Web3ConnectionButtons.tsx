@@ -61,6 +61,10 @@ export default function Web3ConnectionButtons() {
   const [activatingConnector, setActivatingConnector] = useState<any>()
 
   useEffect(() => {
+    if (account) {
+      localStorage.setItem('address', account); // todo test this and check if ok to do like this
+    }
+
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined);
     }
@@ -70,6 +74,8 @@ export default function Web3ConnectionButtons() {
   const triedEager = useEagerConnect();
 
   const handleDisconnect = () => {
+    localStorage.setItem('address', ""); // todo test this and check if ok to do like this
+
     if (connector === connectorsByName[ConnectorNames.WalletConnect]) {
       console.log('Deactivating WalletConnect session');
       (connector as any).close(); // todo unfinsihed
@@ -164,6 +170,9 @@ export default function Web3ConnectionButtons() {
             )}
             <br/>
             {/*<DonateButton />*/}
+            <Typography className="secondaryColor">You may need to refresh the page to view the NFTs (<a href="https://unegma.com/contact" target="_blank">let us know</a> if there are any issues):</Typography>
+            <br/>
+            <Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>
             <br/>
           </div>
 

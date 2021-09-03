@@ -12,10 +12,15 @@ import {
 import React from "react";
 import {Switch} from "@material-ui/core";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import {useWeb3React} from "@web3-react/core";
+import {Web3Provider} from "@ethersproject/providers";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
-                                         setInfoOpen, source, setSource, address, setAddress }: any) {
+                                         setInfoOpen, address, setAddress }: any) {
+
+  const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context;
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -35,20 +40,9 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
     // localStorage.setItem('musicUrl', JSON.stringify(url));
   }
 
-  const updateAddress = (ad: any) => {
-    setAddress(ad);
-    localStorage.setItem('address', ad);
-    // localStorage.setItem('musicUrl', JSON.stringify(url));
-  }
-
   const updateDisplayMode = (dm: any) => {
     setDisplayMode(dm);
     localStorage.setItem('displayMode', dm);
-  }
-
-  const updateSource = (src: any) => {
-    setSource(src);
-    localStorage.setItem('source', src);
   }
 
   const updateMaxImages = (mi: any) => {
@@ -126,17 +120,20 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
         <br/>
         <InputLabel id="demo-simple-select-label3">Address:</InputLabel>
-        <Select
-          className="addressInput"
-          labelId="demo-simple-select-label3"
-          id="demo-simple-select3"
-          value={address}
-          onChange={(ev) => {updateAddress(ev.target.value)}}
-        >
-          <MenuItem value={"0x0000000000000000000000000000000000000000"}>0x0000000000000000000000000000000000000000</MenuItem>
-          <MenuItem value={"0x000000000000000000000000000000000000dead"}>0x000000000000000000000000000000000000dead</MenuItem>
-          {/*<MenuItem value={"0x8309d9a1B39CC5f309B5e44db315532Afb60f43e"}>0x8309d9a1B39CC5f309B5e44db315532Afb60f43e</MenuItem>*/}
-        </Select>
+
+        {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }
+
+        {/*<Select*/}
+        {/*  className="addressInput"*/}
+        {/*  labelId="demo-simple-select-label3"*/}
+        {/*  id="demo-simple-select3"*/}
+        {/*  value={address}*/}
+        {/*  onChange={(ev) => {updateAddress(ev.target.value)}}*/}
+        {/*>*/}
+        {/*  <MenuItem value={"0x0000000000000000000000000000000000000000"}>0x0000000000000000000000000000000000000000</MenuItem>*/}
+        {/*  <MenuItem value={"0x000000000000000000000000000000000000dead"}>0x000000000000000000000000000000000000dead</MenuItem>*/}
+        {/*  /!*<MenuItem value={"0x8309d9a1B39CC5f309B5e44db315532Afb60f43e"}>0x8309d9a1B39CC5f309B5e44db315532Afb60f43e</MenuItem>*!/*/}
+        {/*</Select>*/}
         <br/>
         <br/>
 
@@ -153,18 +150,6 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <MenuItem value={3}>Swirl</MenuItem>
         </Select>
 
-        <br/><br/>
-
-        <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label2"
-          id="demo-simple-select2"
-          value={source}
-          onChange={(ev) => {updateSource(ev.target.value)}}
-        >
-          <MenuItem value={'knownorigin'}>KnownOrigin</MenuItem>
-          <MenuItem value={'opensea'}>OpenSea</MenuItem>
-        </Select>
 
         <br/>
         <br/>

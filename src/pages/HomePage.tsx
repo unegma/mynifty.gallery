@@ -13,12 +13,17 @@ import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 import Web3ConnectionButtons from '../components/Web3ConnectionButtons';
+import {useWeb3React} from "@web3-react/core";
+import {Web3Provider} from "@ethersproject/providers";
 
 export default function HomePage(): JSX.Element {
+  const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context;
+
+
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
-  const [source, setSource] = React.useState("opensea");
-  const [address, setAddress] = React.useState("0x000000000000000000000000000000000000dead");
+  const [address, setAddress] = React.useState<string>("");
   const [open, setOpen] = React.useState(false);
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
@@ -32,28 +37,34 @@ export default function HomePage(): JSX.Element {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   useEffect(() => {
+
+    let localStorageAddress = localStorage.getItem('address');
+    if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
+      setAddress(localStorageAddress); // get first
+    }
+    // if (account) {
+    //   setAddress(account);
+    // } else {
+    //   setAddress(""); // todo maybe add an error message
+    // }
+
     // open settings on first visit
     let localStorageFirstVisit = localStorage.getItem('firstVisit');
     if (typeof localStorageFirstVisit === "undefined" || localStorageFirstVisit === null || localStorageFirstVisit === "") {
       setInfoOpen(true);
       localStorage.setItem('firstVisit', 'false');
     }
-
-    // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
-    let localStorageSource = localStorage.getItem('source');
-    if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
-      setSource(localStorageSource);
-    }
+    //
+    // // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
+    // let localStorageSource = localStorage.getItem('source');
+    // if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
+    //   setSource(localStorageSource);
+    // }
 
     // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
     let localStorageMusicUrl = localStorage.getItem('musicUrl');
     if (typeof localStorageMusicUrl !== "undefined" && localStorageMusicUrl !== null && localStorageMusicUrl !== "") {
       setMusicUrl(localStorageMusicUrl);
-    }
-    // todo the music url issue might not be working properly because of race conditions. May need an await in here (and move to music component)
-    let localStorageAddress = localStorage.getItem('address');
-    if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
-      setAddress(localStorageAddress);
     }
 
     let localStorageZoomEnabled = localStorage.getItem('zoomEnabled');
@@ -81,7 +92,7 @@ export default function HomePage(): JSX.Element {
 
 
   async function getAssets () {
-    let newAssets = await fetchAssets([], maxImages, source, address);
+    let newAssets = await fetchAssets([], maxImages, address);
     setLoading(false);
     console.log('assets:', newAssets)
     if (newAssets.length === 0) {
@@ -155,8 +166,6 @@ export default function HomePage(): JSX.Element {
         maxImages={maxImages}
         setMaxImages={setMaxImages}
         setInfoOpen={setInfoOpen}
-        source={source}
-        setSource={setSource}
         address={address}
         setAddress={setAddress}
       />
@@ -165,7 +174,6 @@ export default function HomePage(): JSX.Element {
         setOpen={setInfoOpen}
         maxImages={maxImages}
         openSettings={setSettingsOpen}
-        source={source}
         address={address}
       />
 
