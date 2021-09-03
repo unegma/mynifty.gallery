@@ -48,6 +48,7 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
           <b>Description:</b> {selectedImage.description}<br/>
         </p>
         <p><b>Last Price:</b> {selectedImage.lastPrice} ETH<br/></p>
+        <br/>
         <img src={selectedImage.imageUrl} /><br/>
         {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
       </div>
