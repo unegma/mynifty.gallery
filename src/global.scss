@@ -4,11 +4,14 @@ $secondary-background-color: #ecd8bf;
 $main-color: #023c40;
 $secondary-color: #683d00;
 
+$secondary: #333;
+
 * {
   padding: 0;
   margin:0;
   box-sizing: border-box;
   // background-color: $main-background-color;
+  //color: $secondary;
 }
 
 // position
@@ -182,6 +185,7 @@ $secondary-color: #683d00;
   position: absolute;
   right: 5px;
   top:5px;
+  color: $secondary;
 }
 
 .error {
@@ -192,6 +196,19 @@ $secondary-color: #683d00;
   font-size: 10px;
 }
 
-.greyFont {
-  color: #333;
+.secondaryColor {
+  color: $secondary;
+}
+
+.connectButtonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.modalTitle {
+  color: $secondary;
+}
+
+.connectTypeButton {
+  margin-right: 5px !important;
 }

@@ -8,6 +8,8 @@ import { Spinner } from "./Spinner";
 import { Button, Modal} from "@material-ui/core";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 // import DonateButton from "./DonateButton";
+import {Typography} from "@material-ui/core";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 function getModalStyle() {
   const top = 50;
@@ -95,18 +97,21 @@ export default function Web3ConnectionButtons() {
         onClose={hideModal}
       >
         <div style={modalStyle} className={`modalBoxContainer ${classes2.paper}`} >
+          <HighlightOffIcon className="closeModalButton" onClick={() => { hideModal()}}/>
 
           {(!active && !error) && (
-            <h2 className="modalTitle">Choose Connection Type</h2>
+            <h2 className="modalTitle">Choose Connection Type<br/><br/></h2>
           )}
 
           {(active || error) && (
-            <h2 className="modalTitle">Choose Action</h2>
+            <h2 className="modalTitle">Info<br/><br/></h2>
           )}
 
           {!!error && <h4>{getErrorMessage(error)}</h4>}
 
           <div>
+            <div className="connectButtonContainer">
+
             {Object.keys(connectorsByName).map((name: any) => {
               const currentConnector = connectorsByName[name as keyof typeof ConnectorNames];
               const activating = currentConnector === activatingConnector;
@@ -115,45 +120,47 @@ export default function Web3ConnectionButtons() {
 
               return (
                 (!active && !error) && (
-                  <div className="connectButtonContainer" key={name}>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      className="connectTypeButton"
-                      disabled={disabled}
-                      key={name}
-                      onClick={() => {
-                        setActivatingConnector(currentConnector);
-                        activate(connectorsByName[name as keyof typeof ConnectorNames]);
-                      }}
-                    >
-                      <div>
-                        {activating && <Spinner color={'black'} style={{ height: '25%', marginLeft: '-1rem' }} />}
-                        {connected && (
-                          <span role="img" aria-label="check">
-                            ✅
-                          </span>
-                        )}
-                      </div>
-                      {name}
-                    </Button>
-                  </div>
+
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="connectTypeButton"
+                    disabled={disabled}
+                    key={name}
+                    onClick={() => {
+                      setActivatingConnector(currentConnector);
+                      activate(connectorsByName[name as keyof typeof ConnectorNames]);
+                    }}
+                  >
+                    <div>
+                      {activating && <Spinner color={'black'} style={{ height: '25%', marginLeft: '-1rem' }} />}
+                      {connected && (
+                        <span role="img" aria-label="check">
+                          ✅
+                        </span>
+                      )}
+                    </div>
+                    {name}
+                  </Button>
                 )
               )
             })}
+            </div>
 
             { !active &&
               <div className="youtube-link-container">
+                <br/>
                 <a target="_blank" href="https://www.youtube.com/watch?v=6h_liI6atEk">Learn how to set up a MetaMask wallet.</a>
               </div>
             }
 
           </div>
           <div className="mywallet-button-container">
-            {(active) && (<></>
+            {(active) && (
               // <Button variant="contained" color="primary" onClick={hideModal} component={Link} to="/wallet">
               //   Go To My Wallet
               // </Button>
+              <Typography className="secondaryColor">Connected to: <span className="minitext">{account}</span></Typography>
             )}
             <br/>
             {/*<DonateButton />*/}
