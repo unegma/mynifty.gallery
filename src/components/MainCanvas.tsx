@@ -11,6 +11,8 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
       <PerspectiveCamera position={[4, 7, 7]} makeDefault />
       {/*<pointLight intensity={3} position={[5, 0, 5]} />*/}
+      {/*<pointLight intensity={3} position={[-90, -90, -180]} />*/}
+      <pointLight intensity={3} position={[-90, -90, -100]} />
 
       {/* Lights*/}
       {/*<rectAreaLight*/}
@@ -60,11 +62,27 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       </Suspense>
 
       <Suspense fallback={null}>
-        <Moon position={[0, -100, 40]} size={[4, 24, 24]} color="#E3615C"/>
+        <Moon position={[-90, -90, -180]} size={[9, 24, 24]} color="#E3615C"/>
       </Suspense>
 
       <Suspense fallback={null}>
-        <Moon position={[-100, -400, 100]} size={[4, 24, 24]} color="#728FAC"/>
+        <Moon position={[-90, -90, -220]} size={[4, 24, 24]} color="#728FAC"/>
+      </Suspense>
+
+      {/*sun*/}
+      
+      {/*<rectAreaLight*/}
+      {/*  intensity={9}*/}
+      {/*  position={[0, -290, 190]}*/}
+      {/*  rotation={[0, 0, 0]}*/}
+      {/*  width={50}*/}
+      {/*  height={50}*/}
+      {/*/>*/}
+      {/*<pointLight intensity={3} position={[0, -280, 180]}  />*/}
+
+
+      <Suspense fallback={null}>
+        <Moon position={[0, -290, 190]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
   </>
   )
