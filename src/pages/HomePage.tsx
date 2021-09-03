@@ -12,7 +12,7 @@ import {Spinner} from "../components/Spinner";
 import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
-
+import Web3ConnectionButtons from '../components/Web3ConnectionButtons';
 
 export default function HomePage(): JSX.Element {
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
@@ -128,7 +128,7 @@ export default function HomePage(): JSX.Element {
 
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
-
+          <Web3ConnectionButtons />
         </Typography>
       </div>
 
