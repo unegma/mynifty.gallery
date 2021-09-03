@@ -117,7 +117,7 @@ export default function Web3ConnectionButtons() {
                 (!active && !error) && (
                   <div className="connectButtonContainer" key={name}>
                     <Button
-                      variant="contained"
+                      variant="outlined"
                       color="secondary"
                       className="connectTypeButton"
                       disabled={disabled}
@@ -164,7 +164,7 @@ export default function Web3ConnectionButtons() {
       </Modal>
 
       {(!active && !error) && (
-        <Button variant="contained" color="secondary" className="connectButton" onClick={showModal}>
+        <Button variant="outlined" color="secondary" className="connectButton" onClick={showModal}>
           Connect
         </Button>
       )}
@@ -174,7 +174,7 @@ export default function Web3ConnectionButtons() {
           <div className="donateButton-container">
             {/*<DonateButton />*/}
           </div>
-          <Button variant="contained" color="secondary" className="disconnectButton" onClick={() => {handleDisconnect()}}>
+          <Button variant="outlined" color="secondary" className="disconnectButton" onClick={() => {handleDisconnect()}}>
             Disconnect
           </Button>
         </>
