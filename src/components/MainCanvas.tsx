@@ -22,15 +22,17 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       {/*  height={50}*/}
       {/*/>*/}
 
-      <color attach="background" args={['#000']} />
+      { scene === 1 && (
+        <color attach="background" args={['#000']} />
+      )}
 
       { scene === 2 && (
         <>
-        <pointLight intensity={3} position={[5, 0, 5]} />
-
-        <Suspense fallback={null}>
-          <Grass/>
-        </Suspense>
+          <color attach="background" args={['#6E9EF1']} />
+          <pointLight intensity={3} position={[5, 0, 5]} />
+          <Suspense fallback={null}>
+            <Grass/>
+          </Suspense>
         </>
       )}
 
@@ -53,14 +55,17 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
       </group>
       <ambientLight intensity={1} />
 
-      <Stars
-        radius={100} // Radius of the inner sphere (default=100)
-        depth={50} // Depth of area where stars should fit (default=50)
-        count={5000} // Amount of stars (default=5000)
-        factor={4} // Size factor (default=4)
-        saturation={0} // Saturation 0-1 (default=0)
-        fade // Faded dots (default=false)
-      />
+
+      { scene === 1 && (
+        <Stars
+          radius={100} // Radius of the inner sphere (default=100)
+          depth={50} // Depth of area where stars should fit (default=50)
+          count={5000} // Amount of stars (default=5000)
+          factor={4} // Size factor (default=4)
+          saturation={0} // Saturation 0-1 (default=0)
+          fade // Faded dots (default=false)
+        />
+      )}
 
       <Suspense fallback={null}>
         <Moon position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
