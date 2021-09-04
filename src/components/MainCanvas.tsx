@@ -5,12 +5,11 @@ import Image3D from "./Image3D";
 import Moon from "./Moon";
 import Grass from "./Grass";
 
-export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMode}: any) {
+export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMode, scene}: any) {
   return (
     <>
       {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
       <PerspectiveCamera position={[4, 7, 7]} makeDefault />
-      {/*<pointLight intensity={3} position={[5, 0, 5]} />*/}
       {/*<pointLight intensity={3} position={[-90, -90, -180]} />*/}
       <pointLight intensity={3} position={[-90, -90, -100]} />
 
@@ -25,9 +24,15 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
 
       <color attach="background" args={['#000']} />
 
-      {/*<Suspense fallback={null}>*/}
-      {/*  <Grass />*/}
-      {/*</Suspense>*/}
+      { scene === 2 && (
+        <>
+        <pointLight intensity={3} position={[5, 0, 5]} />
+
+        <Suspense fallback={null}>
+          <Grass/>
+        </Suspense>
+        </>
+      )}
 
       <group>
         <group>

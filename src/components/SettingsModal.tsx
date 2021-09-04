@@ -17,7 +17,7 @@ import {Web3Provider} from "@ethersproject/providers";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
-                                         setInfoOpen, address, setAddress }: any) {
+                                         setInfoOpen, scene, setScene }: any) {
 
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
@@ -48,6 +48,11 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   const updateMaxImages = (mi: any) => {
     setMaxImages(mi);
     localStorage.setItem('maxImages', mi);
+  }
+
+  const updateScene = (sc: any) => {
+    setScene(sc);
+    localStorage.setItem('scene', sc);
   }
 
   function getModalStyle() {
@@ -148,6 +153,20 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <MenuItem value={1}>Spiral</MenuItem>
           <MenuItem value={2}>Spiral Galaxy</MenuItem>
           <MenuItem value={3}>Swirl</MenuItem>
+        </Select>
+
+        <br/>
+        <br/>
+
+        <InputLabel id="demo-simple-select-label">Scene:</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={scene}
+          onChange={(ev) => {updateScene(ev.target.value)}}
+        >
+          <MenuItem value={1}>Space</MenuItem>
+          <MenuItem value={2}>Earth</MenuItem>
         </Select>
 
 

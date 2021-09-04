@@ -24,6 +24,7 @@ export default function HomePage(): JSX.Element {
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [address, setAddress] = React.useState<string>("");
+  const [scene, setScene] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
@@ -41,6 +42,11 @@ export default function HomePage(): JSX.Element {
     let localStorageAddress = localStorage.getItem('address');
     if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
       setAddress(localStorageAddress); // get first
+    }
+
+    let localStorageScene = localStorage.getItem('scene');
+    if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
+      setScene(parseInt(localStorageScene));
     }
     // if (account) {
     //   setAddress(account);
@@ -166,8 +172,8 @@ export default function HomePage(): JSX.Element {
         maxImages={maxImages}
         setMaxImages={setMaxImages}
         setInfoOpen={setInfoOpen}
-        address={address}
-        setAddress={setAddress}
+        scene={scene}
+        setScene={setScene}
       />
       <InfoModal
         open={infoOpen}
@@ -182,14 +188,14 @@ export default function HomePage(): JSX.Element {
           <VRCanvas className="timeline-canvas">
             <DefaultXRControllers />
             <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} scene={scene} />
           </VRCanvas>
         )}
 
         { !vrMode && (
           <Canvas className="timeline-canvas">
             <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} />
+            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} scene={scene} />
           </Canvas>
         )}
 
