@@ -152,7 +152,7 @@ export default function HomePage(): JSX.Element {
       <div className="text4-container">
         <Typography variant="subtitle2" className="text4" >
           <SettingsOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleSettingsModal}/>
-          <InfoOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleInfoModal}/>
+          <InfoOutlined className="pointer" style={{ color: "white", margin: "0 4px" }} onClick={toggleInfoModal}/>
           <AudioPlayer url={musicUrl} />
         </Typography>
       </div>
