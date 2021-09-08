@@ -2,7 +2,7 @@ import {Canvas} from "@react-three/fiber";
 import {OrbitControls, PerspectiveCamera, Stars} from "@react-three/drei";
 import React, {Suspense, useEffect, useState} from "react";
 import Image3D from "./Image3D";
-import Moon from "./Moon";
+import Globe from "./Globe";
 import Grass from "./Grass";
 
 export default function MainCanvas({gallery, handleOpen, displayMode, scene, source}: any) {
@@ -88,15 +88,15 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       )}
 
       <Suspense fallback={null}>
-        <Moon position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
+        <Globe name="The Moon" position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
       </Suspense>
 
       <Suspense fallback={null}>
-        <Moon position={[-90, -90, -180]} size={[9, 24, 24]} color="#E3615C"/>
+        <Globe name="The Red Planet" position={[-90, -90, -180]} size={[9, 24, 24]} color="#E3615C"/>
       </Suspense>
 
       <Suspense fallback={null}>
-        <Moon position={[-90, -90, -220]} size={[4, 24, 24]} color="#728FAC"/>
+        <Globe name="The Blue Planet" position={[-90, -90, -220]} size={[4, 24, 24]} color="#728FAC"/>
       </Suspense>
 
       {/*sun*/}
@@ -112,13 +112,13 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
     { scene === 1 && (
       <Suspense fallback={null}>
-        <Moon position={[0, -290, 190]} size={[4, 24, 24]} color="yellow"/>
+        <Globe name="The Sun" position={[0, -290, 190]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
     )}
 
     { scene === 2 && (
       <Suspense fallback={null}>
-        <Moon position={[0, 290, 0]} size={[4, 24, 24]} color="yellow"/>
+        <Globe name="The Sun" position={[0, 290, 0]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
     )}
   </>
