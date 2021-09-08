@@ -11,7 +11,7 @@ import MainCanvas from "../components/MainCanvas";
 import {Spinner} from "../components/Spinner";
 import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
 import {Canvas} from "@react-three/fiber";
-import {OrbitControls} from "@react-three/drei";
+import {FlyControls, OrbitControls} from "@react-three/drei";
 import Web3ConnectionButtons from '../components/Web3ConnectionButtons';
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
@@ -215,7 +215,8 @@ export default function HomePage(): JSX.Element {
       { vrMode && (
         <VRCanvas className="timeline-canvas">
           <DefaultXRControllers />
-          <OrbitControls enableZoom={zoomEnabled} />
+          {/*<OrbitControls enableZoom={zoomEnabled} />*/}
+          <FlyControls />
           <MainCanvas
             vrMode={vrMode}
             gallery={gallery}
