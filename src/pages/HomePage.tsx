@@ -196,14 +196,14 @@ export default function HomePage(): JSX.Element {
           <VRCanvas className="timeline-canvas">
             <DefaultXRControllers />
             <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} scene={scene} />
+            <MainCanvas gallery={gallery} handleOpen={handleOpen} displayMode={displayMode} scene={scene} source={source} />
           </VRCanvas>
         )}
 
         { !vrMode && (
           <Canvas className="timeline-canvas">
             <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} zoomEnabled={zoomEnabled} handleOpen={handleOpen} displayMode={displayMode} scene={scene} />
+            <MainCanvas gallery={gallery} handleOpen={handleOpen} displayMode={displayMode} scene={scene} source={source} />
           </Canvas>
         )}
 

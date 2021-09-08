@@ -1,11 +1,23 @@
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls, PerspectiveCamera, Stars} from "@react-three/drei";
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import Image3D from "./Image3D";
 import Moon from "./Moon";
 import Grass from "./Grass";
 
-export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMode, scene}: any) {
+export default function MainCanvas({gallery, handleOpen, displayMode, scene, source}: any) {
+
+  const [shape, setShape] = useState('square');
+
+  useEffect(() => {
+    // todo change these to use enum/type or interface or whichever is the most recent correct typescript way
+    if (source === 1) {
+      setShape('square');
+    } else if (source === 2) {
+      setShape('disk');
+    }
+  }, [source, shape, setShape]); // todo check these
+
   return (
     <>
       {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
@@ -48,7 +60,7 @@ export default function MainCanvas({gallery, zoomEnabled, handleOpen, displayMod
           ? gallery.map((image: any, index: number) => (
 
             <Suspense key={index} fallback={null}>
-              <Image3D displayMode={displayMode} className="pointer" image={image} handleOpen={handleOpen}/>
+              <Image3D displayMode={displayMode} className="pointer" image={image} handleOpen={handleOpen} shape={shape}/>
             </Suspense>
           ))
           : <></> }
