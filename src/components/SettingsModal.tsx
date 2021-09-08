@@ -14,6 +14,8 @@ import {Switch} from "@material-ui/core";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
+import metaMaskLogo from '../images/metamask-logo.svg';
+import poapLogo from '../images/poap-logo.svg';
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
@@ -130,16 +132,29 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <Typography variant="h5" className="secondaryColor">Basic</Typography>
         <br/>
 
-        <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label2"
-          id="demo-simple-select2"
-          value={source}
-          onChange={(ev) => {updateSource(ev.target.value)}}
-        >
-          <MenuItem value={1}>My Wallet</MenuItem>
-          <MenuItem value={2}>POAP</MenuItem>
-        </Select>
+
+
+        <div className="sourceLogo-container">
+          <div className="sourceLogo-container2">
+            <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
+            <Select
+              labelId="demo-simple-select-label2"
+              id="demo-simple-select2"
+              value={source}
+              onChange={(ev) => {updateSource(ev.target.value)}}
+            >
+              <MenuItem value={1}>My Wallet</MenuItem>
+              <MenuItem value={2}>POAP</MenuItem>
+            </Select>
+          </div>
+
+          { source === 1 && (
+            <img className="sourceLogo" src={metaMaskLogo} />
+          )}
+          { source === 2 && (
+            <img className="sourceLogo" src={poapLogo} />
+          )}
+        </div>
 
         <br/>
         <br/>

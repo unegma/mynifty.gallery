@@ -11,8 +11,6 @@ import * as shapeUtils from '@unegma/shapes';
 export default async function getAssets(assetsArray: [], maxImages: number, address: string, source: number, offset = 0): Promise<any> {
   let assets = <any>assetsArray;
 
-  console.log(`The Address ${address}`);
-
   // added this here with await instead of using only maxImages pulled in, because of possible race conditions
   let localStorageMaxImages = await localStorage.getItem('maxImages');
   if (typeof localStorageMaxImages !== "undefined" && localStorageMaxImages !== null && localStorageMaxImages !== "") {

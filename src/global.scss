@@ -215,3 +215,19 @@ $secondary: #333;
 .connectTypeButton {
   margin-right: 5px !important;
 }
+
+.sourceLogo {
+  display: flex;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.sourceLogo-container {
+  display: flex;
+  flex-direction: row;
+}
+.sourceLogo-container2 {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
