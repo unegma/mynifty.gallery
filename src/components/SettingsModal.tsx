@@ -108,27 +108,6 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
         <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
-        <hr/>
-        <br/>
-        <Typography className="secondaryColor">Zoom Enabled:</Typography>
-        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
-        <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
-        <br/>
-        <br/>
-        <Typography className="secondaryColor">VR Mode:</Typography>
-        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
-        <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
-        <br/>
-        <br/>
-        <TextField
-          className="audioURLInput"
-          type="url"
-          value={musicUrl}
-          onChange={(e) => updateMusicUrl(e.target.value)}
-          label="AudioURL"
-        />
-        <br/>
-        <br/>
         <InputLabel id="demo-simple-select-label3">Address:</InputLabel>
 
         {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }
@@ -146,6 +125,25 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         {/*</Select>*/}
         <br/>
         <br/>
+        <hr/>
+        <br/>
+        <Typography variant="h5" className="secondaryColor">Basic</Typography>
+        <br/>
+
+        <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
+        <Select
+          labelId="demo-simple-select-label2"
+          id="demo-simple-select2"
+          value={source}
+          onChange={(ev) => {updateSource(ev.target.value)}}
+        >
+          <MenuItem value={1}>My Wallet</MenuItem>
+          <MenuItem value={2}>POAP</MenuItem>
+        </Select>
+
+        <br/>
+        <br/>
+
 
         <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
         <Select
@@ -177,19 +175,6 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
         <br/>
 
-        <InputLabel id="demo-simple-select-label2">Source:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label2"
-          id="demo-simple-select2"
-          value={source}
-          onChange={(ev) => {updateSource(ev.target.value)}}
-        >
-          <MenuItem value={1}>My Wallet</MenuItem>
-          <MenuItem value={2}>POAP</MenuItem>
-        </Select>
-
-        <br/>
-        <br/>
         {/*max images setting*/}
         <TextField
           type="number"
@@ -204,7 +189,34 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         />
         <br/><br/>
 
-        <Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>
+        <hr/>
+
+        <br/>
+
+        <Typography variant="h5" className="secondaryColor">Advanced</Typography>
+        <br/>
+
+        <Typography className="secondaryColor">Zoom Enabled:</Typography>
+        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
+        <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
+        <br/>
+        <br/>
+        <Typography className="secondaryColor">VR Mode:</Typography>
+        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
+        <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
+        <br/>
+        <br/>
+        <TextField
+          className="audioURLInput"
+          type="url"
+          value={musicUrl}
+          onChange={(e) => updateMusicUrl(e.target.value)}
+          label="AudioURL"
+        />
+        <br/>
+        <br/>
+
+        {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
       </div>
     </Modal>
   )
