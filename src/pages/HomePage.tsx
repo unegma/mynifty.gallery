@@ -217,6 +217,7 @@ export default function HomePage(): JSX.Element {
           <DefaultXRControllers />
           <OrbitControls enableZoom={zoomEnabled} />
           <MainCanvas
+            vrMode={vrMode}
             gallery={gallery}
             handleOpen={handleOpen}
             displayMode={displayMode}
@@ -231,6 +232,7 @@ export default function HomePage(): JSX.Element {
         <Canvas className="timeline-canvas">
           <OrbitControls enableZoom={zoomEnabled} />
           <MainCanvas
+            vrMode={vrMode}
             gallery={gallery}
             handleOpen={handleOpen}
             displayMode={displayMode}

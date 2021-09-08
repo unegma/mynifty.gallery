@@ -4,8 +4,9 @@ import React, {Suspense, useEffect, useState} from "react";
 import Image3D from "./Image3D";
 import Globe from "./Globe";
 import Grass from "./Grass";
+import {RayGrab} from "@react-three/xr";
 
-export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe}: any) {
+export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe, vrMode}: any) {
 
   const [shape, setShape] = useState('square');
 
@@ -50,14 +51,30 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
         {gallery && gallery.length
           ? gallery.map((image: any, index: number) => (
             <Suspense key={index} fallback={null}>
-              <Image3D
-                index={index}
-                displayMode={displayMode}
-                className="pointer"
-                image={image}
-                handleOpen={handleOpen}
-                shape={shape}
-              />
+              { vrMode && (
+                <RayGrab>
+                  <Image3D
+                    index={index}
+                    displayMode={displayMode}
+                    className="pointer"
+                    image={image}
+                    handleOpen={handleOpen}
+                    shape={shape}
+                  />
+                </RayGrab>
+              )}
+
+              { !vrMode && (
+                <Image3D
+                  index={index}
+                  displayMode={displayMode}
+                  className="pointer"
+                  image={image}
+                  handleOpen={handleOpen}
+                  shape={shape}
+                />
+              )}
+
             </Suspense>
           ))
           : <></> }
