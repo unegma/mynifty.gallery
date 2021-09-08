@@ -100,7 +100,8 @@ export default function HomePage(): JSX.Element {
 
     // this might be being called before the local storage retreival above
     getAssets();
-  }, []);
+
+  }, [source, address]);
 
 
   async function getAssets () {
@@ -108,8 +109,9 @@ export default function HomePage(): JSX.Element {
     setLoading(false);
     console.log('assets:', newAssets)
     if (newAssets.length === 0) {
-      console.log('There has probably been an error (not very helpful I know sorry, but there ain\'t no Nifties!');
-      setErrorMessage('Looks like an error :(');
+      // todo fix this so that errors show but not when disconnecting
+      // console.log('There has probably been an error (not very helpful I know sorry, but there ain\'t no Nifties!');
+      // setErrorMessage('Looks like an error :(');
     }
     setGallery(newAssets);
   }
@@ -151,7 +153,7 @@ export default function HomePage(): JSX.Element {
 
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
-          <Web3ConnectionButtons />
+          <Web3ConnectionButtons setAddress={setAddress} />
         </Typography>
       </div>
 

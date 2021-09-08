@@ -41,7 +41,7 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       { scene === 2 && (
         <>
           <color attach="background" args={['#6E9EF1']} />
-          <pointLight intensity={3} position={[5, 0, 5]} />
+          <pointLight intensity={1.5} position={[5, 0, 5]} />
           <Suspense fallback={null}>
             <Grass/>
           </Suspense>

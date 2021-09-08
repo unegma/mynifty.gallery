@@ -49,7 +49,7 @@ const connectorsByName: { [connectorName in ConnectorNames]: any} = {
   [ConnectorNames.WalletConnect]: walletconnect
 }
 
-export default function Web3ConnectionButtons() {
+export default function Web3ConnectionButtons({setAddress}: any) {
   const classes2 = useStyles2();
   const [modalStyle] = useState(getModalStyle);
 
@@ -63,6 +63,7 @@ export default function Web3ConnectionButtons() {
   useEffect(() => {
     if (account) {
       localStorage.setItem('address', account); // todo test this and check if ok to do like this
+      setAddress(account);
     }
 
     if (activatingConnector && activatingConnector === connector) {
@@ -75,6 +76,7 @@ export default function Web3ConnectionButtons() {
 
   const handleDisconnect = () => {
     localStorage.setItem('address', ""); // todo test this and check if ok to do like this
+    setAddress("");
 
     if (connector === connectorsByName[ConnectorNames.WalletConnect]) {
       console.log('Deactivating WalletConnect session');

@@ -8,7 +8,6 @@ export default function Image3D({image, handleOpen, displayMode, shape}: any): J
 
   useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
 
-  console.log(`Shape is ${shape}`)
   let pos1 = 0, pos2 = 0, pos3 = 0;
   displayMode = Number.parseInt(displayMode); // may not be needed
 
