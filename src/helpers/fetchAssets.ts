@@ -5,9 +5,10 @@ import * as shapeUtils from '@unegma/shapes';
  * @param assetsArray
  * @param maxImages
  * @param address
+ * @param source
  * @param offset
  */
-export default async function getAssets(assetsArray: [], maxImages: number, address: string, offset = 0): Promise<any> {
+export default async function getAssets(assetsArray: [], maxImages: number, address: string, source: number, offset = 0): Promise<any> {
   let assets = <any>assetsArray;
 
   console.log(`The Address ${address}`);
@@ -26,6 +27,10 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
     return [];
   }
 
+  let localStorageSource = localStorage.getItem('source');
+  if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
+    source = parseInt(localStorageSource);
+  }
 
   try {
 
@@ -121,7 +126,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
       // todo THIS MIGHT NEED TO BE > offset OTHERWISE COULD ENTER AN INFINITE CALLING LOOP
       // todo might need to do a test for if assets.length == 0
       if (structuredAssets.length < maxImages && structuredAssets.length >= offset) {
-        return await getAssets(structuredAssets, maxImages, address, offset+20); // may be a better way of getting 20 at a time and then slicing to be length of maxImages
+        return await getAssets(structuredAssets, maxImages, address, source, offset+20); // may be a better way of getting 20 at a time and then slicing to be length of maxImages
       } else {
         // this should be equal to maxImages
         finalAssets = structuredAssets.splice(0, maxImages);

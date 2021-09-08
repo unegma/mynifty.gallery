@@ -25,6 +25,7 @@ export default function HomePage(): JSX.Element {
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [address, setAddress] = React.useState<string>("");
   const [scene, setScene] = React.useState(1);
+  const [source, setSource] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
@@ -47,6 +48,11 @@ export default function HomePage(): JSX.Element {
     let localStorageScene = localStorage.getItem('scene');
     if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
       setScene(parseInt(localStorageScene));
+    }
+
+    let localStorageSource = localStorage.getItem('source');
+    if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
+      setSource(parseInt(localStorageSource));
     }
     // if (account) {
     //   setAddress(account);
@@ -98,7 +104,7 @@ export default function HomePage(): JSX.Element {
 
 
   async function getAssets () {
-    let newAssets = await fetchAssets([], maxImages, address);
+    let newAssets = await fetchAssets([], maxImages, address, source, 0);
     setLoading(false);
     console.log('assets:', newAssets)
     if (newAssets.length === 0) {
@@ -174,6 +180,8 @@ export default function HomePage(): JSX.Element {
         setInfoOpen={setInfoOpen}
         scene={scene}
         setScene={setScene}
+        source={source}
+        setSource={setSource}
       />
       <InfoModal
         open={infoOpen}
