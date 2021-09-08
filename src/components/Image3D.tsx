@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from "react";
+import React, {Suspense, useEffect, useRef} from "react";
 import * as THREE from "three";
 import {useFrame, useLoader} from "@react-three/fiber";
 
-export default function Image3D({image, handleOpen, displayMode, shape}: any): JSX.Element {
+export default function Image3D({image, handleOpen, displayMode, shape, index = 0}: any): JSX.Element {
   const mesh = useRef<THREE.Mesh>(null!);
   const texture = useLoader(THREE.TextureLoader, image.thumbnail);
 

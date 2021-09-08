@@ -15,6 +15,10 @@ import {OrbitControls} from "@react-three/drei";
 import Web3ConnectionButtons from '../components/Web3ConnectionButtons';
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
+import DialogModal from "../components/DialogModal";
+
+// todo add enums
+// todo move cookeis highur up
 
 export default function HomePage(): JSX.Element {
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
@@ -27,6 +31,8 @@ export default function HomePage(): JSX.Element {
   const [scene, setScene] = React.useState(1);
   const [source, setSource] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogData, setDialogData] = React.useState('');
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
   const [maxImages, setMaxImages] = React.useState(15);
@@ -107,7 +113,6 @@ export default function HomePage(): JSX.Element {
   async function getAssets () {
     let newAssets = await fetchAssets([], maxImages, address, source, 0);
     setLoading(false);
-    console.log('assets:', newAssets)
     if (newAssets.length === 0) {
       // todo fix this so that errors show but not when disconnecting
       // console.log('There has probably been an error (not very helpful I know sorry, but there ain\'t no Nifties!');
@@ -120,6 +125,11 @@ export default function HomePage(): JSX.Element {
     setOpen(true);
     setSelectedImage(image);
   };
+
+  const handleYouClickedMe = (name: string) => {
+    setDialogOpen(true);
+    setDialogData(name);
+  }
 
   const toggleInfoModal = () => setInfoOpen(!infoOpen);
   const toggleSettingsModal = () => setSettingsOpen(!settingsOpen);
@@ -166,6 +176,7 @@ export default function HomePage(): JSX.Element {
       </div>
 
       <NFTModal open={open} setOpen={setOpen} selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+
       <SettingsModal
         open={settingsOpen}
         setOpen={setSettingsOpen}
@@ -185,6 +196,7 @@ export default function HomePage(): JSX.Element {
         source={source}
         setSource={setSource}
       />
+
       <InfoModal
         open={infoOpen}
         setOpen={setInfoOpen}
@@ -193,22 +205,41 @@ export default function HomePage(): JSX.Element {
         address={address}
       />
 
+      <DialogModal
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        dialogData={dialogData}
+        setDialogData={setDialogData}
+      />
 
-        { vrMode && (
-          <VRCanvas className="timeline-canvas">
-            <DefaultXRControllers />
-            <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} handleOpen={handleOpen} displayMode={displayMode} scene={scene} source={source} />
-          </VRCanvas>
-        )}
+      { vrMode && (
+        <VRCanvas className="timeline-canvas">
+          <DefaultXRControllers />
+          <OrbitControls enableZoom={zoomEnabled} />
+          <MainCanvas
+            gallery={gallery}
+            handleOpen={handleOpen}
+            displayMode={displayMode}
+            scene={scene}
+            source={source}
+            handleYouClickedMe={handleYouClickedMe}
+          />
+        </VRCanvas>
+      )}
 
-        { !vrMode && (
-          <Canvas className="timeline-canvas">
-            <OrbitControls enableZoom={zoomEnabled} />
-            <MainCanvas gallery={gallery} handleOpen={handleOpen} displayMode={displayMode} scene={scene} source={source} />
-          </Canvas>
-        )}
-
+      { !vrMode && (
+        <Canvas className="timeline-canvas">
+          <OrbitControls enableZoom={zoomEnabled} />
+          <MainCanvas
+            gallery={gallery}
+            handleOpen={handleOpen}
+            displayMode={displayMode}
+            scene={scene}
+            source={source}
+            handleYouClickedMe={handleYouClickedMe}
+          />
+        </Canvas>
+      )}
 
     </div>
   )

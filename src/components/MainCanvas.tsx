@@ -5,7 +5,7 @@ import Image3D from "./Image3D";
 import Globe from "./Globe";
 import Grass from "./Grass";
 
-export default function MainCanvas({gallery, handleOpen, displayMode, scene, source}: any) {
+export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe}: any) {
 
   const [shape, setShape] = useState('square');
 
@@ -20,9 +20,7 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   return (
     <>
-      {/*<PerspectiveCamera position={[4, 4, 7]} makeDefault />*/}
       <PerspectiveCamera position={[4, 7, 7]} makeDefault />
-      {/*<pointLight intensity={3} position={[-90, -90, -180]} />*/}
       <pointLight intensity={3} position={[-90, -90, -100]} />
 
       {/* Lights*/}
@@ -49,18 +47,17 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       )}
 
       <group>
-        <group>
-          {/*<Date date={1967} position={[-1,2,5]} rotation={[0,60,0]}></Date>*/}
-          {/*<Date date={1977} position={[-2.5,-3,-5]} rotation={[0,0,0]}></Date>*/}
-          {/*<Line color='white'position={[0, 0, 0]} geometry={[20, 0.1, 0.1]} rotation={[0, 0, 0]}/>*/}
-          {/*<Line color='blue' position={[0, 0, 1]} geometry={[20, 0.1, 0.1]} rotation={[1, 7.9, 30]}/>*/}
-        </group>
-
         {gallery && gallery.length
           ? gallery.map((image: any, index: number) => (
-
             <Suspense key={index} fallback={null}>
-              <Image3D displayMode={displayMode} className="pointer" image={image} handleOpen={handleOpen} shape={shape}/>
+              <Image3D
+                index={index}
+                displayMode={displayMode}
+                className="pointer"
+                image={image}
+                handleOpen={handleOpen}
+                shape={shape}
+              />
             </Suspense>
           ))
           : <></> }
@@ -87,16 +84,15 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
         </>
       )}
 
-      <Suspense fallback={null}>
-        <Globe name="The Moon" position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
-      </Suspense>
 
       <Suspense fallback={null}>
-        <Globe name="The Red Planet" position={[-90, -90, -180]} size={[9, 24, 24]} color="#E3615C"/>
+        <Globe name="The Moon" handleYouClickedMe={handleYouClickedMe} position={[0, 100, -40]} size={[4, 24, 24]} color="white"/>
       </Suspense>
-
       <Suspense fallback={null}>
-        <Globe name="The Blue Planet" position={[-90, -90, -220]} size={[4, 24, 24]} color="#728FAC"/>
+        <Globe name="The Red Planet" handleYouClickedMe={handleYouClickedMe} position={[-90, -90, -180]} size={[9, 24, 24]} color="#E3615C"/>
+      </Suspense>
+      <Suspense fallback={null}>
+        <Globe name="The Blue Planet" handleYouClickedMe={handleYouClickedMe} position={[-90, -90, -220]} size={[4, 24, 24]} color="#728FAC"/>
       </Suspense>
 
       {/*sun*/}
