@@ -112,13 +112,13 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
     { scene === 1 && (
       <Suspense fallback={null}>
-        <Globe name="The Sun" position={[0, -290, 190]} size={[4, 24, 24]} color="yellow"/>
+        <Globe name="The Sun" position={[0, -200, 190]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
     )}
 
     { scene === 2 && (
       <Suspense fallback={null}>
-        <Globe name="The Sun" position={[0, 290, 0]} size={[4, 24, 24]} color="yellow"/>
+        <Globe name="The Sun" position={[0, 200, 0]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
     )}
   </>
