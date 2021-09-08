@@ -32,7 +32,7 @@ export default function Image3D({image, handleOpen, displayMode, shape}: any): J
       )}
 
       { shape === 'disk' && (
-        <circleBufferGeometry args={[1, 32, 32]} />
+        <circleBufferGeometry args={[0.5, 32, 32]} />
       )}
 
       { /* @ts-ignore */ }
