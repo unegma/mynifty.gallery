@@ -18,7 +18,10 @@ import {Web3Provider} from "@ethersproject/providers";
 import DialogModal from "../components/DialogModal";
 
 
-
+// todo more margins on modals
+// todo less margin on info modal
+// todo show settings modal first
+// todo more obvious close modal button
 // todo add enums
 // todo move cookeis highur up
 
