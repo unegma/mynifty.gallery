@@ -9,13 +9,15 @@ import InfoModal from "../components/InfoModal";
 import fetchAssets from '../helpers/fetchAssets';
 import MainCanvas from "../components/MainCanvas";
 import {Spinner} from "../components/Spinner";
-import {DefaultXRControllers, VRCanvas} from '@react-three/xr'
+import {DefaultXRControllers, useXR, VRCanvas} from '@react-three/xr'
 import {Canvas} from "@react-three/fiber";
-import {FlyControls, OrbitControls} from "@react-three/drei";
+import {OrbitControls} from "@react-three/drei";
 import Web3ConnectionButtons from '../components/Web3ConnectionButtons';
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
 import DialogModal from "../components/DialogModal";
+
+
 
 // todo add enums
 // todo move cookeis highur up
@@ -23,7 +25,11 @@ import DialogModal from "../components/DialogModal";
 export default function HomePage(): JSX.Element {
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
+  const { player } = useXR();
 
+  useEffect(() => {
+    console.log(player)
+  }, [])
 
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
@@ -215,8 +221,7 @@ export default function HomePage(): JSX.Element {
       { vrMode && (
         <VRCanvas className="timeline-canvas">
           <DefaultXRControllers />
-          {/*<OrbitControls enableZoom={zoomEnabled} />*/}
-          <FlyControls />
+          <OrbitControls enableZoom={zoomEnabled} />
           <MainCanvas
             vrMode={vrMode}
             gallery={gallery}
