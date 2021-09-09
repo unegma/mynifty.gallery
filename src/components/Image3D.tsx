@@ -11,12 +11,9 @@ export default function Image3D({image, handleOpen, displayMode, shape, index = 
   let pos1 = 0, pos2 = 0, pos3 = 0;
   displayMode = Number.parseInt(displayMode); // may not be needed
 
-  // todo this works without use effect, and I'm not sure why (ie switching from cluser to spiral)
-  // useEffect(() => {
-    pos1 = image.displayMode[displayMode].pos1;
-    pos2 = image.displayMode[displayMode].pos2;
-    pos3 = image.displayMode[displayMode].pos3;
-  // }, [displayMode])
+  pos1 = image.displayMode[displayMode].pos1;
+  pos2 = image.displayMode[displayMode].pos2;
+  pos3 = image.displayMode[displayMode].pos3;
 
   return (
     <mesh
