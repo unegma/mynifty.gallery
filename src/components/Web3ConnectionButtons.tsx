@@ -172,7 +172,7 @@ export default function Web3ConnectionButtons({setAddress}: any) {
             )}
             <br/>
             {/*<DonateButton />*/}
-            <Typography className="secondaryColor">You may need to refresh the page if changing chains.</Typography>
+            <Typography className="secondaryColor"><b>You may need to refresh the page when changing chains or wallets.</b></Typography>
             {/*<br/>*/}
             {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
             {/*<br/>*/}
