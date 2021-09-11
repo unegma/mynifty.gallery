@@ -32,7 +32,7 @@ export default function HomePage(): JSX.Element {
 
   useEffect(() => {
     console.log(player)
-  }, [])
+  }, []) // todo if there is no [], then it only fires 1 time on page load
 
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
@@ -78,7 +78,7 @@ export default function HomePage(): JSX.Element {
     // open settings on first visit
     let localStorageFirstVisit = localStorage.getItem('firstVisit');
     if (typeof localStorageFirstVisit === "undefined" || localStorageFirstVisit === null || localStorageFirstVisit === "") {
-      setInfoOpen(true);
+      setSettingsOpen(true);
       localStorage.setItem('firstVisit', 'false');
     }
     //
