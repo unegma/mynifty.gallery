@@ -44,7 +44,7 @@ export default function HomePage(): JSX.Element {
   const [dialogData, setDialogData] = React.useState('');
   const [vrMode, setVrMode] = React.useState(false);
   const [displayMode, setDisplayMode] = React.useState(0);
-  const [maxImages, setMaxImages] = React.useState(15);
+  const [maxImages, setMaxImages] = React.useState(30);
   const [infoOpen, setInfoOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [zoomEnabled, setZoomEnabled] = React.useState(false);

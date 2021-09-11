@@ -195,7 +195,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           type="number"
           value={maxImages}
           onChange={(e) => updateMaxImages(e.target.value)}
-          label="Max Images"
+          label="Max Images <="
           InputProps={{
             inputProps: {
               min: 1 , max: 100
