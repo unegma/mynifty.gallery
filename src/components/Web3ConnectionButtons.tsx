@@ -172,7 +172,7 @@ export default function Web3ConnectionButtons({setAddress}: any) {
             )}
             <br/>
             {/*<DonateButton />*/}
-            {/*<Typography className="secondaryColor">You may need to refresh the page to view the NFTs (<a href="https://unegma.com/contact" target="_blank">let us know</a> if there are any issues):</Typography>*/}
+            <Typography className="secondaryColor">You may need to refresh the page if changing chains.</Typography>
             {/*<br/>*/}
             {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
             {/*<br/>*/}
