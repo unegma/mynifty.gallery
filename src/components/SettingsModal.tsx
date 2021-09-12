@@ -68,7 +68,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       top: `50%`,
       left: `50%`,
       transform: `translate(-50%, -50%)`,
-      minWidth: '50vw',
+      minWidth: '80vw',
       maxWidth: '90vw',
       maxHeight: '70vh',
       overflow: 'scroll'
@@ -98,20 +98,23 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   return (
     // todo add close button on modal
     <Modal
-      className="timeline-modal"
+      className="settings-modal"
       open={open}
       onClose={handleClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
-        <HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>
+        {/*<HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>*/}
+        <Button variant="contained" color="primary" className="closeModalButton" onClick={() => { setOpen(false)}}>
+          Ok
+        </Button>
 
         <Typography variant="h3" className="secondaryColor">Settings</Typography>
         <br/>
         <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
-        <InputLabel id="demo-simple-select-label3">Address:</InputLabel>
+        <InputLabel id="demo-simple-select-label3">Connected Address:</InputLabel>
 
         {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }
 

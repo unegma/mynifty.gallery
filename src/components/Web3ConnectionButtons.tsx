@@ -103,6 +103,7 @@ export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any
       <Modal
         open={modalOpen}
         onClose={hideModal}
+        className="connection-modal"
       >
         <div style={modalStyle} className={`modalBoxContainer ${classes2.paper}`} >
           <HighlightOffIcon className="closeModalButton" onClick={() => { hideModal()}}/>

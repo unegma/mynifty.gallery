@@ -73,8 +73,31 @@ $secondary: #333;
   }
 }
 
-.timeline-modal {
+//.connection-modal {
+//  min-width: 80vw;
+//  max-width: 90vw;
+//  @media only screen and (min-device-width: 768px){
+//    min-width: 70vw;
+//    max-width: 90vw;
+//  }
+//}
+
+
+.info-modal {
   z-index: 99;
+}
+
+.settings-modal {
+  z-index: 99;
+
+  // currently in material ui
+  //min-width: 80vw;
+  //max-width: 90vw;
+  //@media only screen and (min-device-width: 768px){
+  //  min-width: 70vw;
+  //  max-width: 90vw;
+  //}
+
 
   img {
     //padding: 10vw;
@@ -184,11 +207,10 @@ $secondary: #333;
 }
 
 .closeModalButton {
-  cursor: pointer;
-  position: absolute;
-  right: 5px;
-  top:5px;
-  color: $secondary;
+  //cursor: pointer;
+  position: absolute !important;
+  right: 5px !important;
+  top:5px !important;
 }
 
 .error {
