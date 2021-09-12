@@ -49,7 +49,7 @@ const connectorsByName: { [connectorName in ConnectorNames]: any} = {
   [ConnectorNames.WalletConnect]: walletconnect
 }
 
-export default function Web3ConnectionButtons({setAddress}: any) {
+export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any) {
   const classes2 = useStyles2();
   const [modalStyle] = useState(getModalStyle);
 
@@ -155,13 +155,6 @@ export default function Web3ConnectionButtons({setAddress}: any) {
             })}
             </div>
 
-            { !active &&
-              <div className="youtube-link-container">
-                <br/>
-                <a target="_blank" href="https://www.youtube.com/watch?v=6h_liI6atEk">Learn how to set up a MetaMask wallet.</a>
-              </div>
-            }
-
           </div>
           <div className="mywallet-button-container">
             {(active) && (
@@ -171,11 +164,30 @@ export default function Web3ConnectionButtons({setAddress}: any) {
               <Typography className="secondaryColor">Connected to: <span className="minitext">{account}</span></Typography>
             )}
             <br/>
-            {/*<DonateButton />*/}
-            <Typography className="secondaryColor"><b>You may need to refresh the page when changing chains or wallets.</b></Typography>
+            { active &&
+              <>
+                <Button variant="contained" color="primary" onClick={() => {setSettingsOpen(true)}}>
+                  Change Settings
+                </Button>
+                <br/>
+                <br/>
+              </>
+            }
+
+
+            {!active &&
+              <Typography className="secondaryColor"><b>(You may need to refresh the page when changing chains or
+                wallets.)</b></Typography>
+            }
             {/*<br/>*/}
             {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
             {/*<br/>*/}
+            { !active &&
+            <div className="youtube-link-container">
+              <br/>
+              <a target="_blank" href="https://www.youtube.com/watch?v=6h_liI6atEk">Learn how to set up a MetaMask wallet.</a>
+            </div>
+            }
           </div>
 
         </div>

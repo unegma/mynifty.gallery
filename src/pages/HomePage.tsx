@@ -172,7 +172,7 @@ export default function HomePage(): JSX.Element {
 
       <div className="text3-container">
         <Typography variant="subtitle2" className="text3" >
-          <Web3ConnectionButtons setAddress={setAddress} />
+          <Web3ConnectionButtons setAddress={setAddress} setSettingsOpen={setSettingsOpen}/>
         </Typography>
       </div>
 
