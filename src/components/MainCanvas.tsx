@@ -5,6 +5,7 @@ import Image3D from "./Image3D";
 import Globe from "./Globe";
 import Grass from "./Grass";
 import {RayGrab} from "@react-three/xr";
+import { Source } from '../types/SourceEnum';
 
 export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe, vrMode}: any) {
 
@@ -12,9 +13,9 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   useEffect(() => {
     // todo change these to use enum/type or interface or whichever is the most recent correct typescript way
-    if (source === 1) {
+    if (source === Source.Wallet) {
       setShape('square');
-    } else if (source === 2) {
+    } else if (source === Source.POAP) {
       setShape('disk');
     }
   }, [source, shape, setShape]); // todo check these
@@ -33,10 +34,12 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       {/*  height={50}*/}
       {/*/>*/}
 
+      {/*todo use enum*/}
       { scene === 1 && (
         <color attach="background" args={['#000']} />
       )}
 
+      {/*todo use enum*/}
       { scene === 2 && (
         <>
           <color attach="background" args={['#6E9EF1']} />
@@ -80,7 +83,7 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
           : <></> }
       </group>
 
-
+      {/*todo use enum*/}
       { scene === 1 && (
         <>
         <ambientLight intensity={1} />
@@ -95,6 +98,7 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
         </>
       )}
 
+      {/*todo use enum*/}
       { scene === 2 && (
         <>
           <ambientLight intensity={3} />
@@ -123,13 +127,15 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       {/*/>*/}
       {/*<pointLight intensity={3} position={[0, -280, 180]}  />*/}
 
+      {/*todo use enum*/}
     { scene === 1 && (
       <Suspense fallback={null}>
         <Globe name="The Sun" position={[0, -200, 190]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>
     )}
 
-    { scene === 2 && (
+      {/*todo use enum*/}
+      { scene === 2 && (
       <Suspense fallback={null}>
         <Globe name="The Sun" position={[0, 200, 0]} size={[4, 24, 24]} color="yellow"/>
       </Suspense>

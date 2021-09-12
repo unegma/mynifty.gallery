@@ -1,4 +1,5 @@
 import * as shapeUtils from '@unegma/shapes';
+import { Source } from '../types/SourceEnum';
 
 /**
  * Offset is for using with opensea api and is used for getting past the 20 max
@@ -8,7 +9,7 @@ import * as shapeUtils from '@unegma/shapes';
  * @param source
  * @param offset
  */
-export default async function getAssets(assetsArray: [], maxImages: number, address: string, source: number, offset = 0): Promise<any> {
+export default async function getAssets(assetsArray: [], maxImages: number, address: string, source: string, offset = 0): Promise<any> {
   let assets = <any>assetsArray;
 
   // added this here with await instead of using only maxImages pulled in, because of possible race conditions
@@ -27,7 +28,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
 
   let localStorageSource = localStorage.getItem('source');
   if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
-    source = parseInt(localStorageSource);
+    source = localStorageSource;
   }
 
   try {
@@ -38,7 +39,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
     */
     // 20 is the default limit
 
-    if (source === 1) {
+    if (source === Source.Wallet) {
 
       let openSeaAssets;
       openSeaAssets = await fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=20&owner=${address}`);
@@ -49,7 +50,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
     /**
      * POAP
      */
-    } else if (source === 2) {
+    } else if (source === Source.POAP) {
       let poapAssets;
       poapAssets = await fetch(`https://api.poap.xyz/actions/scan/${address}`);
       poapAssets = await poapAssets.json();
@@ -76,7 +77,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
         /**
          * Opensea
          */
-        if (source === 1) {
+        if (source === Source.Wallet) {
 
           index = index + offset; // this becomes 20+index whenever using opensea. is always 0+index when using KO
 
@@ -123,7 +124,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
         /**
          * POAP
          */
-        } else {
+        } else if (source === Source.POAP) {
           assetImage = asset.event.image_url;
           assetImageThumbnail = asset.event.image_url;
           assetImageName = asset.event.name;
@@ -165,7 +166,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
       /**
        * Opensea
        */
-      if (source === 1) {
+      if (source === Source.Wallet) {
         if (structuredAssets.length < maxImages && structuredAssets.length >= offset) {
           return await getAssets(structuredAssets, maxImages, address, source, offset + 20); // may be a better way of getting 20 at a time and then slicing to be length of maxImages
         } else {
@@ -175,7 +176,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
         /**
          * POAP
          */
-      } else if (source === 2) {
+      } else if (source === Source.POAP) {
         finalAssets = structuredAssets.splice(0, maxImages);
       }
 

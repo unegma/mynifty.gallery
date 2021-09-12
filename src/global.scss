@@ -220,14 +220,24 @@ $secondary: #333;
   display: flex;
   width: 50px !important;
   height: 50px !important;
+  cursor: pointer;
+
+  &--active {
+    background-color: red;
+  }
 }
 
 .sourceLogo-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .sourceLogo-container2 {
   display: flex;
   flex-direction: column;
   margin-right: 10px;
+}
+
+.sourcesBox {
+  display: flex;
+  flex-direction: row;
 }
