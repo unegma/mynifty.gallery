@@ -1,0 +1,19 @@
+// todo check that probably don't need important
+#simple-modal-description {
+  //flex: 1 0;
+  display: block !important;
+  //overflow-y: scroll !important;
+  //max-height: 20vh !important;
+}
+
+.nftImage {
+  width: 75%;
+  height: 75%;
+  margin: auto auto;
+
+  @media only screen and (min-device-width: 480px) {
+    width: 50%;
+    height: 50%;
+
+  }
+}

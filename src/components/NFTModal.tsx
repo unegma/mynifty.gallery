@@ -1,3 +1,4 @@
+import './nftModal.scss';
 import {createStyles, makeStyles, Modal, Theme} from "@material-ui/core";
 import React from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -11,7 +12,8 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
       transform: `translate(-50%, -50%)`,
       minWidth: '85vw',
       maxWidth: '90vw',
-      maxHeight: '70vh',
+      minHeight: '85vh',
+      maxHeight: '90vh',
       overflow: 'scroll',
       display: 'flex',
     };
@@ -65,7 +67,7 @@ export default function NFTModal ({ open, selectedImage, setOpen, setSelectedIma
         )}
         <br/>
 
-        <img src={selectedImage.imageUrl} /><br/>
+        <img className="nftImage" src={selectedImage.imageUrl} /><br/>
         {/*<button onClick={initiateTransaction}>Buy NFT on Palm Network</button>*/}
       </div>
     </Modal>
