@@ -122,6 +122,14 @@ export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any
             <div className="connectButtonContainer">
 
             {Object.keys(connectorsByName).map((name: any) => {
+
+              // don't display metamask button on mobile
+
+              // @ts-ignore
+              if (!window.ethereum && name === ConnectorNames.Metamask) {
+                return;
+              }
+
               const currentConnector = connectorsByName[name as keyof typeof ConnectorNames];
               const activating = currentConnector === activatingConnector;
               const connected = currentConnector === connector;
