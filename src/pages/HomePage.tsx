@@ -38,7 +38,7 @@ export default function HomePage(): JSX.Element {
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [address, setAddress] = React.useState<string>("");
   const [scene, setScene] = React.useState(1);
-  const [source, setSource] = React.useState<Source|string>(Source.Wallet);
+  const [source, setSource] = React.useState<Source|string>(Source.POAP);
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogData, setDialogData] = React.useState('');
