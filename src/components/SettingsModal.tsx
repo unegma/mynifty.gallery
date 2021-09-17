@@ -186,6 +186,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           {/*todo use enum*/}
           <MenuItem value={1}>Space</MenuItem>
           <MenuItem value={2}>Earth</MenuItem>
+          <MenuItem value={3}>Cowork</MenuItem>
         </Select>
 
         <br/>
