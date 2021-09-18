@@ -214,9 +214,9 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         />
         <br/><br/>
 
-        <hr/>
+        {/*<hr/>*/}
 
-        <br/>
+        {/*<br/>*/}
 
         {/*<Typography variant="h5" className="secondaryColor">Advanced</Typography>*/}
         {/*<br/>*/}
