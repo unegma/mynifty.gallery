@@ -233,7 +233,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
             </Typography>
           </AccordionSummary>
           <AccordionDetails >
-            <Typography className="secondaryColor">Zoom Enabled:</Typography>
+            <Typography variant="h5" className="secondaryColor">Zoom Enabled:</Typography>
             {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
             <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
             <br/>
