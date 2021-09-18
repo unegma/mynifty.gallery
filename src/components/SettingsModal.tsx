@@ -7,7 +7,8 @@ import {
   Modal,
   Select,
   TextField,
-  Theme, Typography
+  Theme, Typography,
+  Accordion, AccordionSummary, AccordionDetails,
 } from "@material-ui/core";
 import React from "react";
 import {Switch} from "@material-ui/core";
@@ -17,6 +18,8 @@ import {Web3Provider} from "@ethersproject/providers";
 import metaMaskLogo from '../images/metamask-logo.svg';
 import poapLogo from '../images/poap-logo.svg';
 import { Source } from '../types/SourceEnum';
+import {ExpandMore} from "@material-ui/icons";
+
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
@@ -24,6 +27,11 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel: any) => (event: any, isExpanded: any) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -210,29 +218,40 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
         <br/>
 
-        <Typography variant="h5" className="secondaryColor">Advanced</Typography>
-        <br/>
+        {/*<Typography variant="h5" className="secondaryColor">Advanced</Typography>*/}
+        {/*<br/>*/}
 
-        <Typography className="secondaryColor">Zoom Enabled:</Typography>
-        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
-        <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
-        <br/>
-        <br/>
-        <Typography className="secondaryColor">VR Mode:</Typography>
-        {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
-        <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
-        <br/>
-        <br/>
-        <TextField
-          className="audioURLInput"
-          type="url"
-          value={musicUrl}
-          onChange={(e) => updateMusicUrl(e.target.value)}
-          label="AudioURL"
-        />
-        <br/>
-        <br/>
-
+        <Accordion onChange={handleChange('panel1')} className="settings-according">
+          <AccordionSummary
+            className="settings-according--summary"
+            expandIcon={<ExpandMore />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography>
+              Advanced Settings
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails >
+            <Typography className="secondaryColor">Zoom Enabled:</Typography>
+            {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
+            <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
+            <br/>
+            <br/>
+            <Typography className="secondaryColor">VR Mode:</Typography>
+            {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
+            <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
+            <br/>
+            <br/>
+            <TextField
+              className="audioURLInput"
+              type="url"
+              value={musicUrl}
+              onChange={(e) => updateMusicUrl(e.target.value)}
+              label="AudioURL"
+            />
+          </AccordionDetails>
+        </Accordion>
         {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
       </div>
     </Modal>

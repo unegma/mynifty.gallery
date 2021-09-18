@@ -256,3 +256,20 @@ $secondary: #333;
   display: flex;
   flex-direction: row;
 }
+
+.settings-according {
+  display: flex !important;
+  flex-direction: column !important;
+
+  //box-shadow: none !important;
+  //background-color: 'white' !important;
+
+  .MuiAccordionDetails-root {
+    flex-direction: column;
+  }
+  &--summary {
+    //display: flex !important;
+    //flex-direction: column !important;
+    //padding: 0 !important;
+  }
+}
