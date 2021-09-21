@@ -4,6 +4,7 @@ import SpaceScene from "./Scenes/SpaceScene";
 import EarthScene from "./Scenes/EarthScene";
 import CoworkScene from "./Scenes/CoworkScene";
 import NFTGallery from "./NFTGallery";
+import GalleryScene from "./Scenes/GalleryScene";
 
 export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe, vrMode}: any) {
 
@@ -20,23 +21,35 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   return (
     <>
-
       {/*todo use enum*/}
       { scene === 1 && (
-        <SpaceScene handleYouClickedMe={handleYouClickedMe} />
+        <>
+          <SpaceScene handleYouClickedMe={handleYouClickedMe} />
+          <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
+        </>
       )}
 
       {/*todo use enum*/}
       { scene === 2 && (
-        <EarthScene handleYouClickedMe={handleYouClickedMe} />
+        <>
+          <EarthScene handleYouClickedMe={handleYouClickedMe} />
+          <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
+        </>
       )}
 
       { scene === 3 && (
-        <CoworkScene />
+        <>
+          <CoworkScene />
+          <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
+        </>
       )}
 
-      <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
-
+      { scene === 4 && (
+        <>
+          <GalleryScene />
+          {/*<NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />*/}
+        </>
+      )}
     </>
   )
 }

@@ -144,8 +144,6 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <Typography variant="h5" className="secondaryColor">Basic</Typography>
         <br/>
 
-
-
         <div className="sourceLogo-container">
           <div className="sourceLogo-container2">
             <Typography className="secondaryColor" id="demo-simple-select-label2">Source: </Typography>
@@ -195,6 +193,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <MenuItem value={1}>Space</MenuItem>
           <MenuItem value={2}>Earth</MenuItem>
           <MenuItem value={3}>Cowork</MenuItem>
+          <MenuItem value={4}>Gallery</MenuItem>
         </Select>
 
         <br/>

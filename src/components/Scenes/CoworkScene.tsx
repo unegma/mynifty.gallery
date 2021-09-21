@@ -11,6 +11,7 @@ export default function () {
       <pointLight intensity={1.5} position={[0, 0, 0]} />
 
       <Suspense fallback={null}>
+        {/*todo i think these two need to be moved out of here*/}
         <PerspectiveCamera position={[7, 7, 7]} makeDefault />
         {/*<pointLight intensity={3} position={[-90, -90, -100]} />*/}
         <color attach="background" args={['#000']} />
