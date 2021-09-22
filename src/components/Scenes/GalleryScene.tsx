@@ -1,33 +1,54 @@
 import React, {Suspense} from "react";
 import {PerspectiveCamera, Stars} from "@react-three/drei";
-import Globe from "../Globe";
-import Room from "../Room";
 import * as THREE from "three";
+import Image3D from "../Image3D";
 
-export default function () {
+export default function ({gallery, vrMode, displayMode, handleOpen, shape}: any) {
 
   return (
     <>
-      <ambientLight intensity={3} />
+      <ambientLight intensity={2} />
       <PerspectiveCamera position={[10, 10, 10]} makeDefault />
       <pointLight intensity={3} position={[-90, -90, -100]} />
       <color attach="background" args={['#000']} />
-      {/*<pointLight intensity={1.5} position={[5, 0, 5]} />*/}
 
-      {/*<Suspense fallback={null}>*/}
+      { gallery && gallery.length
+        ? gallery.map((image: any, index: number) => (
+          <group position={[-index*5, 0, 0]} key={index} >
+            <mesh receiveShadow rotation={[0, 0, 0]} position={[0, 0, 0]}>
+              <planeBufferGeometry args={[10, 10]} />
+              <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />
+            </mesh>
 
-      <mesh receiveShadow rotation={[0, 0, 0]} position={[0, 0, 0]}>
-        <planeBufferGeometry args={[10, 10]} />
-        <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />
-      </mesh>
+            <mesh receiveShadow rotation={[1.55, 0, 0]} position={[0, -5, 5]}>
+              <planeBufferGeometry args={[10, 10]} />
+              <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />
+            </mesh>
 
-      {/*<mesh receiveShadow rotation={[1.065, 0, 0]} position={[0, -15, 0]}>*/}
-        {/*<planeBufferGeometry attach="geometry" args={[9999, 9999]} />*/}
-        {/*<circleBufferGeometry attach="geometry" args={[250, 250]}/>*/}
-        {/*<meshPhysicalMaterial side={THREE.DoubleSide} clearcoat={1} attach="material" color="#212529" />*/}
-      {/*</mesh>*/}
+            {/*<mesh receiveShadow rotation={[0, 0, 0]} position={[0, 0, 0]}>*/}
+            {/*  <planeBufferGeometry args={[10, 10]} />*/}
+            {/*  <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />*/}
+            {/*</mesh>*/}
 
-      {/*</Suspense>*/}
+            <Suspense fallback={null}>
+              <Image3D
+                pos={[0,1,0.1]}
+                index={index}
+                className="pointer"
+                image={image}
+                handleOpen={handleOpen}
+                shape={shape}
+                scale={4}
+              />
+            </Suspense>
+
+            <mesh receiveShadow position={[0, -2, 0.1]}>
+              <planeBufferGeometry args={[3, 1]} />
+              <meshPhysicalMaterial side={THREE.DoubleSide} color="white" />
+            </mesh>
+          </group>
+        )) : <></>
+      }
     </>
   )
 }

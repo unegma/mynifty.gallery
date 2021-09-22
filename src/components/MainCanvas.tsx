@@ -46,8 +46,7 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
       { scene === 4 && (
         <>
-          <GalleryScene />
-          {/*<NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />*/}
+          <GalleryScene gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
     </>
