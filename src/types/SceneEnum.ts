@@ -1,6 +1,7 @@
+// todo make sure you know which way around the keys and values are
 export enum Scene {
-  space = 'Space',
-  earth = 'Earth',
-  cowork = 'Cowork',
-  gallery = 'Gallery'
+  Space = 'Space',
+  Earth = 'Earth',
+  Cowork = 'Cowork',
+  Gallery = 'Gallery'
 }

@@ -287,3 +287,13 @@ $secondary: #333;
     //padding: 0 !important;
   }
 }
+
+
+.shareLinkBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.shareLinkLabel {
+  margin-bottom: 5px !important;
+}

@@ -22,28 +22,28 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   return (
     <>
-      { scene === Scene.space && (
+      { scene === Scene.Space && (
         <>
           <SpaceScene handleYouClickedMe={handleYouClickedMe} />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      { scene === Scene.earth && (
+      { scene === Scene.Earth && (
         <>
           <EarthScene handleYouClickedMe={handleYouClickedMe} />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      { scene === Scene.cowork && (
+      { scene === Scene.Cowork && (
         <>
           <CoworkScene />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      { scene === Scene.gallery && (
+      { scene === Scene.Gallery && (
         <>
           <GalleryScene gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>

@@ -39,13 +39,13 @@ export default function HomePage(): JSX.Element {
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [address, setAddress] = React.useState<string>("");
-  const [scene, setScene] = React.useState<Scene|string>(Scene.space);
+  const [scene, setScene] = React.useState<Scene|string>(Scene.Space);
   const [source, setSource] = React.useState<Source|string>(Source.POAP);
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogData, setDialogData] = React.useState('');
   const [vrMode, setVrMode] = React.useState(false);
-  const [displayMode, setDisplayMode] = React.useState<DisplayMode|string>(DisplayMode.cluster);
+  const [displayMode, setDisplayMode] = React.useState<DisplayMode|string>(DisplayMode.Cluster);
   const [maxImages, setMaxImages] = React.useState(30);
   const [infoOpen, setInfoOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -55,8 +55,41 @@ export default function HomePage(): JSX.Element {
   const [loading, setLoading] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState("");
 
+  const [myLabel, setMyLabel] = React.useState(""); // used for share link
+  const [ignoreCookies, setIgnoreCookies] = React.useState(false); // used for share link
+
   useEffect(() => {
 
+    let search = window.location.search;
+    let queryString = new URLSearchParams(search);
+    let p = queryString.get('p');
+    console.log(`p is ${p}`)
+
+    if (p) {
+      console.log('im here')
+      console.log('p')
+
+      setIgnoreCookies(true);
+      let params = atob(p);
+      // params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}`);
+      console.log(params);
+
+      // todo create struct of cookies
+      let fakeCookies: any = Object.fromEntries(new URLSearchParams(params));
+      console.log(fakeCookies);
+      setAddress(fakeCookies.account);
+      setDisplayMode(fakeCookies.displayMode);
+      setSource(fakeCookies.source);
+      setScene(fakeCookies.scene);
+      setMusicUrl(fakeCookies.musicUrl);
+      setZoomEnabled(fakeCookies.zoomEnabled);
+      setVrMode(fakeCookies.vrMode);
+      setMyLabel(fakeCookies.myLabel)
+    }
+
+    // todo move all this to a cookies helper hook or something (cookies also set in Web3ConnectionButtons, but the connect button is removed so it shouldnt be an issue here)
+if (!ignoreCookies) {
+  console.log('ignoring cookies')
     let localStorageAddress = localStorage.getItem('address');
     if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
       setAddress(localStorageAddress); // get first
@@ -70,6 +103,7 @@ export default function HomePage(): JSX.Element {
       // @ts-ignore
       if(!isNaN(localStorageScene)) {
         localStorage.setItem('scene', "");
+        console.log('reloading to patch new cookies');
         location.reload();
       }
       // todo removeme (patch)
@@ -84,6 +118,7 @@ export default function HomePage(): JSX.Element {
       // @ts-ignore
       if(!isNaN(localStorageSource)) {
         localStorage.setItem('source', "");
+        console.log('reloading to patch new cookies');
         location.reload();
       }
       // todo removeme (patch)
@@ -126,12 +161,15 @@ export default function HomePage(): JSX.Element {
     }
 
     let localStorageDisplayMode = localStorage.getItem('displayMode');
+  console.log('display mode')
+  console.log(localStorageDisplayMode)
     if (typeof localStorageDisplayMode !== "undefined" && localStorageDisplayMode !== null && localStorageDisplayMode !== "") {
-
+      console.log(localStorageDisplayMode)
       // todo removeme (patch)
       // @ts-ignore
       if(!isNaN(localStorageDisplayMode)) {
         localStorage.setItem('displayMode', "");
+        console.log('reloading to patch new cookies');
         location.reload();
       }
       // todo removeme (patch)
@@ -142,6 +180,8 @@ export default function HomePage(): JSX.Element {
     if (typeof localStorageMaxImages !== "undefined" && localStorageMaxImages !== null && localStorageMaxImages !== "") {
       setMaxImages(parseInt(localStorageMaxImages));
     }
+
+}
 
     // this might be being called before the local storage retreival above
     getAssets();
@@ -177,7 +217,16 @@ export default function HomePage(): JSX.Element {
     <div>
       <div className="text1-container">
         <Typography variant="subtitle1" className="text1" >
-          My NFTs:&nbsp;
+          { !ignoreCookies && (
+            <>
+              My NFTs:&nbsp;
+            </>
+          )}
+          { myLabel && (
+            <>
+              {myLabel}:&nbsp;
+            </>
+          )}
           { loading &&
             <Spinner className="spinner" color="white"/>
           }
@@ -201,15 +250,21 @@ export default function HomePage(): JSX.Element {
       </div>
 
       <div className="text3-container">
-        <Typography variant="subtitle2" className="text3" >
-          <Web3ConnectionButtons setAddress={setAddress} setSettingsOpen={setSettingsOpen}/>
-        </Typography>
+        { !ignoreCookies && (
+          <Typography variant="subtitle2" className="text3" >
+            <Web3ConnectionButtons setAddress={setAddress} setSettingsOpen={setSettingsOpen}/>
+          </Typography>
+        )}
       </div>
 
       <div className="text4-container">
         <Typography variant="subtitle2" className="text4" >
-          <SettingsOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleSettingsModal}/>
-          <InfoOutlined className="pointer" style={{ color: "white", margin: "0 4px" }} onClick={toggleInfoModal}/>
+          { !ignoreCookies && (
+            <>
+              <SettingsOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleSettingsModal}/>
+              <InfoOutlined className="pointer" style={{ color: "white", margin: "0 4px" }} onClick={toggleInfoModal}/>
+            </>
+          )}
           <AudioPlayer url={musicUrl} />
         </Typography>
       </div>

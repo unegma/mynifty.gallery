@@ -207,10 +207,10 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
 
 function createShapes(index:number) {
   let shapes = <any>[];
-  shapes[DisplayMode.cluster] = shapeUtils.createCluster(index);
-  shapes[DisplayMode.spiral] = shapeUtils.createSpiral(index);
-  shapes[DisplayMode.galaxy] = shapeUtils.createGoldenSpiral(index);
-  shapes[DisplayMode.swirl] = shapeUtils.createSwirl(index);
+  shapes[DisplayMode.Cluster] = shapeUtils.createCluster(index);
+  shapes[DisplayMode.Spiral] = shapeUtils.createSpiral(index);
+  shapes[DisplayMode.Galaxy] = shapeUtils.createGoldenSpiral(index);
+  shapes[DisplayMode.Swirl] = shapeUtils.createSwirl(index);
   return shapes;
 }
 

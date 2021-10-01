@@ -1,6 +1,7 @@
+// todo make sure you know which way around the keys and values are
 export enum DisplayMode {
-  cluster = "Cluster",
-  spiral = "Spiral",
-  galaxy = "Galaxy",
-  swirl = "Swirl"
+  Cluster = "Cluster",
+  Spiral = "Spiral",
+  Galaxy = "Galaxy",
+  Swirl = "Swirl"
 }

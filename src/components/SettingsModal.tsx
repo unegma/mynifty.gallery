@@ -30,7 +30,6 @@ import { Scene } from '../types/SceneEnum';
 import { DisplayMode } from '../types/DisplayModeEnum';
 import {ExpandMore} from "@material-ui/icons";
 
-
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,
                                          setInfoOpen, scene, setScene, source, setSource }: any) {
@@ -38,10 +37,26 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
   const [expanded, setExpanded] = React.useState(false);
+  const [shareLink, setShareLink] = React.useState("");
+
+  const [myLabel, setMyLabel] = React.useState("'s Gallery");
+
+  const updateMyLabel = (val: any) => {
+    setMyLabel(val);
+  }
 
   const handleChange = (panel: any) => (event: any, isExpanded: any) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  const generateShareLink = () => {
+
+    let params: any;
+    // TODO ADD THIS TO THE COOKIES HELPER HOOK?
+    params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}&zoomEnabled=${zoomEnabled}&musicUrl=${musicUrl}&vrMode=${vrMode}&myLabel=${myLabel}`);
+
+    setShareLink(`https://mynifty.gallery?p=${params}`)
+  }
 
   const toggleZoomEnabled = () => {
     let zoomEnabledOption = !zoomEnabled;
@@ -132,7 +147,9 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
         <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
-        <InputLabel id="demo-simple-select-label3">Connected Address:</InputLabel>
+        <hr/>
+        <br/>
+        <InputLabel id="demo-simple-select-label3">Your Connected Address:</InputLabel>
 
         {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }
 
@@ -148,6 +165,19 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         {/*  /!*<MenuItem value={"0x8309d9a1B39CC5f309B5e44db315532Afb60f43e"}>0x8309d9a1B39CC5f309B5e44db315532Afb60f43e</MenuItem>*!/*/}
         {/*</Select>*/}
         <br/>
+        <br/>
+        <div className="shareLinkBox">
+          <TextField id="outlined-basic" className="shareLinkLabel" label="Custom Share Label" variant="outlined" value={myLabel} onChange={(e) => {updateMyLabel(e.target.value)}} />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {generateShareLink()}}
+          >
+            Create Share Link
+          </Button>
+        </div>
+        <br/>
+        <Typography><a target="_blank" href={shareLink}>{shareLink}</a></Typography>
         <br/>
         <hr/>
         <br/>
@@ -178,25 +208,25 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <InputLabel id="demo-simple-select-label">Scene:</InputLabel>
 
         <div className="scenesBox">
-          <img className={`sceneLogo ${scene === Scene.space ? "sceneLogo--active" : "" }`} src={space} onClick={() => updateScene(Scene.space)}/>
-          <img className={`sceneLogo ${scene === Scene.earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.earth)}/>
-          <img className={`sceneLogo ${scene === Scene.cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.cowork)}/>
-          <img className={`sceneLogo ${scene === Scene.gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.gallery)}/>
+          <img className={`sceneLogo ${scene === Scene.Space ? "sceneLogo--active" : "" }`} src={space} onClick={() => updateScene(Scene.Space)}/>
+          <img className={`sceneLogo ${scene === Scene.Earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.Earth)}/>
+          <img className={`sceneLogo ${scene === Scene.Cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.Cowork)}/>
+          <img className={`sceneLogo ${scene === Scene.Gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Gallery)}/>
         </div>
 
         <br/>
         <br/>
 
         {/*todo use enum*/}
-        { scene !== Scene.gallery && (
+        { scene !== Scene.Gallery && (
           <>
             <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
 
             <div className="displayModeBox">
-              <img className={`displayModeLogo ${displayMode === DisplayMode.cluster ? "displayModeLogo--active" : "" }`} src={cluster} onClick={() => updateDisplayMode(DisplayMode.cluster)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.spiral ? "displayModeLogo--active" : "" }`} src={spiral} onClick={() => updateDisplayMode(DisplayMode.spiral)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.galaxy ? "displayModeLogo--active" : "" }`} src={galaxy} onClick={() => updateDisplayMode(DisplayMode.galaxy)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.swirl ? "displayModeLogo--active" : "" }`} src={swirl} onClick={() => updateDisplayMode(DisplayMode.swirl)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Cluster ? "displayModeLogo--active" : "" }`} src={cluster} onClick={() => updateDisplayMode(DisplayMode.Cluster)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Spiral ? "displayModeLogo--active" : "" }`} src={spiral} onClick={() => updateDisplayMode(DisplayMode.Spiral)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Galaxy ? "displayModeLogo--active" : "" }`} src={galaxy} onClick={() => updateDisplayMode(DisplayMode.Galaxy)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Swirl ? "displayModeLogo--active" : "" }`} src={swirl} onClick={() => updateDisplayMode(DisplayMode.Swirl)}/>
             </div>
             <br/>
             <br/>
