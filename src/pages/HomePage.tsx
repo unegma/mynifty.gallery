@@ -64,11 +64,30 @@ export default function HomePage(): JSX.Element {
 
     let localStorageScene = localStorage.getItem('scene');
     if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
+
+      // todo removeme (patch)
+
+      // @ts-ignore
+      if(!isNaN(localStorageScene)) {
+        localStorage.setItem('scene', "");
+        location.reload();
+      }
+      // todo removeme (patch)
+
       setScene(localStorageScene);
     }
 
     let localStorageSource = localStorage.getItem('source');
     if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
+
+      // todo removeme (patch) THIS ONE DOESN'T SEEM TO WORK PROPERLY
+      // @ts-ignore
+      if(!isNaN(localStorageSource)) {
+        localStorage.setItem('source', "");
+        location.reload();
+      }
+      // todo removeme (patch)
+
       setSource(localStorageSource);
     }
     // if (account) {
@@ -108,6 +127,15 @@ export default function HomePage(): JSX.Element {
 
     let localStorageDisplayMode = localStorage.getItem('displayMode');
     if (typeof localStorageDisplayMode !== "undefined" && localStorageDisplayMode !== null && localStorageDisplayMode !== "") {
+
+      // todo removeme (patch)
+      // @ts-ignore
+      if(!isNaN(localStorageDisplayMode)) {
+        localStorage.setItem('displayMode', "");
+        location.reload();
+      }
+      // todo removeme (patch)
+
       setDisplayMode(localStorageDisplayMode);
     }
     let localStorageMaxImages = localStorage.getItem('maxImages');
