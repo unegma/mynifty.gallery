@@ -238,7 +238,8 @@ $secondary: #333;
   cursor: pointer;
 
   &--active {
-    background-color: black;
+    //background-color: black;
+    border: 2px solid black;
   }
 }
 

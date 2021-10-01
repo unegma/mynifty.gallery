@@ -165,23 +165,6 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
         <br/>
 
-        {/*todo use enum*/}
-        <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={displayMode}
-          onChange={(ev) => {updateDisplayMode(ev.target.value)}}
-        >
-          <MenuItem value={0}>Cluster</MenuItem>
-          <MenuItem value={1}>Spiral</MenuItem>
-          <MenuItem value={2}>Spiral Galaxy</MenuItem>
-          <MenuItem value={3}>Swirl</MenuItem>
-        </Select>
-
-        <br/>
-        <br/>
-
         <InputLabel id="demo-simple-select-label">Scene:</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -198,6 +181,28 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
         <br/>
         <br/>
+
+        {/*todo use enum*/}
+        { scene !== 4 && (
+          <>
+            <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={displayMode}
+              onChange={(ev) => {updateDisplayMode(ev.target.value)}}
+            >
+              <MenuItem value={0}>Cluster</MenuItem>
+              <MenuItem value={1}>Spiral</MenuItem>
+              <MenuItem value={2}>Spiral Galaxy</MenuItem>
+              <MenuItem value={3}>Swirl</MenuItem>
+            </Select>
+            <br/>
+            <br/>
+          </>
+        )}
+
+
 
         {/*max images setting*/}
         <TextField
