@@ -231,7 +231,7 @@ $secondary: #333;
   margin-right: 5px !important;
 }
 
-.sourceLogo {
+.sourceLogo, .displayModeLogo, .sceneLogo {
   display: flex;
   width: 50px !important;
   height: 50px !important;
@@ -254,6 +254,16 @@ $secondary: #333;
 }
 
 .sourcesBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.scenesBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.displayModeBox {
   display: flex;
   flex-direction: row;
 }

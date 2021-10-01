@@ -1,5 +1,6 @@
 import * as shapeUtils from '@unegma/shapes';
 import { Source } from '../types/SourceEnum';
+import { DisplayMode } from '../types/DisplayModeEnum';
 
 /**
  * Offset is for using with opensea api and is used for getting past the 20 max
@@ -206,12 +207,10 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
 
 function createShapes(index:number) {
   let shapes = <any>[];
-
-  shapes.push(shapeUtils.createCluster(index));
-  shapes.push(shapeUtils.createSpiral(index));
-  shapes.push(shapeUtils.createGoldenSpiral(index));
-  shapes.push(shapeUtils.createSwirl(index));
-
+  shapes[DisplayMode.cluster] = shapeUtils.createCluster(index);
+  shapes[DisplayMode.spiral] = shapeUtils.createSpiral(index);
+  shapes[DisplayMode.galaxy] = shapeUtils.createGoldenSpiral(index);
+  shapes[DisplayMode.swirl] = shapeUtils.createSwirl(index);
   return shapes;
 }
 

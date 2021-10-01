@@ -17,6 +17,8 @@ import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
 import DialogModal from "../components/DialogModal";
 import {Source} from '../types/SourceEnum';
+import {Scene} from '../types/SceneEnum';
+import {DisplayMode} from '../types/DisplayModeEnum';
 
 // todo more margins on modals
 // todo less margin on info modal
@@ -37,13 +39,13 @@ export default function HomePage(): JSX.Element {
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
   const [address, setAddress] = React.useState<string>("");
-  const [scene, setScene] = React.useState(1);
+  const [scene, setScene] = React.useState<Scene|string>(Scene.space);
   const [source, setSource] = React.useState<Source|string>(Source.POAP);
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogData, setDialogData] = React.useState('');
   const [vrMode, setVrMode] = React.useState(false);
-  const [displayMode, setDisplayMode] = React.useState(0);
+  const [displayMode, setDisplayMode] = React.useState<DisplayMode|string>(DisplayMode.cluster);
   const [maxImages, setMaxImages] = React.useState(30);
   const [infoOpen, setInfoOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -62,7 +64,7 @@ export default function HomePage(): JSX.Element {
 
     let localStorageScene = localStorage.getItem('scene');
     if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
-      setScene(parseInt(localStorageScene));
+      setScene(localStorageScene);
     }
 
     let localStorageSource = localStorage.getItem('source');
@@ -106,7 +108,7 @@ export default function HomePage(): JSX.Element {
 
     let localStorageDisplayMode = localStorage.getItem('displayMode');
     if (typeof localStorageDisplayMode !== "undefined" && localStorageDisplayMode !== null && localStorageDisplayMode !== "") {
-      setDisplayMode(parseInt(localStorageDisplayMode));
+      setDisplayMode(localStorageDisplayMode);
     }
     let localStorageMaxImages = localStorage.getItem('maxImages');
     if (typeof localStorageMaxImages !== "undefined" && localStorageMaxImages !== null && localStorageMaxImages !== "") {

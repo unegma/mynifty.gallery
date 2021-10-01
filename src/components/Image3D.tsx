@@ -24,7 +24,6 @@ export default function Image3D({image, handleOpen, displayMode, shape, index = 
   // if isplay mode (cluster etc) is set, get pos from the object instead
   // todo saying false because it is 0 // TODO REPLACE WITH ENUM
   if (typeof displayMode !== 'undefined' && displayMode !== null) {
-    displayMode = Number.parseInt(displayMode); // may not be needed
 
     pos1 = image.displayMode[displayMode].pos1;
     pos2 = image.displayMode[displayMode].pos2;

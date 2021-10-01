@@ -1,4 +1,6 @@
 export enum Scene {
   space = 'Space',
-  earth = 'Earth'
+  earth = 'Earth',
+  cowork = 'Cowork',
+  gallery = 'Gallery'
 }

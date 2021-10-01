@@ -1,5 +1,6 @@
 import React, {Suspense, useEffect, useState} from "react";
 import { Source } from '../types/SourceEnum';
+import { Scene } from '../types/SceneEnum';
 import SpaceScene from "./Scenes/SpaceScene";
 import EarthScene from "./Scenes/EarthScene";
 import CoworkScene from "./Scenes/CoworkScene";
@@ -21,30 +22,28 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   return (
     <>
-      {/*todo use enum*/}
-      { scene === 1 && (
+      { scene === Scene.space && (
         <>
           <SpaceScene handleYouClickedMe={handleYouClickedMe} />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      {/*todo use enum*/}
-      { scene === 2 && (
+      { scene === Scene.earth && (
         <>
           <EarthScene handleYouClickedMe={handleYouClickedMe} />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      { scene === 3 && (
+      { scene === Scene.cowork && (
         <>
           <CoworkScene />
           <NFTGallery gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
 
-      { scene === 4 && (
+      { scene === Scene.gallery && (
         <>
           <GalleryScene gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>

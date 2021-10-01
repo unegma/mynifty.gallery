@@ -17,7 +17,17 @@ import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
 import metaMaskLogo from '../images/metamask-logo.svg';
 import poapLogo from '../images/poap-logo.svg';
+import space from '../images/space.png';
+import earth from '../images/earth.png';
+import gallery from '../images/gallery.png';
+import cowork from '../images/cowork.png';
+import cluster from '../images/cluster.png';
+import galaxy from '../images/galaxy.png';
+import swirl from '../images/swirl.png';
+import spiral from '../images/spiral.png';
 import { Source } from '../types/SourceEnum';
+import { Scene } from '../types/SceneEnum';
+import { DisplayMode } from '../types/DisplayModeEnum';
 import {ExpandMore} from "@material-ui/icons";
 
 
@@ -166,42 +176,32 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
 
         <InputLabel id="demo-simple-select-label">Scene:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={scene}
-          onChange={(ev) => {updateScene(ev.target.value)}}
-        >
-          {/*todo use enum*/}
-          <MenuItem value={1}>Space</MenuItem>
-          <MenuItem value={2}>Earth</MenuItem>
-          <MenuItem value={3}>Cowork</MenuItem>
-          <MenuItem value={4}>Gallery</MenuItem>
-        </Select>
+
+        <div className="scenesBox">
+          <img className={`sceneLogo ${scene === Scene.space ? "sceneLogo--active" : "" }`} src={space} onClick={() => updateScene(Scene.space)}/>
+          <img className={`sceneLogo ${scene === Scene.earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.earth)}/>
+          <img className={`sceneLogo ${scene === Scene.cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.cowork)}/>
+          <img className={`sceneLogo ${scene === Scene.gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.gallery)}/>
+        </div>
 
         <br/>
         <br/>
 
         {/*todo use enum*/}
-        { scene !== 4 && (
+        { scene !== Scene.gallery && (
           <>
             <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={displayMode}
-              onChange={(ev) => {updateDisplayMode(ev.target.value)}}
-            >
-              <MenuItem value={0}>Cluster</MenuItem>
-              <MenuItem value={1}>Spiral</MenuItem>
-              <MenuItem value={2}>Spiral Galaxy</MenuItem>
-              <MenuItem value={3}>Swirl</MenuItem>
-            </Select>
+
+            <div className="displayModeBox">
+              <img className={`displayModeLogo ${displayMode === DisplayMode.cluster ? "displayModeLogo--active" : "" }`} src={cluster} onClick={() => updateDisplayMode(DisplayMode.cluster)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.spiral ? "displayModeLogo--active" : "" }`} src={spiral} onClick={() => updateDisplayMode(DisplayMode.spiral)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.galaxy ? "displayModeLogo--active" : "" }`} src={galaxy} onClick={() => updateDisplayMode(DisplayMode.galaxy)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.swirl ? "displayModeLogo--active" : "" }`} src={swirl} onClick={() => updateDisplayMode(DisplayMode.swirl)}/>
+            </div>
             <br/>
             <br/>
           </>
         )}
-
 
 
         {/*max images setting*/}
