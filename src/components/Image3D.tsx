@@ -19,21 +19,24 @@ export default function Image3D({image, handleOpen, displayMode, shape, index = 
   const texture = useLoader(THREE.TextureLoader, image.thumbnail);
 
   let pos1 = pos[0], pos2 = pos[1], pos3 = pos[2];
+  let roty = 0;
   console.log(pos1, pos2, pos3);
 
   // if isplay mode (cluster etc) is set, get pos from the object instead
   // todo saying false because it is 0 // TODO REPLACE WITH ENUM
   if (typeof displayMode !== 'undefined' && displayMode !== null) {
-
     pos1 = image.displayMode[displayMode].pos1;
     pos2 = image.displayMode[displayMode].pos2;
     pos3 = image.displayMode[displayMode].pos3;
 
-    // todo sort this
-    useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
     rotation = [Math.PI / pos1, Math.PI / pos2, Math.PI / pos3];
     scale = image.scale;
+    roty = 0.01;
   }
+  
+  
+  // useFrame can't be conditional
+  useFrame((state, delta) => (mesh.current.rotation.x += roty));
 
   return (
     <mesh

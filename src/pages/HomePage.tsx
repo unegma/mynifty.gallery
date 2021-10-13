@@ -56,25 +56,27 @@ export default function HomePage(): JSX.Element {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const [myLabel, setMyLabel] = React.useState(""); // used for share link
-  const [ignoreCookies, setIgnoreCookies] = React.useState(false); // used for share link
+  const [sharedGalleryView, setSharedGalleryView] = React.useState(false); // used for share link
 
   useEffect(() => {
 
-    let search = window.location.search;
-    let queryString = new URLSearchParams(search);
+    let _sharedGalleryView = false;
+    let queryString = new URLSearchParams(window.location.search);
     let p = queryString.get('p');
-    console.log(`p is ${p}`)
 
-    if (p) {
+    if (typeof p !== 'undefined' && p !== null) {
+      console.log(`p is ${p}`)
+    
       console.log('im here')
-      console.log('p')
+      console.log('p'); // TODO CHECK IF THIS IS BEING CALLED AT THE WRONG TIME
 
-      setIgnoreCookies(true);
+      setSharedGalleryView(true);
+      _sharedGalleryView = true;
       let params = atob(p);
       // params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}`);
       console.log(params);
 
-      // todo create struct of cookies
+      // todo create struct of cookies // todo replace with 'cookieOverride'
       let fakeCookies: any = Object.fromEntries(new URLSearchParams(params));
       console.log(fakeCookies);
       setAddress(fakeCookies.account);
@@ -84,16 +86,21 @@ export default function HomePage(): JSX.Element {
       setMusicUrl(fakeCookies.musicUrl);
       setZoomEnabled(fakeCookies.zoomEnabled);
       setVrMode(fakeCookies.vrMode);
-      setMyLabel(fakeCookies.myLabel)
+      setMyLabel(fakeCookies.myLabel);
+      //set // TODO CHECK NOTHING WAS WIPED HERE
+      //  todo create serialised version of object so that can pass data about whether certain items are sellable or not (user SHOULD BE ABLE TO SELECT SELLABLE AND WHICH SOURCE)
     }
 
-    // todo move all this to a cookies helper hook or something (cookies also set in Web3ConnectionButtons, but the connect button is removed so it shouldnt be an issue here)
-if (!ignoreCookies) {
-  console.log('ignoring cookies')
+  // todo move all this to a cookies helper hook or something (cookies also set in Web3ConnectionButtons, but the connect button is removed so it shouldnt be an issue here)
+  if (_sharedGalleryView === false) { // ie every scenario which isn't sharing gallery link
+
+// when using the State variable, on change, is this useEffect called again?
+// alert('test') // TODO WHY IS THIS CALLED 2 TIMES?? // bug which was having was that needed to pass sharedGalleryView in as a dependency to the array below
     let localStorageAddress = localStorage.getItem('address');
     if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
       setAddress(localStorageAddress); // get first
-    }
+    } // TODO DOES THIS CAUSE THE useEffect TO BE CALLED AGAIN?
+    // DON'T GET ADDRESS FROM COOKIES MAYBE, BECAUSE CAN CREATE A SHARE LINK WITH NO ADDRESS IN IT??
 
     let localStorageScene = localStorage.getItem('scene');
     if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
@@ -104,7 +111,7 @@ if (!ignoreCookies) {
       if(!isNaN(localStorageScene)) {
         localStorage.setItem('scene', "");
         console.log('reloading to patch new cookies');
-        location.reload();
+        window.location.reload();
       }
       // todo removeme (patch)
 
@@ -119,7 +126,7 @@ if (!ignoreCookies) {
       if(!isNaN(localStorageSource)) {
         localStorage.setItem('source', "");
         console.log('reloading to patch new cookies');
-        location.reload();
+        window.location.reload();
       }
       // todo removeme (patch)
 
@@ -170,7 +177,7 @@ if (!ignoreCookies) {
       if(!isNaN(localStorageDisplayMode)) {
         localStorage.setItem('displayMode', "");
         console.log('reloading to patch new cookies');
-        location.reload();
+        window.location.reload();
       }
       // todo removeme (patch)
 
@@ -181,12 +188,12 @@ if (!ignoreCookies) {
       setMaxImages(parseInt(localStorageMaxImages));
     }
 
-}
+  }
 
     // this might be being called before the local storage retreival above
     getAssets();
 
-  }, [source, address, maxImages]);
+  }, [source, address, maxImages]); // do these here cause useEffect to be called again when they change? (don't add sharedGalleryView in here in that case)
 
 
   async function getAssets () {
@@ -217,7 +224,7 @@ if (!ignoreCookies) {
     <div>
       <div className="text1-container">
         <Typography variant="subtitle1" className="text1" >
-          { !ignoreCookies && (
+          { !sharedGalleryView && (
             <>
               My NFTs:&nbsp;
             </>
@@ -232,7 +239,9 @@ if (!ignoreCookies) {
           }
           { !loading && errorMessage === "" &&
             <a className="pointer underlined" onClick={() => {
+            if(!sharedGalleryView) {
               setSettingsOpen(true)
+            }
             }}>{maxImages} NFTs</a>
           }
           { errorMessage !== "" &&
@@ -250,7 +259,7 @@ if (!ignoreCookies) {
       </div>
 
       <div className="text3-container">
-        { !ignoreCookies && (
+        { !sharedGalleryView && (
           <Typography variant="subtitle2" className="text3" >
             <Web3ConnectionButtons setAddress={setAddress} setSettingsOpen={setSettingsOpen}/>
           </Typography>
@@ -259,7 +268,7 @@ if (!ignoreCookies) {
 
       <div className="text4-container">
         <Typography variant="subtitle2" className="text4" >
-          { !ignoreCookies && (
+          { !sharedGalleryView && (
             <>
               <SettingsOutlined className="pointer" style={{ color: "white", marginLeft: "2px" }} onClick={toggleSettingsModal}/>
               <InfoOutlined className="pointer" style={{ color: "white", margin: "0 4px" }} onClick={toggleInfoModal}/>

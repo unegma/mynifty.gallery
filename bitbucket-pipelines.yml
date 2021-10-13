@@ -1,0 +1,23 @@
+# This is a sample build configuration for Javascript (Node.js).
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: rhinogram/node-awscli
+options:
+  docker: true
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy to production (not optimised production build)
+          deployment: staging
+          #TODO ADD OPTIMISED BUILD FOR PRODUCTION (NEED TO HAVE NO TS ERRORS)
+          caches:
+            - node
+          script:
+            - npm install
+            - unset CI
+            - NODE_ENV=development ENVIRONMENT=development CI="" npm run-script build
+            - aws s3 sync --delete ./build/ s3://mynifty.gallery/
