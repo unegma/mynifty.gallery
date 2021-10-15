@@ -6,6 +6,7 @@ import EarthScene from "./Scenes/EarthScene";
 import CoworkScene from "./Scenes/CoworkScene";
 import NFTGallery from "./NFTGallery";
 import GalleryScene from "./Scenes/GalleryScene";
+import PlinthScene from "./Scenes/PlinthScene";
 
 export default function MainCanvas({gallery, handleOpen, displayMode, scene, source, handleYouClickedMe, vrMode}: any) {
 
@@ -48,6 +49,13 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
       { scene === Scene.Gallery && (
         <>
           <GalleryScene gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
+        </>
+      )}
+
+
+      { scene === Scene.Plinth && (
+        <>
+          <PlinthScene gallery={gallery} vrMode={vrMode} displayMode={displayMode} handleOpen={handleOpen} shape={shape} />
         </>
       )}
     </>

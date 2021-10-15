@@ -12,14 +12,15 @@ import {useFrame, useLoader} from "@react-three/fiber";
  * @param pos
  * @param rotation
  * @param scale
+ * @param roty (how quickly to rotate)
+ * @param rotyAxis
  * @constructor
  */
-export default function Image3D({image, handleOpen, displayMode, shape, index = 0, pos = [0, 0, 0], rotation = [0, 0, 0], scale = 1}: any): JSX.Element {
+export default function Image3D({image, handleOpen, displayMode, shape, index = 0, pos = [0, 0, 0], rotation = [0, 0, 0], scale = 1, roty = 0, rotyAxis = 'x'}: any): JSX.Element {
   const mesh = useRef<THREE.Mesh>(null!);
   const texture = useLoader(THREE.TextureLoader, image.thumbnail);
 
   let pos1 = pos[0], pos2 = pos[1], pos3 = pos[2];
-  let roty = 0;
   console.log(pos1, pos2, pos3);
 
   // if isplay mode (cluster etc) is set, get pos from the object instead
@@ -36,7 +37,8 @@ export default function Image3D({image, handleOpen, displayMode, shape, index = 
   
   
   // useFrame can't be conditional
-  useFrame((state, delta) => (mesh.current.rotation.x += roty));
+  // @ts-ignore
+  useFrame((state, delta) => (mesh.current.rotation[rotyAxis] += roty));
 
   return (
     <mesh

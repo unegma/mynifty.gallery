@@ -21,6 +21,7 @@ import poapLogo from '../images/poap-logo.svg';
 import space from '../images/space.png';
 import earth from '../images/earth.png';
 import gallery from '../images/gallery.png';
+import plinth from '../images/plinth.png';
 import cowork from '../images/cowork.png';
 import cluster from '../images/cluster.png';
 import galaxy from '../images/galaxy.png';
@@ -223,7 +224,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <img className={`sceneLogo ${scene === Scene.Earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.Earth)}/>
           <img className={`sceneLogo ${scene === Scene.Cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.Cowork)}/>
           <img className={`sceneLogo ${scene === Scene.Gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Gallery)}/>
-          {/*<img className={`sceneLogo ${scene === Scene.Plinth ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Plinth)}/>*/}
+          <img className={`sceneLogo ${scene === Scene.Plinth ? "sceneLogo--active" : "" }`} src={plinth} onClick={() => updateScene(Scene.Plinth)}/>
         </div>
 
         <br/>

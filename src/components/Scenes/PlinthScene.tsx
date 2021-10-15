@@ -14,16 +14,16 @@ export default function ({gallery, vrMode, displayMode, handleOpen, shape}: any)
 
       { gallery && gallery.length
         ? gallery.map((image: any, index: number) => (
-          <group position={[-index*5, 0, 0]} key={index} >
-            <mesh receiveShadow rotation={[0, 0, 0]} position={[0, 0, 0]}>
-              <planeBufferGeometry args={[10, 10]} />
+          <group position={[-index*7, 0, 0]} key={index} >
+            <mesh receiveShadow rotation={[0, 0, 0]} position={[0, -2, 0]}>
+              <boxBufferGeometry args={[5, 2, 5]} />
               <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />
             </mesh>
 
-            <mesh receiveShadow rotation={[1.55, 0, 0]} position={[0, -5, 5]}>
-              <planeBufferGeometry args={[10, 10]} />
-              <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />
-            </mesh>
+            {/*<mesh receiveShadow rotation={[1.55, 0, 0]} position={[0, -5, 5]}>*/}
+            {/*  <planeBufferGeometry args={[10, 10]} />*/}
+            {/*  <meshPhysicalMaterial side={THREE.DoubleSide} color="#212529" />*/}
+            {/*</mesh>*/}
 
             {/*<mesh receiveShadow rotation={[0, 0, 0]} position={[0, 0, 0]}>*/}
             {/*  <planeBufferGeometry args={[10, 10]} />*/}
@@ -39,13 +39,16 @@ export default function ({gallery, vrMode, displayMode, handleOpen, shape}: any)
                 handleOpen={handleOpen}
                 shape={shape}
                 scale={4}
+                rotation={[0,0,0]}
+                roty={0.01}
+                rotyAxis={'y'}
               />
             </Suspense>
 
-            <mesh receiveShadow position={[0, -2, 0.1]}>
-              <planeBufferGeometry args={[3, 1]} />
-              <meshPhysicalMaterial side={THREE.DoubleSide} color="white" />
-            </mesh>
+            {/*<mesh receiveShadow position={[0, -2, 0.1]}>*/}
+            {/*  <planeBufferGeometry args={[3, 1]} />*/}
+            {/*  <meshPhysicalMaterial side={THREE.DoubleSide} color="white" />*/}
+            {/*</mesh>*/}
           </group>
         )) : <></>
       }
