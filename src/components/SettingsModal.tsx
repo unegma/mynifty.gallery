@@ -117,6 +117,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        paddingTop: 0,
       },
     }),
   );
@@ -138,13 +139,16 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       aria-describedby="simple-modal-description"
     >
       <div style={modalStyle} className={classes2.paper}>
-        {/*<HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>*/}
-        <Button variant="contained" color="primary" className="closeModalButton" onClick={() => { setOpen(false)}}>
-          Ok
-        </Button>
+        <div className="fixedSettingsTag">
+          {/*<HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>*/}
+          <Button variant="contained" color="primary" className="closeModalButton" onClick={() => { setOpen(false)}}>
+            Ok
+          </Button>
 
-        <Typography variant="h3" className="secondaryColor">Settings</Typography>
-        <br/>
+          <Typography variant="h3" className="secondaryColor">Settings</Typography>
+          <br/>
+        </div>
+
         <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
         <br/>
         <hr/>
@@ -212,6 +216,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <img className={`sceneLogo ${scene === Scene.Earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.Earth)}/>
           <img className={`sceneLogo ${scene === Scene.Cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.Cowork)}/>
           <img className={`sceneLogo ${scene === Scene.Gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Gallery)}/>
+          {/*<img className={`sceneLogo ${scene === Scene.Plinth ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Plinth)}/>*/}
         </div>
 
         <br/>

@@ -3,5 +3,6 @@ export enum Scene {
   Space = 'Space',
   Earth = 'Earth',
   Cowork = 'Cowork',
-  Gallery = 'Gallery'
+  Gallery = 'Gallery',
+  // Plinth = 'Plinth'
 }

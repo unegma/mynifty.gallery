@@ -22,6 +22,8 @@ export default function MainCanvas({gallery, handleOpen, displayMode, scene, sou
 
   return (
     <>
+      {/*todo add switch with fallback?*/}
+
       { scene === Scene.Space && (
         <>
           <SpaceScene handleYouClickedMe={handleYouClickedMe} />
