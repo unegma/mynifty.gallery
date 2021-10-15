@@ -33,8 +33,20 @@ export default function HomePage(): JSX.Element {
   const { player } = useXR();
 
   useEffect(() => {
-    console.log(player)
+    console.log('player here1');
+    console.log(player);
+  }) // todo if there is no [], then it only fires 1 time on page load
+
+  useEffect(() => {
+    console.log('player here2');
+    console.log(player);
   }, []) // todo if there is no [], then it only fires 1 time on page load
+
+  useEffect(() => {
+    console.log('player here3');
+    console.log(player);
+  }, [player]) // todo if there is no [], then it only fires 1 time on page load
+
 
   const [musicUrl, setMusicUrl] = React.useState("https://cdn.pixabay.com/download/audio/2021/07/18/audio_d920a53533.mp3?filename=ambient-piano-happy-days--5541.mp3");
   // const [musicUrl, setMusicUrl] = React.useState("https://www.free-stock-music.com/music/alexander-nakarada-space-ambience.mp3");
