@@ -1,3 +1,4 @@
+import './nftModal.scss';
 import {
   Button,
   createStyles,
@@ -153,7 +154,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         {/*<br/>*/}
         {/*<hr/>*/}
         <br/>
-        <InputLabel id="demo-simple-select-label3">Connected Address: {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }</InputLabel>
+        <InputLabel className="connectedAddressLabel">Connected Address: <br/>{account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }</InputLabel>
 
 
         {/*<Select*/}
