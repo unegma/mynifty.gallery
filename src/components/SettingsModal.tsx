@@ -39,7 +39,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
   const [expanded, setExpanded] = React.useState(false);
   const [shareLink, setShareLink] = React.useState("");
 
-  const [myLabel, setMyLabel] = React.useState("'s Gallery");
+  const [myLabel, setMyLabel] = React.useState(``);
 
   const updateMyLabel = (val: any) => {
     setMyLabel(val);
@@ -141,7 +141,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       <div style={modalStyle} className={classes2.paper}>
         <div className="fixedSettingsTag">
           {/*<HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>*/}
-          <Button variant="contained" color="primary" className="closeModalButton" onClick={() => { setOpen(false)}}>
+          <Button variant="contained" color="primary" className={`closeModalButton closeModalButtonOk`} onClick={() => { setOpen(false)}}>
             Ok
           </Button>
 
@@ -149,13 +149,12 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           <br/>
         </div>
 
-        <Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>
+        {/*<Typography className="secondaryColor">More <a className="pointer underlined" onClick={()=>{setOpen(false); setInfoOpen(true)}}>Info here</a>.</Typography>*/}
+        {/*<br/>*/}
+        {/*<hr/>*/}
         <br/>
-        <hr/>
-        <br/>
-        <InputLabel id="demo-simple-select-label3">Your Connected Address:</InputLabel>
+        <InputLabel id="demo-simple-select-label3">Connected Address: {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }</InputLabel>
 
-        {account ? <span className="minitext, secondaryColor">{account}</span> : <span className="secondaryColor">Click Connect in the top right</span> }
 
         {/*<Select*/}
         {/*  className="addressInput"*/}
@@ -169,19 +168,26 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         {/*  /!*<MenuItem value={"0x8309d9a1B39CC5f309B5e44db315532Afb60f43e"}>0x8309d9a1B39CC5f309B5e44db315532Afb60f43e</MenuItem>*!/*/}
         {/*</Select>*/}
         <br/>
-        <br/>
         <div className="shareLinkBox">
-          <TextField id="outlined-basic" className="shareLinkLabel" label="Custom Share Label" variant="outlined" value={myLabel} onChange={(e) => {updateMyLabel(e.target.value)}} />
+          <TextField
+            id="outlined-basic"
+            className="shareLinkLabel"
+            label="Your Gallery Name"
+            variant="outlined"
+            value={myLabel}
+            onChange={(e) => {updateMyLabel(e.target.value)}}
+          />
           <Button
             variant="outlined"
             color="primary"
+            className="shareLinkButton"
             onClick={() => {generateShareLink()}}
           >
             Create Share Link
           </Button>
         </div>
         <br/>
-        <Typography><a target="_blank" href={shareLink}>{shareLink}</a></Typography>
+        <Typography className="generatedShareLink" onClick={() => {navigator.clipboard.writeText(shareLink)}}>{shareLink ? <><span className="secondaryColor">Your Shareable Link:</span><br/>{shareLink}</> : ""}</Typography>
         <br/>
         <hr/>
         <br/>

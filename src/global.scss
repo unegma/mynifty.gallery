@@ -14,6 +14,10 @@ $secondary: #333;
   //color: $secondary;
 }
 
+.secondaryColor {
+  color: $secondary
+}
+
 // position
 @mixin column-centered {
   display: flex;
@@ -200,7 +204,7 @@ $secondary: #333;
 }
 
 .closeModalButton {
-  //cursor: pointer;
+  cursor: pointer;
   position: absolute !important;
   right: 5px !important;
   top:5px !important;
@@ -291,11 +295,21 @@ $secondary: #333;
 
 .shareLinkBox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .shareLinkLabel {
-  margin-bottom: 5px !important;
+  //margin-bottom: 5px !important;
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+.generatedShareLink {
+  overflow: scroll;
+  line-break: anywhere;
+  color: blue;
+  cursor: pointer;
 }
 
 .fixedSettingsTag {
@@ -307,6 +321,6 @@ $secondary: #333;
   z-index: 10;
 }
 
-.closeModalButton {
+.closeModalButtonOk {
   margin-top: 15px !important;
 }
