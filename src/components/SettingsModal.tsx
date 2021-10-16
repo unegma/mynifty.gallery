@@ -55,8 +55,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
     let params: any;
     // TODO ADD THIS TO THE COOKIES HELPER HOOK?
-
-    params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}&zoomEnabled=${zoomEnabled}&musicUrl=${musicUrl}&vrMode=${vrMode}&myLabel=${myLabel}`);
+    params = btoa(`account=${account}&displayMode=${displayMode}&maxImages=${maxImages}&source=${source}&scene=${scene}&zoomEnabled=${zoomEnabled}&musicUrl=${musicUrl}&vrMode=${vrMode}&myLabel=${myLabel}`);
 
     // todo add array of all nfts so can add custom data
 

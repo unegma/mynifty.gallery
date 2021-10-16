@@ -90,6 +90,7 @@ export default function HomePage(): JSX.Element {
 
       // todo  create type of url params ?
       // todo create struct of cookies // todo replace with 'cookieOverride'
+      // todo could be issues if ever change things here and it tries to pull something which doesn't exist (ie for old share links which may not have 'maxImages' added
       let fakeCookies: any = Object.fromEntries(new URLSearchParams(params));
       console.log(fakeCookies);
       setAddress(fakeCookies.account);
@@ -100,6 +101,7 @@ export default function HomePage(): JSX.Element {
       setZoomEnabled(fakeCookies.zoomEnabled);
       setVrMode(fakeCookies.vrMode);
       setMyLabel(fakeCookies.myLabel);
+      setMaxImages(fakeCookies.maxImages);
       //set // TODO CHECK NOTHING WAS WIPED HERE
       //  todo create serialised version of object so that can pass data about whether certain items are sellable or not (user SHOULD BE ABLE TO SELECT SELLABLE AND WHICH SOURCE)
     }
