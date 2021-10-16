@@ -73,8 +73,12 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
      * POAP
      */
     } else if (source === Source.POAP) {
+      console.log('Fetching with address:');
+      console.log(address);
       let poapAssets;
-      poapAssets = await fetch(`https://api.poap.xyz/actions/scan/${address}`);
+      let assetsAddress = address ? `https://api.poap.xyz/actions/scan/${address}` : '';
+
+      poapAssets = await fetch(assetsAddress);
       poapAssets = await poapAssets.json();
       // poapAssets = poapAssets.assets;
       assets = assets.concat(poapAssets); // this is either just the unstructured assets from opensea, or a concatination of structured assets (see below) AND new offsetted unstructured assets
