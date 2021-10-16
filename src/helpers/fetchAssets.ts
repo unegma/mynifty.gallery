@@ -87,6 +87,8 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
   }
 
   try {
+    console.log('Assets:');
+    console.log(assets);
     if (assets.length > 0) {
 
       // create new array of Structured assets
@@ -147,6 +149,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
          * POAP
          */
         } else if (source === Source.POAP) {
+          console.log(asset); // todo seems to be a bug here
           assetImage = asset.event.image_url;
           assetImageThumbnail = asset.event.image_url;
           assetImageName = asset.event.name;
