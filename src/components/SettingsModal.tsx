@@ -61,6 +61,8 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
     let location = window.location.origin + window.location.pathname; // remove any querystring
 
+    // todo could there be an issue with xss etc if encoding into url like this. may be better to do via own server
+
     setShareLink(`${location}?p=${params}`)
   }
 
