@@ -31,6 +31,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
     sharedGalleryView = true;
   }
 
+  // todo could just get this from url if passing in as a parameter doesn't work?
   let localStorageSharedAddress = await localStorage.getItem('sharedaddress');
   if (typeof localStorageSharedAddress !== "undefined" && localStorageSharedAddress !== null && localStorageSharedAddress !== "") {
     address = localStorageSharedAddress;
