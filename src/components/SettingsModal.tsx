@@ -11,7 +11,7 @@ import {
   Theme, Typography,
   Accordion, AccordionSummary, AccordionDetails,
 } from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import {Switch} from "@material-ui/core";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {useWeb3React} from "@web3-react/core";
@@ -43,8 +43,16 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
   const [myLabel, setMyLabel] = React.useState(``);
 
+  useEffect(() => {
+    let localStorageMyLabel = localStorage.getItem('myLabel');
+    if (typeof localStorageMyLabel !== "undefined" && localStorageMyLabel !== null && localStorageMyLabel !== "") {
+      setMyLabel(localStorageMyLabel);
+    }
+  }, []);
+
   const updateMyLabel = (val: any) => {
     setMyLabel(val);
+    localStorage.setItem('myLabel', val);
   }
 
   const handleChange = (panel: any) => (event: any, isExpanded: any) => {
