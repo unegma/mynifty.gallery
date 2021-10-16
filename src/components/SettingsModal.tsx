@@ -245,7 +245,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <br/>
 
         {/*todo use enum*/}
-        { scene !== Scene.Gallery && (
+        { scene !== Scene.Gallery && scene !== Scene.Plinth && (
           <>
             <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
 
