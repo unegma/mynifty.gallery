@@ -1,4 +1,4 @@
-import './nftModal.scss';
+import './settings.scss';
 import {
   Button,
   createStyles,
