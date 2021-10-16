@@ -22,13 +22,22 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
 
   // // added this here with await instead of using only address pulled in, because of possible race conditions
 
+
+  // todo this is really hacky and should be working based on parameter passed in
+  let queryString = new URLSearchParams(window.location.search);
+  let p = queryString.get('p');
+  let sharedGalleryView = false;
+  if (typeof p !== 'undefined' && p !== null) {
+    sharedGalleryView = true;
+  }
+
   let localStorageSharedAddress = await localStorage.getItem('sharedaddress');
   if (typeof localStorageSharedAddress !== "undefined" && localStorageSharedAddress !== null && localStorageSharedAddress !== "") {
     address = localStorageSharedAddress;
   }
 
   // this is currently using the sharedaddress as an override (until find a way to maybe store all data in url or on a server) (see else clause on homepage with sharedaddress)
-  if (!localStorageSharedAddress) {
+  if (sharedGalleryView === false) {
     let localStorageAddress = await localStorage.getItem('address');
     if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
       address = localStorageAddress;
