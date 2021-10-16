@@ -11,6 +11,7 @@ import { DisplayMode } from '../types/DisplayModeEnum';
  * @param offset
  */
 export default async function getAssets(assetsArray: [], maxImages: number, address: string, source: string, offset = 0): Promise<any> {
+  console.log('hello from getAssets');
   let assets = <any>assetsArray;
 
   // added this here with await instead of using only maxImages pulled in, because of possible race conditions
@@ -20,11 +21,21 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
   }
 
   // // added this here with await instead of using only address pulled in, because of possible race conditions
-  let localStorageAddress = await localStorage.getItem('address');
-  if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
-    address = localStorageAddress;
-  } else {
-    return [];
+
+  let localStorageSharedAddress = await localStorage.getItem('sharedaddress');
+  if (typeof localStorageSharedAddress !== "undefined" && localStorageSharedAddress !== null && localStorageSharedAddress !== "") {
+    address = localStorageSharedAddress;
+  }
+
+  // this is currently using the sharedaddress as an override (until find a way to maybe store all data in url or on a server) (see else clause on homepage with sharedaddress)
+  if (!localStorageSharedAddress) {
+    let localStorageAddress = await localStorage.getItem('address');
+    if (typeof localStorageAddress !== "undefined" && localStorageAddress !== null && localStorageAddress !== "") {
+      address = localStorageAddress;
+    } else {
+      console.log('nothing fetched');
+      return []; // todo is this in the case address is not set?
+    }
   }
 
   let localStorageSource = localStorage.getItem('source');
@@ -33,7 +44,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
   }
 
   try {
-
+    console.log('preparing to fetch assets');
     /**
      * Opensea
      * this is be called multiple times depending on the offset

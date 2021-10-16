@@ -88,6 +88,7 @@ export default function HomePage(): JSX.Element {
       // params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}`);
       console.log(params);
 
+      // todo  create type of url params ?
       // todo create struct of cookies // todo replace with 'cookieOverride'
       let fakeCookies: any = Object.fromEntries(new URLSearchParams(params));
       console.log(fakeCookies);
@@ -200,6 +201,11 @@ export default function HomePage(): JSX.Element {
       setMaxImages(parseInt(localStorageMaxImages));
     }
 
+  } else {
+    console.log('setting sharedaddress');
+    localStorage.setItem('sharedaddress', address); // todo this is temporary so can override in fetch assets (without overwriting my gallery addres in localstorage). eventuall get all links from url params
+    // DON'T GET ADDRESS FROM COOKIES MAYBE, BECAUSE CAN CREATE A SHARE LINK WITH NO ADDRESS IN IT??
+    console.log(address); // todo is this going to have been set by this point or only locally within the useEffect? // todo and does setting it here cause the function to be called again??
   }
 
     // this might be being called before the local storage retreival above

@@ -18,15 +18,15 @@ import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
 import metaMaskLogo from '../images/metamask-logo.svg';
 import poapLogo from '../images/poap-logo.svg';
-import space from '../images/space.png';
-import earth from '../images/earth.png';
-import gallery from '../images/gallery.png';
-import plinth from '../images/plinth.png';
-import cowork from '../images/cowork.png';
-import cluster from '../images/cluster.png';
-import galaxy from '../images/galaxy.png';
-import swirl from '../images/swirl.png';
-import spiral from '../images/spiral.png';
+import spaceImage from '../images/space.png';
+import earthImage from '../images/earth.png';
+import galleryImage from '../images/gallery.png';
+import plinthImage from '../images/plinth.png';
+import coworkImage from '../images/cowork.png';
+import clusterImage from '../images/cluster.png';
+import galaxyImage from '../images/galaxy.png';
+import swirlImage from '../images/swirl.png';
+import spiralImage from '../images/spiral.png';
 import { Source } from '../types/SourceEnum';
 import { Scene } from '../types/SceneEnum';
 import { DisplayMode } from '../types/DisplayModeEnum';
@@ -55,9 +55,14 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
 
     let params: any;
     // TODO ADD THIS TO THE COOKIES HELPER HOOK?
+
     params = btoa(`account=${account}&displayMode=${displayMode}&source=${source}&scene=${scene}&zoomEnabled=${zoomEnabled}&musicUrl=${musicUrl}&vrMode=${vrMode}&myLabel=${myLabel}`);
 
-    setShareLink(`https://mynifty.gallery?p=${params}`)
+    // todo add array of all nfts so can add custom data
+
+    let location = window.location.origin + window.location.pathname; // remove any querystring
+
+    setShareLink(`${location}?p=${params}`)
   }
 
   const toggleZoomEnabled = () => {
@@ -220,11 +225,11 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
         <InputLabel id="demo-simple-select-label">Scene:</InputLabel>
 
         <div className="scenesBox">
-          <img className={`sceneLogo ${scene === Scene.Space ? "sceneLogo--active" : "" }`} src={space} onClick={() => updateScene(Scene.Space)}/>
-          <img className={`sceneLogo ${scene === Scene.Earth ? "sceneLogo--active" : "" }`} src={earth} onClick={() => updateScene(Scene.Earth)}/>
-          <img className={`sceneLogo ${scene === Scene.Cowork ? "sceneLogo--active" : "" }`} src={cowork} onClick={() => updateScene(Scene.Cowork)}/>
-          <img className={`sceneLogo ${scene === Scene.Gallery ? "sceneLogo--active" : "" }`} src={gallery} onClick={() => updateScene(Scene.Gallery)}/>
-          <img className={`sceneLogo ${scene === Scene.Plinth ? "sceneLogo--active" : "" }`} src={plinth} onClick={() => updateScene(Scene.Plinth)}/>
+          <img className={`sceneLogo ${scene === Scene.Space ? "sceneLogo--active" : "" }`} src={spaceImage} onClick={() => updateScene(Scene.Space)}/>
+          <img className={`sceneLogo ${scene === Scene.Earth ? "sceneLogo--active" : "" }`} src={earthImage} onClick={() => updateScene(Scene.Earth)}/>
+          <img className={`sceneLogo ${scene === Scene.Cowork ? "sceneLogo--active" : "" }`} src={coworkImage} onClick={() => updateScene(Scene.Cowork)}/>
+          <img className={`sceneLogo ${scene === Scene.Gallery ? "sceneLogo--active" : "" }`} src={galleryImage} onClick={() => updateScene(Scene.Gallery)}/>
+          <img className={`sceneLogo ${scene === Scene.Plinth ? "sceneLogo--active" : "" }`} src={plinthImage} onClick={() => updateScene(Scene.Plinth)}/>
         </div>
 
         <br/>
@@ -236,10 +241,10 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
             <InputLabel id="demo-simple-select-label">Display Mode:</InputLabel>
 
             <div className="displayModeBox">
-              <img className={`displayModeLogo ${displayMode === DisplayMode.Cluster ? "displayModeLogo--active" : "" }`} src={cluster} onClick={() => updateDisplayMode(DisplayMode.Cluster)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.Spiral ? "displayModeLogo--active" : "" }`} src={spiral} onClick={() => updateDisplayMode(DisplayMode.Spiral)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.Galaxy ? "displayModeLogo--active" : "" }`} src={galaxy} onClick={() => updateDisplayMode(DisplayMode.Galaxy)}/>
-              <img className={`displayModeLogo ${displayMode === DisplayMode.Swirl ? "displayModeLogo--active" : "" }`} src={swirl} onClick={() => updateDisplayMode(DisplayMode.Swirl)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Cluster ? "displayModeLogo--active" : "" }`} src={clusterImage} onClick={() => updateDisplayMode(DisplayMode.Cluster)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Spiral ? "displayModeLogo--active" : "" }`} src={spiralImage} onClick={() => updateDisplayMode(DisplayMode.Spiral)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Galaxy ? "displayModeLogo--active" : "" }`} src={galaxyImage} onClick={() => updateDisplayMode(DisplayMode.Galaxy)}/>
+              <img className={`displayModeLogo ${displayMode === DisplayMode.Swirl ? "displayModeLogo--active" : "" }`} src={swirlImage} onClick={() => updateDisplayMode(DisplayMode.Swirl)}/>
             </div>
             <br/>
             <br/>
