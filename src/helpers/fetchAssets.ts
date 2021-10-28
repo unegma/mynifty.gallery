@@ -77,6 +77,7 @@ export default async function getAssets(assetsArray: [], maxImages: number, addr
       console.log(address);
       let poapAssets;
       let assetsAddress = address ? `https://api.poap.xyz/actions/scan/${address}` : '';
+      // todo did the above because of a weird error with address being empty. maybe a race condition? still an error caught with < in JSON
 
       poapAssets = await fetch(assetsAddress);
       poapAssets = await poapAssets.json();
