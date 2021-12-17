@@ -287,7 +287,10 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
             <Switch checked={zoomEnabled} onChange={toggleZoomEnabled} color="primary" />
             <br/>
             <br/>
-            <Typography className="secondaryColor">VR Mode:</Typography>
+            {/*todo fix 'No valid root for': 'Primitive' type: this will help https://stackoverflow.com/questions/69071151/why-is-console-log-showing-react-devtools-backend-js4049-instead-of-the-file*/}
+            {/*todo react-three-fiber.esm.js:1714 No valid root for Primitive!*/}
+            {/*todo react-three-fiber.esm.js:649*/}
+            <Typography className="secondaryColor">VR Mode (experimental - known bugs when changing scene):</Typography>
             {/*<Button variant="contained" color="primary" onClick={toggleZoomEnabled}>Toggle Zoom</Button>*/}
             <Switch checked={vrMode} onChange={toggleVrMode} color="primary" />
             <br/>

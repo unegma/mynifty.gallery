@@ -13,6 +13,8 @@ function getLibrary(provider: any): Web3Provider {
   return library;
 }
 
+// todo thorough audit of project
+
 ReactDOM.render(
   <React.StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
