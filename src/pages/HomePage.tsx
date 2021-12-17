@@ -120,15 +120,15 @@ export default function HomePage(): JSX.Element {
     let localStorageScene = localStorage.getItem('scene');
     if (typeof localStorageScene !== "undefined" && localStorageScene !== null && localStorageScene !== "") {
 
-      // todo removeme (patch)
-
-      // @ts-ignore
-      if(!isNaN(localStorageScene)) {
-        localStorage.setItem('scene', "");
-        console.log('reloading to patch new cookies');
-        window.location.reload();
-      }
-      // todo removeme (patch)
+      // // todo removeme (patch)
+      //
+      // // @ts-ignore
+      // if(!isNaN(localStorageScene)) {
+      //   localStorage.setItem('scene', "");
+      //   console.log('reloading to patch new cookies');
+      //   window.location.reload();
+      // }
+      // // todo removeme (patch)
 
       setScene(localStorageScene);
     }
@@ -136,14 +136,14 @@ export default function HomePage(): JSX.Element {
     let localStorageSource = localStorage.getItem('source');
     if (typeof localStorageSource !== "undefined" && localStorageSource !== null && localStorageSource !== "") {
 
-      // todo removeme (patch) THIS ONE DOESN'T SEEM TO WORK PROPERLY
-      // @ts-ignore
-      if(!isNaN(localStorageSource)) {
-        localStorage.setItem('source', "");
-        console.log('reloading to patch new cookies');
-        window.location.reload();
-      }
-      // todo removeme (patch)
+      // // todo removeme (patch) THIS ONE DOESN'T SEEM TO WORK PROPERLY
+      // // @ts-ignore
+      // if(!isNaN(localStorageSource)) {
+      //   localStorage.setItem('source', "");
+      //   console.log('reloading to patch new cookies');
+      //   window.location.reload();
+      // }
+      // // todo removeme (patch)
 
       setSource(localStorageSource);
     }
@@ -187,14 +187,14 @@ export default function HomePage(): JSX.Element {
   console.log(localStorageDisplayMode)
     if (typeof localStorageDisplayMode !== "undefined" && localStorageDisplayMode !== null && localStorageDisplayMode !== "") {
       console.log(localStorageDisplayMode)
-      // todo removeme (patch)
-      // @ts-ignore
-      if(!isNaN(localStorageDisplayMode)) {
-        localStorage.setItem('displayMode', "");
-        console.log('reloading to patch new cookies');
-        window.location.reload();
-      }
-      // todo removeme (patch)
+      // // todo removeme (patch)
+      // // @ts-ignore
+      // if(!isNaN(localStorageDisplayMode)) {
+      //   localStorage.setItem('displayMode', "");
+      //   console.log('reloading to patch new cookies');
+      //   window.location.reload();
+      // }
+      // // todo removeme (patch)
 
       setDisplayMode(localStorageDisplayMode);
     }
