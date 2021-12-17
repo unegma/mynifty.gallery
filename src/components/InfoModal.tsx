@@ -1,6 +1,6 @@
-import {Button, createStyles, makeStyles, Modal, Theme, Typography} from "@material-ui/core";
+import {Button, createStyles, makeStyles, Modal, Theme, Typography} from "@mui/material";
 import React from "react";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export default function InfoModal ({ open, setOpen, maxImages, openSettings, source, address }: any) {
 

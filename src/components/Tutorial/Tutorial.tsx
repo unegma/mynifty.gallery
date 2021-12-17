@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box, Button, Step, StepLabel, Stepper, Typography} from "@material-ui/core";
+import {Box, Button, Step, StepLabel, Stepper, Typography} from "@mui/material";
 
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 

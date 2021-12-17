@@ -1,7 +1,7 @@
 import './nftModal.scss';
-import {createStyles, makeStyles, Modal, Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Modal, Theme} from "@mui/material";
 import React from "react";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import {HighlightOff as HighlightOffIcon } from "@mui/icons-material";
 
 export default function NFTModal ({ open, selectedImage, setOpen, setSelectedImage }: any) {
 

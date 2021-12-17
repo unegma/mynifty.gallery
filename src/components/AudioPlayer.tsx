@@ -1,5 +1,5 @@
 import React, {useState, useEffect, AudioHTMLAttributes} from "react";
-import {MusicNoteOutlined, MusicOffOutlined} from "@material-ui/icons";
+import {MusicNoteOutlined, MusicOffOutlined} from "@mui/icons-material";
 
 /**
  * https://stackoverflow.com/questions/47686345/playing-sound-in-react-js

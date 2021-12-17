@@ -5,11 +5,11 @@ import { injected, walletconnect } from "../helpers/connectors";
 import { useEagerConnect, useInactiveListener } from "../helpers/hooks";
 import getErrorMessage from "../helpers/getErrorMessage";
 import { Spinner } from "./Spinner";
-import { Button, Modal} from "@material-ui/core";
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Button, Modal} from "@mui/material";
+import { Theme, createStyles, makeStyles } from '@mui/material/styles';
 // import DonateButton from "./DonateButton";
-import {Typography} from "@material-ui/core";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import {Typography} from "@mui/material";
+import {HighlightOff as HighlightOffIcon} from "@mui/icons-material";
 
 function getModalStyle() {
   const top = 50;

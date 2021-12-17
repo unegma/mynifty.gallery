@@ -1,7 +1,7 @@
 import React from 'react';
 import './global.scss';
 import HomePage from "./pages/HomePage";
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
@@ -17,9 +17,9 @@ const theme = createTheme({
 function App(): JSX.Element {
   return (
     <div className="App">
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <HomePage />
-      </MuiThemeProvider>
+      </ThemeProvider>
     </div>
   );
 }

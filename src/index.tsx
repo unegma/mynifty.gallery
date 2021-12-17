@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './global.scss'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {CssBaseline} from "@material-ui/core";
+import {CssBaseline} from "@mui/material";
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 

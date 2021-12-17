@@ -10,10 +10,10 @@ import {
   TextField,
   Theme, Typography,
   Accordion, AccordionSummary, AccordionDetails,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, {useEffect} from "react";
-import {Switch} from "@material-ui/core";
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import {Switch} from "@mui/material";
+import {HighlightOff as HighlightOffIcon} from '@mui/icons-material';
 import {useWeb3React} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
 import metaMaskLogo from '../images/metamask-logo.svg';
@@ -30,7 +30,7 @@ import spiralImage from '../images/spiral.png';
 import { Source } from '../types/SourceEnum';
 import { Scene } from '../types/SceneEnum';
 import { DisplayMode } from '../types/DisplayModeEnum';
-import {ExpandMore} from "@material-ui/icons";
+import {ExpandMore} from "@mui/icons-material";
 
 export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnabled, setMusicUrl, musicUrl,
                                          setDisplayMode, displayMode, maxImages, setMaxImages, vrMode, setVrMode,

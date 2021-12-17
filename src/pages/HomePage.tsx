@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './homePage.module.scss';
-import {Typography} from "@material-ui/core";
-import {InfoOutlined, SettingsOutlined} from "@material-ui/icons";
+import {Typography} from "@mui/material";
+import {InfoOutlined, SettingsOutlined} from "@mui/icons-material";
 import AudioPlayer from "../components/AudioPlayer";
 import NFTModal from "../components/NFTModal";
 import SettingsModal from "../components/SettingsModal";
