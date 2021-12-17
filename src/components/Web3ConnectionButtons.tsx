@@ -5,39 +5,29 @@ import { injected, walletconnect } from "../helpers/connectors";
 import { useEagerConnect, useInactiveListener } from "../helpers/hooks";
 import getErrorMessage from "../helpers/getErrorMessage";
 import { Spinner } from "./Spinner";
-import { Button, Modal} from "@mui/material";
+import { Button, Modal, Box} from "@mui/material";
 import { Theme, createStyles, makeStyles } from '@mui/material/styles';
 // import DonateButton from "./DonateButton";
 import {Typography} from "@mui/material";
 import {HighlightOff as HighlightOffIcon} from "@mui/icons-material";
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
+const modalStyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 'auto',
+  maxWidth: '90vw',
+  minWidth: '85vw',
+  maxHeight: '90vh',
+  minHeight: '85vh',
+  overflow: 'scroll',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const useStyles2 = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-      display: 'flex',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      alignContent: 'center'
-    },
-  }),
-);
 
 enum ConnectorNames {
   Metamask = 'Metamask',
@@ -50,9 +40,6 @@ const connectorsByName: { [connectorName in ConnectorNames]: any} = {
 }
 
 export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any) {
-  const classes2 = useStyles2();
-  const [modalStyle] = useState(getModalStyle);
-
   const [modalOpen, setModalOpen] = useState(false);
   const context = useWeb3React<Web3Provider>(); // todo check because this web3provider is from ethers
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
@@ -105,7 +92,8 @@ export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any
         onClose={hideModal}
         className="connection-modal"
       >
-        <div style={modalStyle} className={`modalBoxContainer ${classes2.paper}`} >
+        {/*<div style={modalStyle} className={`modalBoxContainer ${classes2.paper}`} >*/}
+        <Box component="div" sx={modalStyle} className={`modalBoxContainer`} >
           <HighlightOffIcon className="closeModalButton" onClick={() => { hideModal()}}/>
 
           {(!active && !error) && (
@@ -199,7 +187,7 @@ export default function Web3ConnectionButtons({setAddress, setSettingsOpen}: any
             }
           </div>
 
-        </div>
+        </Box>
       </Modal>
 
       {(!active && !error) && (

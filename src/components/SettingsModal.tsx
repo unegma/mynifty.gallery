@@ -7,7 +7,7 @@ import {
   MenuItem,
   Modal,
   Select,
-  TextField,
+  TextField, Box,
   Theme, Typography,
   Accordion, AccordionSummary, AccordionDetails,
 } from "@mui/material";
@@ -112,34 +112,22 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
     localStorage.setItem('source', src);
   }
 
-  function getModalStyle() {
-    return {
-      top: `50%`,
-      left: `50%`,
-      transform: `translate(-50%, -50%)`,
-      minWidth: '80vw',
-      maxWidth: '90vw',
-      maxHeight: '70vh',
-      overflow: 'scroll'
-    };
-  }
-
-  const useStyles2 = makeStyles((theme: Theme) =>
-    createStyles({
-      paper: {
-        position: 'absolute',
-        width: 'auto',
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        paddingTop: 0,
-      },
-    }),
-  );
-
-  const classes2 = useStyles2();
-  const [modalStyle] = React.useState(getModalStyle);
+  const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'auto',
+    maxWidth: '90vw',
+    minWidth: '85vw',
+    maxHeight: '90vh',
+    minHeight: '85vh',
+    overflow: 'scroll',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -154,7 +142,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <div style={modalStyle} className={classes2.paper}>
+      <Box component="div" sx={modalStyle}>
         <div className="fixedSettingsTag">
           {/*<HighlightOffIcon className="closeModalButton" onClick={() => { setOpen(false)}}/>*/}
           <Button variant="contained" color="primary" className={`closeModalButton closeModalButtonOk`} onClick={() => { setOpen(false)}}>
@@ -314,7 +302,7 @@ export default function SettingsModal ({ open, setOpen, zoomEnabled, setZoomEnab
           </AccordionDetails>
         </Accordion>
         {/*<Button variant="contained" color="primary" onClick={()=>{window.location.reload();}}>Refresh Page</Button>*/}
-      </div>
+      </Box>
     </Modal>
   )
 }
